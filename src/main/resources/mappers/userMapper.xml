@@ -24,4 +24,20 @@
  			, #{nickName}
  		)
  	</insert>
+ 	
+ 	<select id="selectUser" parameterType="Map" resultType="com.goodsmarket.jh.user.domain.User">
+ 		SELECT
+ 			`id`
+ 			, `loginId`
+ 			, `password`
+ 			, `name`
+ 			, `phone`
+ 			, `email`
+ 			, `nickName`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`user`
+ 		WHERE `loginId` = #{loginId} AND `password` = #{password} 
+ 	</select>
  </mapper>

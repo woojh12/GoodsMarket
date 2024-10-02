@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.goodsmarket.jh.user.domain.User;
 import com.goodsmarket.jh.user.service.UserService;
 
 @RequestMapping("/user")
@@ -35,6 +36,26 @@ public class UserRestController {
 		Map<String, String> resultMap = new HashMap<>();
 		
 		if(count == 1)
+		{
+			resultMap.put("result", "success");
+		}
+		else
+		{
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
+	}
+	
+	@PostMapping("login")
+	public Map<String, String> login(@RequestParam("loginId") String loginId
+			, @RequestParam("password") String password)
+	{
+		Map<String, String> resultMap = new HashMap<>();
+		
+		User user = userService.getUser(loginId, password);
+		
+		if(user != null)
 		{
 			resultMap.put("result", "success");
 		}

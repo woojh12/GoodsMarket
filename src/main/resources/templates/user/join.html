@@ -42,7 +42,7 @@
 					type:"post"
 					, url:"/user/join"
 					, data:{"loginId":loginId, "password":password, "name":name, "phone":phone, "email":email, "nickName":nickName}
-					, success:function()
+					, success:function(data)
 					{
 						if(data.result == "success")
 						{
