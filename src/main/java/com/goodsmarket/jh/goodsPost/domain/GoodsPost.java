@@ -11,6 +11,7 @@ public class GoodsPost {
 	private String location;
 	private String sellerName;
 	private int sellPrice;
+	private int views;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	
@@ -61,6 +62,12 @@ public class GoodsPost {
 	}
 	public void setSellPrice(int sellPrice) {
 		this.sellPrice = sellPrice;
+	}
+	public int getViews() {
+		return views;
+	}
+	public void setViews(int views) {
+		this.views = views;
 	}
 	public LocalDateTime getCreatedAt() {
 		return createdAt;

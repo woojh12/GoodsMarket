@@ -37,6 +37,7 @@
  			, `location`
  			, `sellerName`
  			, `sellPrice`
+ 			, `views`
  			, `createdAt`
  			, `updatedAt`
  		FROM
@@ -53,6 +54,7 @@
  			, `location`
  			, `sellerName`
  			, `sellPrice`
+ 			, `views`
  			, `createdAt`
  			, `updatedAt`
  		FROM
@@ -68,4 +70,13 @@
  		WHERE 
  			`usedTradeId` = #{usedTradeId};
  	</select>
+ 	
+ 	<update id="updateUsedTradeViews" parameterType="int">
+ 		UPDATE
+ 			`used_trade`
+ 		SET
+ 			`views` = `views` + 1
+ 		WHERE
+ 			`id` = #{id}
+ 	</update>
  </mapper>

@@ -45,7 +45,6 @@ public class GoodsPostController {
 			, @RequestParam("id") int id)
 	{
 		GoodsPost goodsPost = goodsPostService.getUsedTrade(id);
-		
 		model.addAttribute("goodsPost", goodsPost);
 		
 		return "post/goodsPost";

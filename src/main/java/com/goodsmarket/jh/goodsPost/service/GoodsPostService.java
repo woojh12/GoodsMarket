@@ -47,9 +47,18 @@ public class GoodsPostService {
 		return goodsPostRepository.selectUsedTrade(id);
 	}
 	
-	// 조회수 가져오기
-	public int getUsedTradeView(int usedTradeId)
+	// 게시글 조회수 Service
+	public boolean countUpUsedTradeViews(int id)
 	{
-		return goodsPostRepository.selectUsedTradeViews(usedTradeId);
+		int count = goodsPostRepository.updateUsedTradeViews(id);
+		
+		if(count >= 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

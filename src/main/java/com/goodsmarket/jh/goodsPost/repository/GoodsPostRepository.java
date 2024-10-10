@@ -21,5 +21,5 @@ public interface GoodsPostRepository {
 	
 	public GoodsPost selectUsedTrade(@Param("id") int id);
 	
-	public int selectUsedTradeViews(@Param("usedTradeId") int usedTradeId);
+	public int updateUsedTradeViews(@Param("id") int id);
 }

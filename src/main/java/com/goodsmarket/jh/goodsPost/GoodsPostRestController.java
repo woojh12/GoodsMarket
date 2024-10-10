@@ -53,4 +53,24 @@ public class GoodsPostRestController {
 		
 		return resultMap;
 	}
+	
+	// 조회수 API
+	@PostMapping("/increase/views")
+	public Map<String, String> increaseViews(@RequestParam("id") int id)
+	{
+		Map<String, String> resultMap = new HashMap<>();
+		
+		boolean check = goodsPostService.countUpUsedTradeViews(id);
+		
+		if(check == true)
+		{
+			resultMap.put("result", "success");
+		}
+		else
+		{
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
+	}
 }

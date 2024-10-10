@@ -31,7 +31,7 @@
 		</header>
 		<div id="showGoodsTitle" class="mt-5 d-flex">
 			<div id="noneUseShowGoodsTitle1" class="ml-2 d-flex align-items-center">
-				<h5>조회수 : 5</h5>
+				<h5 id="postViews" th:text="${goodsPost.views}" th:data-post-id="${goodsPost.id}">조회수 : 5</h5>
 			</div>
 			<div id="useShowGoodsTitle" class="d-flex align-items-center justify-content-center">
 				<h2 th:text="${goodsPost.title}">자동차 팝니다.</h2>
@@ -98,11 +98,34 @@
 				}
 			})
 			
-		
-			
 			// 이전 화면으로 이동 버튼
 			$("#backBtn").on("click",function(){
 				location.href="/goodsPost/list-view";
+			});
+			
+			let id = $("#postViews").data("post-id");
+			
+			alert("id : " + id);
+		
+			$.ajax({
+				type:"post"
+				, url:"/goodsPost/increase/views"
+				, data:{"id":id}
+				, success:function(data)
+				{
+					if(data.result == "success")
+					{
+						alert("조회수 증가 완료");
+					}
+					else
+					{
+						alert("조회수 증가 실패");
+					}
+				}
+				, error:function()
+				{
+					alert("조회수 증가 오류");
+				}
 			});
 		});
 	</script>
