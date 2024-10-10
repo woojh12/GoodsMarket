@@ -16,4 +16,8 @@ public interface UserRepository {
 	
 	public User selectUser(@Param("loginId") String loginId
 			, @Param("password") String password);
+	
+	public int countUserId(@Param("loginId") String loginId);
+	
+	public User selectProfileImage(@Param("id") int id);
 }

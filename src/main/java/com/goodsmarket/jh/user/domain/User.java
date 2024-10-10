@@ -10,6 +10,7 @@ public class User {
 	private String phone;
 	private String email;
 	private String nickName;
+	private String imagePath;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	
@@ -54,6 +55,12 @@ public class User {
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	public LocalDateTime getCreatedAt() {
 		return createdAt;

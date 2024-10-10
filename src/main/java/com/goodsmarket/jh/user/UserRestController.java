@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.goodsmarket.jh.user.domain.User;
 import com.goodsmarket.jh.user.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/user")
 @RestController
 public class UserRestController {
@@ -49,13 +51,38 @@ public class UserRestController {
 	
 	@PostMapping("login")
 	public Map<String, String> login(@RequestParam("loginId") String loginId
-			, @RequestParam("password") String password)
+			, @RequestParam("password") String password
+			, HttpSession session)
 	{
 		Map<String, String> resultMap = new HashMap<>();
 		
 		User user = userService.getUser(loginId, password);
-		
+				
 		if(user != null)
+		{
+			// 로그인 한 사용자의 세션 값 저장
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userName", user.getName());
+			
+			resultMap.put("result", "success");
+		}
+		else
+		{
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
+	}
+	
+	// 아이디 중복확인 기능
+	@PostMapping("duplicatedId")
+	public Map<String, String> duplicatedId(@RequestParam("loginId") String loginId)
+	{
+		Map<String, String> resultMap = new HashMap<>();
+		
+		int count = userService.checkUserId(loginId);
+		
+		if(count == 0)
 		{
 			resultMap.put("result", "success");
 		}

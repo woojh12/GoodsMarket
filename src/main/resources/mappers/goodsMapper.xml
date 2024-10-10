@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.goodsmarket.jh.goodsPost.repository.GoodsPostRepository">
+ 	<insert id="insertUsedTrade" parameterType="map">
+ 		INSERT INTO
+ 			`used_trade`
+ 		(
+ 			`userId`
+ 			, `title`
+ 			, `contents`
+ 			, `imagePath`
+ 			, `location`
+ 			, `sellerName`
+ 			, `sellPrice`
+ 		)
+ 		VALUE
+ 		(
+ 			#{userId}
+ 			, #{title}
+ 			, #{contents}
+ 			, #{imagePath}
+ 			, #{location}
+ 			, #{sellerName}
+ 			, #{sellPrice}
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectAllUsedTrade" resultType="com.goodsmarket.jh.goodsPost.domain.GoodsPost">
+ 		SELECT
+ 			`id`
+ 			, `userId`
+ 			, `title`
+ 			, `contents`
+ 			, `imagePath`
+ 			, `location`
+ 			, `sellerName`
+ 			, `sellPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`used_trade`
+ 	</select>
+ 	
+ 	<select id="selectUsedTrade" resultType="com.goodsmarket.jh.goodsPost.domain.GoodsPost" parameterType="int">
+ 		SELECT
+ 			`id`
+ 			, `userId`
+ 			, `title`
+ 			, `contents`
+ 			, `imagePath`
+ 			, `location`
+ 			, `sellerName`
+ 			, `sellPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`used_trade`
+ 		WHERE `id` = #{id};
+ 	</select>
+ 	
+ 	<select id="selectUsedTradeViews" parameterType="int" resultType="int">
+ 		SELECT
+ 			`usedTradeId`
+ 		FROM
+ 			`used_trade_views`
+ 		WHERE 
+ 			`usedTradeId` = #{usedTradeId};
+ 	</select>
+ </mapper>

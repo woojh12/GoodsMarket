@@ -3,23 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입화면</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-	id
-	<input type="text" id="idInput"><br>
-	pw
-	<input type="text" id="passwordInput"><br>
-	pwcheck
-	<input type="text" id="passwordCheckInput"><br>
-	name
-	<input type="text" id="nameInput"><br>
-	phone
-	<input type="text" id="phoneInput"><br>
-	email
-	<input type="text" id="emailInput"><br>
-	nickName
-	<input type="text" id="nickNameInput"><br>
-	<button type="button" id="btn"></button>
+	<div id="wrap" class="bg-secondary">
+		<div id="noneUseJoinArea1"></div>
+		<div id="joinTitle" class="d-flex">
+			<div id="noneUseJoinTitle"></div>
+			<div id="useJoinTitle" class="d-flex justify-content-center align-items-center">
+				<h1>마켓 회원가입</h1>
+			</div>
+		</div>
+		<div id="noneUseJoinArea2"></div>
+		<div id="joinInfo" class="d-flex">
+			<div id="noneJoinMain1"></div>
+			<div id="joinMain">
+				<div id="joinIdArea">
+					<div class="d-flex align-items-center mt-3">
+						<h1>ID : </h1>
+						<input type="text" class="form-control col-5 ml-5" id="idInput">
+						<button type="button" class="btn btn-dark btn-lg ml-5" id="duplicatedIdCheck">중복확인</button>
+					</div>
+					<div class="mt-3">
+						<span class="text-light font-weight-bold" id="idWarningText">중복된 아이디입니다.</span>
+					</div>
+				</div>
+				<div id="joinPwArea" class="d-flex align-items-center">
+					<h1>Password : </h1>
+					<input type="password" class="form-control col-5 ml-3" id="passwordInput">
+				</div>
+				<div id="joinPwCheckArea" class="d-flex align-items-center">
+					<h1>PWCheck : </h1>
+					<input type="password" class="form-control col-5 ml-3" id="passwordCheckInput">
+				</div>
+				<div id="joinNameArea" class="d-flex align-items-center">
+					<h1>Name : </h1>
+					<input type="text" class="form-control col-5 ml-3" id="nameInput">
+				</div>
+				<div id="joinEmailArea" class="d-flex align-items-center">
+					<h1>Email : </h1>
+					<input type="text" class="form-control col-5 ml-3" id="emailInput">
+				</div>
+				<div id="joinPhoneArea" class="d-flex align-items-center">
+					<h1>Phone : </h1>
+					<input type="text" class="form-control col-5 ml-3" id="phoneInput">
+				</div>
+				<div id="joinNickNameArea" class="d-flex align-items-center">
+					<h1>닉네임 : </h1>
+					<input type="text" class="form-control col-5 ml-3" id="nickNameInput">
+				</div>
+				<div id="joinBtnsArea" class="mt-5 d-flex align-items-between justify-content-between">
+					<button type="button" class="btn btn-dark" id="loginBtn">로그인 페이지</button>
+					<button type="button" class="btn btn-dark" id="joinBtn">회원가입</button>
+				</div>
+			</div>
+		</div>
+		<footer class="bg-secondary"></footer>
+	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -27,7 +68,43 @@
 	
 	<script>
 		$(document).ready(function(){
-			$("#btn").on("click", function(){
+			var idCheckClick = false;
+			var duplicatedId = true;
+			$("#idWarningText").hide();
+			
+			$("#duplicatedIdCheck").on("click", function(){
+				idCheckClick = true;
+				let loginId = $("#idInput").val();
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/duplicatedId"
+					, data:{"loginId":loginId}
+					, success:function(data)
+					{
+						if(data.result == "success")
+						{
+							duplicatedId = false;
+							$("#idWarningText").hide();
+						}
+						else
+						{
+							duplicatedId = true;
+							$("#idWarningText").show();
+						}
+					}
+					, error:function(data)
+					{
+						alert("아이디 중복확인 에러발생");
+					}
+				});
+			});
+			
+			$("#loginBtn").on("click", function(){
+				location.href="/user/login-view";
+			});
+			
+			$("#joinBtn").on("click", function(){
 				let loginId = $("#idInput").val();
 				let password = $("#passwordInput").val();
 				let passwordCheck = $("#passwordCheckInput").val();
@@ -36,31 +113,72 @@
 				let email = $("#emailInput").val();
 				let nickName = $("#nickNameInput").val();
 				
-				alert("loginId : " + loginId + " password : " + password + " name : " + name + " phone : " + phone + " email : " + email + " nickName : " + nickName);
+				// 유효성 검사
+				if(loginId == "")
+				{
+					alert("아이디를 입력해주세요.");
+				}
+				if(password == "")
+				{
+					alert("비밀번호를 입력해주세요.");
+				}
+				if(passwordCheck == "")
+				{
+					alert("비밀번호확인을 입력해주세요.")
+				}
+				if(password != passwordCheck)
+				{
+					alert("비밀번호가 동일하지 않습니다.");
+				}
+				if(name == "")
+				{
+					alert("이름을 입력해주세요.");
+				}
+				if(phone == "")
+				{
+					alert("전화번호를 입력해주세요.");
+				}
+				if(email == "")
+				{
+					alert("이메일을 입력해주세요.");
+				}
+				if(nickName == "")
+				{
+					alert("사용할 닉네임을 입력해주세요.");
+				}
+				if(idCheckClick == false)
+				{
+					alert("아이디 중복확인을 눌러주세요.");
+				}
+				if(duplicatedId == true)
+				{
+					alert("중복된 아이디입니다.");	
+				}
 				
-				$.ajax({
-					type:"post"
-					, url:"/user/join"
-					, data:{"loginId":loginId, "password":password, "name":name, "phone":phone, "email":email, "nickName":nickName}
-					, success:function(data)
-					{
-						if(data.result == "success")
+				// 중복확인 버튼 클릭, 아이디 중복이 아닌경우
+				if(idCheckClick == true && duplicatedId == false)
+				{
+					$.ajax({
+						type:"post"
+						, url:"/user/join"
+						, data:{"loginId":loginId, "password":password, "name":name, "phone":phone, "email":email, "nickName":nickName}
+						, success:function(data)
 						{
-							alert("회원완료");
+							if(data.result == "success")
+							{
+								location.href="/user/login-view";
+							}
+							else
+							{
+								alert("회원가입실패");
+							}
 						}
-						else
+						, error:function()
 						{
-							alert("회원가입실패");
+							alert("회원가입 오류발생");
 						}
-					}
-					, error:function()
-					{
-						alert("회원가입 오류발생");
-					}
-					
-					
-					
-				});
+					});
+				}
 			});
 		});
 	</script>

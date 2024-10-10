@@ -1,0 +1,578 @@
+@charset "UTF-8";
+
+#wrap
+{
+	width : 1200px;
+	margin : 0 auto;
+}
+
+header
+{
+	background-color : #c0c0c0;
+}
+
+ul li
+{
+	list-style:none;
+}
+
+header > #mainMenu
+{
+	width : 300px;
+}
+
+header > #titleName
+{
+	width : 600px;
+}
+
+header > #user-field
+{
+	width : 300px;
+}
+
+#wrap > #noneUseLoginArea1
+{
+	height : 100px;
+}
+
+#wrap > #marketField
+{
+	height : 150px;
+}
+
+#wrap > #marketField > #noneUseMarketField
+{
+	width : 200px;
+}
+
+#wrap > #marketField > #useMarketField
+{
+	width : 800px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #noneUseLoginArea2
+{
+	height : 100px;
+}
+
+#wrap > #loginIdFiled
+{
+	height : 200px;
+}
+
+#wrap > #loginIdFiled > #noneUseIdField
+{
+	width : 200px;
+}
+
+#wrap > #loginIdFiled > #useIdField
+{
+	width : 800px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #loginIdFiled > #useIdField > #inputId
+{
+	height : 50px;
+}
+
+#wrap > #loginPwFiled > #noneUsePwField
+{
+	width : 200px;
+}
+
+#wrap > #loginPwFiled > #usePwField
+{
+	width : 800px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #loginPwFiled > #usePwField > #inputPassword
+{
+	height : 50px;
+}
+
+#wrap > #loginPwFiled
+{
+	height : 200px;
+}
+
+#wrap > #noneUseLoginArea3
+{
+	height : 200px;
+}
+
+#wrap > #loginBtnsArea
+{
+	height : 100px;
+}
+
+#wrap > #loginBtnsArea > #noneUseloginBtnsField
+{
+	width : 200px;
+}
+
+#wrap > #loginBtnsArea > #useLoginBtnsField
+{
+	width : 800px;
+}
+
+#wrap > #loginBtnsArea > #useLoginBtnsField > #joinBtn
+{
+	height : 50px;
+}
+
+#wrap > #loginBtnsArea > #useLoginBtnsField > #loginBtn
+{
+	height : 50px;
+}
+
+#wrap > #noneUseJoinArea1
+{
+	height : 100px;
+}
+
+#wrap > #joinTitle
+{
+	height : 150px;
+}
+
+#wrap > #joinTitle > #noneUseJoinTitle
+{
+	width : 200px;
+}
+
+#wrap > #joinTitle > #useJoinTitle
+{
+	width : 800px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #noneUseJoinArea2
+{
+	height : 100px;
+}
+
+#wrap > #joinInfo
+{
+	height : 850px;	
+}
+
+#wrap > #joinInfo > #noneJoinMain1
+{
+	width : 200px;
+}
+
+#wrap > #joinInfo > #joinMain
+{
+	width : 800px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinIdArea
+{
+	height : 120px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinPwArea
+{
+	height : 100px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinPwCheckArea
+{
+	height : 100px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinNameArea
+{
+	height : 100px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinEmailArea
+{
+	height : 100px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinPhoneArea
+{
+	height : 100px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinNickNameArea
+{
+	height : 100px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinBtnsArea
+{
+	height : 100px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinBtnsArea > #loginBtn
+{
+	height : 60px;
+}
+
+#wrap > #joinInfo > #joinMain > #joinBtnsArea > #joinBtn
+{
+	height : 60px;
+}
+
+#wrap > #articleBanner
+{
+	height : 250px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #allGoodsTitle
+{
+	height : 200px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #allGoodsTitle > #noneUseAllGoodsTitle1
+{
+	width : 300px;
+}
+
+#wrap > #allGoodsTitle > #useAllGoodsTitle
+{
+	width : 600px;
+}
+
+#wrap > #allGoodsTitle > #noneUseAllGoodsTitle2
+{
+	width : 300px;
+}
+
+#wrap > section
+{
+	background-color : #c0c0c0;
+}
+
+#wrap > section > a> .goodsList
+{
+	height : 300px;
+}
+
+#wrap > section > a> .goodsList > .goodsPicture
+{
+	width : 300px;
+	height : 300px;
+}
+
+#wrap > section > a> .goodsList > .goodsInfo
+{
+	width : 900px;
+	height : 300px;
+}
+
+#wrap > section > a> .goodsList > .goodsPicture > .goodsPictureSize
+{
+	width : 200px;
+	height : 200px;
+}
+
+#wrap > section > a> .goodsList > .goodsInfo > .goodsInfoTitle
+{
+	height : 100px;
+}
+
+#wrap > section > a> .goodsList > .goodsInfo > .goodsInfoPlace
+{
+	height : 100px;
+}
+
+#wrap > section > a> .goodsList > .goodsInfo > .goodsInfoUser
+{
+	height : 100px;
+}
+
+#wrap > section > #writtingTitle
+{
+	height : 80px;
+}
+
+#wrap > section > #writtingTitle > #inputSellTitle
+{
+	height : 60px;
+}
+
+#wrap > section > #writtingContent
+{
+	height : 250px;
+}
+
+#wrap > section > #writtingOther
+{
+	height : 250px;
+}
+
+#wrap > section > #writtingOther > #writtingFile
+{
+	width : 400px;
+}
+
+#wrap > section > #writtingOther > #writtingNoneUse
+{
+	width : 400px;
+}
+
+#wrap > section > #writtingOther > #writtingEtc
+{
+	width : 400px;
+}
+
+#wrap > section > #writtingOther > #writtingFile > #lookingFileImage
+{
+	width : 200px;
+	height : 200px;
+}
+
+#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPlace
+{
+	height : 50px;
+}
+
+#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPlace > #inputTradingPlace
+{
+	width : 300px;
+}
+
+#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPicture
+{
+	height : 130px;
+}
+
+#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPrice
+{
+	height : 50px;
+}
+
+#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPrice > #inputTradingPrice
+{
+	width : 200px;
+}
+
+#wrap > #showGoodsTitle
+{
+	height : 100px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #showGoodsTitle > #noneUseShowGoodsTitle1
+{
+	width : 300px;
+}
+
+#wrap > #showGoodsTitle > #noneUseShowGoodsTitle2
+{
+	width : 300px;
+}
+
+#wrap > #showGoodsTitle > #useShowGoodsTitle
+{
+	width : 600px;
+}
+
+#wrap > section > #showContent
+{
+	height : 500px;
+}
+
+#wrap > section > #showOther
+{
+	height : 300px;
+}
+
+#wrap > section > #showOther > #showFile
+{
+	width : 400px;
+}
+
+#wrap > section > #showOther > #showFile > #checkImage
+{
+	width : 200px;
+	height : 50px;
+}
+
+#wrap > section > #showOther > #showNoneUse
+{
+	width : 500px;
+}
+
+#wrap > section > #showOther > #showEtc
+{
+	width : 300px;
+}
+
+#wrap > section > #showOther > #showFile > #lookingFileImage
+{
+	width : 200px;
+	height : 200px;
+}
+
+#wrap > section > #showOther > #showFile > #lookingFileImage > #sellImage
+{
+	width : 200px;
+	height : 200px;
+}
+
+#wrap > section > #showOther > #showEtc > #showTradingPlace
+{
+	height : 50px;
+}
+
+
+#wrap > section > #showOther > #showEtc > #showTradingPicture
+{
+	height : 130px;
+}
+
+#wrap > section > #showOther > #showEtc > #showTradingPrice
+{
+	height : 50px;
+}
+
+#wrap > #userinfo
+{
+	background-color : #c0c0c0;
+}
+
+#wrap > #userinfo > #noneUserinfo1
+{
+	width : 50px;
+}
+
+#wrap > #userinfo > #useUserinfo
+{
+	width : 1100px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #userinfo > #noneUserinfo2
+{
+	width : 50px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea
+{
+	height : 300px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoProfileArea
+{
+	width : 300px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoProfileArea > #myinfoProfileImage
+{
+	width : 300px;
+	height : 300px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoTextArea
+{
+	width : 800px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoTextArea > #myinfoUserName
+{
+	width : 800px;
+	height : 150px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoTextArea > #myinfoUserScore
+{
+	width : 800px;
+	height : 150px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoUpdateArea
+{
+	height : 100px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoEtcArea
+{
+	height : 300px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoEtcArea > #myinfoWish
+{
+	height : 100px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoEtcArea > #myinfoBuy
+{
+	height : 100px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoEtcArea > #myinfoSell
+{
+	height : 100px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoPost
+{
+	height : 150px;
+}
+
+#wrap > #infoUpdateArea
+{
+	height : 150px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #useInfoUpdateArea
+{
+	height : 350px;
+}
+
+#wrap > #useInfoUpdateArea > #profileImageArea
+{
+	width : 300px;
+	height : 350px;
+}
+
+#wrap > #useInfoUpdateArea > #profileImageArea > #profileImageChangeLogo
+{
+	height : 50px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #useInfoUpdateArea > #profileImageArea > #profileImageChangeArea
+{
+	height : 285px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #useInfoUpdateArea > #userInfoArea
+{
+	width : 850px;
+	height : 350px;
+	background-color : #c0c0c0;
+}
+
+#wrap >#infoPostTitle
+{
+	height : 150px;
+	background-color : #c0c0c0;
+}
+
+#wrap > #postInfoTitle
+{
+	height : 100px;
+}
+
+#wrap > #postInfoTitle > #postInfo
+{
+	height : 500px;
+}
+
+footer
+{
+	height : 200px;
+}

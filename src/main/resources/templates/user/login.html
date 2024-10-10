@@ -3,13 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-	id
-	<input type="text" id="inputId"><br>
-	pw
-	<input type="text" id="inputPW"><br>
-	<button type="button" id="loginBtn">제출</button>
+	<div id="wrap" class="bg-secondary">
+		<div id= "noneUseLoginArea1"></div>
+		<div id = "marketField" class = "d-flex">
+			<div id = "noneUseMarketField"></div>
+			<div id = "useMarketField" class="d-flex justify-content-center align-items-center">
+				<h1>마켓플레이스</h1>
+			</div>
+		</div>
+		<div id = "noneUseLoginArea2"></div>
+		<div id = "loginIdFiled" class = "d-flex">
+			<div id = "noneUseIdField"></div>
+			<div id = "useIdField" class = "d-flex justify-content-center align-items-center">
+				<h1>ID : </h1>
+				<input type="text" class="ml-3 form-control col-5" id="inputId">
+			</div>
+		</div>
+		<div id = "loginPwFiled" class = "d-flex mt-5">
+			<div id = "noneUsePwField"></div>
+			<div id = "usePwField" class="d-flex justify-content-center align-items-center">
+				<h1>PW : </h1>
+				<input type="text" class="ml-3 form-control col-5" id="inputPassword">
+			</div>
+		</div>
+		<div id = "noneUseLoginArea3"></div>
+		<div id = "loginBtnsArea" class = "d-flex">
+			<div id = "noneUseloginBtnsField"></div>
+			<div id = "useLoginBtnsField" class="d-flex justify-content-between align-items-between">
+				<button type="button" class="btn btn-dark btn-lg" id="joinBtn">회원가입</button>
+				<button type="button" class="btn btn-dark btn-lg" id="loginBtn">로그인</button>
+			</div>
+		</div>
+		<footer class = "bg-secondary"></footer>
+	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -17,11 +47,13 @@
 	
 	<script>
 		$(document).ready(function(){
+			$("#joinBtn").on("click", function(){
+				location.href="/user/join-view";
+			});
+			
 			$("#loginBtn").on("click", function(){
 				let loginId = $("#inputId").val();
-				let password = $("#inputPW").val();
-				
-				alert("id : " + loginId + " pw : " + password);
+				let password = $("#inputPassword").val();
 				
 				$.ajax({
 					type:"post"
@@ -31,7 +63,7 @@
 					{
 						if(data.result == "success")
 						{
-							alert("로그인 성공");
+							location.href="/goodsPost/list-view";
 						}
 						else
 						{
