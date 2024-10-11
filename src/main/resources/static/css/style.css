@@ -249,53 +249,56 @@ header > #user-field
 	width : 300px;
 }
 
-#wrap > section
-{
-	background-color : #c0c0c0;
-}
-
-#wrap > section > a> .goodsList
+#wrap > section > a> .sellList
 {
 	height : 150px;
+	background-color : white;
+	border: 1px solid black;
 }
 
-#wrap > section > a> .goodsList > .goodsPictureArea
+#wrap > section > a> .sellList > .goodsPictureArea
 {
 	width : 150px;
 	height : 150px;
 }
 
-#wrap > section > a> .goodsList > .goodsInfoArea
+#wrap > section > a> .sellList > .sellListInfoArea
 {
-	width : 900px;
+	width : 1050px;
 	height : 150px;
 }
 
-#wrap > section > a> .goodsList > .goodsPictureArea > .goodsPictureSize
+#wrap > section > a> .sellList > .goodsPictureArea > .goodsPictureSize
 {
 	width : 100px;
 	height : 100px;
 }
 
-#wrap > section > a> .goodsList > .goodsInfoArea > .goodsInfoTitle
+#wrap > section > a> .sellList > .sellListInfoArea > .sellListInfoTitle
+{
+	height : 50px;
+}
+
+#wrap > section > a> .sellList > .sellListInfoArea > .sellListInfoPlace
 {
 	height : 20px;
 }
 
-#wrap > section > a> .goodsList > .goodsInfoArea > .goodsInfoPlace
+#wrap > section > a> .sellList > .sellListInfoArea > .sellListInfoUser
 {
 	height : 20px;
 }
 
-#wrap > section > a> .goodsList > .goodsInfoArea > .goodsInfoUser
+#wrap > section > a> .sellList > .sellListInfoArea > .sellListInfoOthers
 {
 	height : 20px;
 }
+
+/* goodsPost.html */
 
 #wrap > #showGoodsTitle
 {
-	height : 100px;
-	background-color : #c0c0c0;
+	height : 50px;
 }
 
 #wrap > #showGoodsTitle > #noneUseShowGoodsTitle1
@@ -313,9 +316,32 @@ header > #user-field
 	width : 600px;
 }
 
+#wrap > section > #sellerInfo
+{
+	height : 50px;
+}
+
+#wrap > section > #sellerInfo > #sellerProfileArea
+{
+	width : 50px;
+	height : 50px;
+}
+
+#wrap > section > #sellerInfo > #sellerProfileArea > #sellerProfile
+{
+	width : 50px;
+	height : 50px;
+	border-radius : 50%;
+}
+
 #wrap > section > #showContent
 {
-	height : 500px;
+	height : 100px;
+}
+
+#wrap > section > #showContent > #goodsPrice
+{
+	height : 50px;
 }
 
 #wrap > section > #showOther
@@ -334,16 +360,6 @@ header > #user-field
 	height : 50px;
 }
 
-#wrap > section > #showOther > #showNoneUse
-{
-	width : 500px;
-}
-
-#wrap > section > #showOther > #showEtc
-{
-	width : 300px;
-}
-
 #wrap > section > #showOther > #showFile > #lookingFileImage
 {
 	width : 200px;
@@ -354,22 +370,6 @@ header > #user-field
 {
 	width : 200px;
 	height : 200px;
-}
-
-#wrap > section > #showOther > #showEtc > #showTradingPlace
-{
-	height : 50px;
-}
-
-
-#wrap > section > #showOther > #showEtc > #showTradingPicture
-{
-	height : 130px;
-}
-
-#wrap > section > #showOther > #showEtc > #showTradingPrice
-{
-	height : 50px;
 }
 
 #wrap > #userinfo
