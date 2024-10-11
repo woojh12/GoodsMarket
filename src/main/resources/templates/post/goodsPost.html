@@ -31,13 +31,13 @@
 		</header>
 		<div id="showGoodsTitle" class="mt-5 d-flex">
 			<div id="noneUseShowGoodsTitle1" class="ml-2 d-flex align-items-center">
-				<h5 id="postViews" th:text="${goodsPost.views}" th:data-post-id="${goodsPost.id}">조회수 : 5</h5>
+				<h5 id="postViews" th:text="'조회수 : ' + ${goodsPost.views}" th:data-post-id="${goodsPost.id}">조회수 : 5</h5>
 			</div>
 			<div id="useShowGoodsTitle" class="d-flex align-items-center justify-content-center">
 				<h2 th:text="${goodsPost.title}">자동차 팝니다.</h2>
 			</div>
 			<div id="noneUseShowGoodsTitle2" class="mr-2 d-flex align-items-center justify-content-end">
-				<h5 th:text="${goodsPost.sellerName}">작성자 : 홍길동</h5>
+				<h5 th:text="'작성자 : ' + ${goodsPost.sellerName}">작성자 : 홍길동</h5>
 			</div>
 		</div>
 		<section class="mt-5">
@@ -105,8 +105,6 @@
 			
 			let id = $("#postViews").data("post-id");
 			
-			alert("id : " + id);
-		
 			$.ajax({
 				type:"post"
 				, url:"/goodsPost/increase/views"
@@ -115,7 +113,7 @@
 				{
 					if(data.result == "success")
 					{
-						alert("조회수 증가 완료");
+						// 조회수 증가
 					}
 					else
 					{
