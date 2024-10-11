@@ -220,6 +220,8 @@ header > #user-field
 	height : 60px;
 }
 
+/* goodsList.html */
+
 #wrap > #articleBanner
 {
 	height : 250px;
@@ -228,7 +230,7 @@ header > #user-field
 
 #wrap > #allGoodsTitle
 {
-	height : 200px;
+	height : 100px;
 	background-color : #c0c0c0;
 }
 
@@ -254,106 +256,40 @@ header > #user-field
 
 #wrap > section > a> .goodsList
 {
-	height : 300px;
+	height : 150px;
 }
 
-#wrap > section > a> .goodsList > .goodsPicture
+#wrap > section > a> .goodsList > .goodsPictureArea
 {
-	width : 300px;
-	height : 300px;
+	width : 150px;
+	height : 150px;
 }
 
-#wrap > section > a> .goodsList > .goodsInfo
+#wrap > section > a> .goodsList > .goodsInfoArea
 {
 	width : 900px;
-	height : 300px;
+	height : 150px;
 }
 
-#wrap > section > a> .goodsList > .goodsPicture > .goodsPictureSize
+#wrap > section > a> .goodsList > .goodsPictureArea > .goodsPictureSize
 {
-	width : 200px;
-	height : 200px;
-}
-
-#wrap > section > a> .goodsList > .goodsInfo > .goodsInfoTitle
-{
+	width : 100px;
 	height : 100px;
 }
 
-#wrap > section > a> .goodsList > .goodsInfo > .goodsInfoPlace
+#wrap > section > a> .goodsList > .goodsInfoArea > .goodsInfoTitle
 {
-	height : 100px;
+	height : 20px;
 }
 
-#wrap > section > a> .goodsList > .goodsInfo > .goodsInfoUser
+#wrap > section > a> .goodsList > .goodsInfoArea > .goodsInfoPlace
 {
-	height : 100px;
+	height : 20px;
 }
 
-#wrap > section > #writtingTitle
+#wrap > section > a> .goodsList > .goodsInfoArea > .goodsInfoUser
 {
-	height : 80px;
-}
-
-#wrap > section > #writtingTitle > #inputSellTitle
-{
-	height : 60px;
-}
-
-#wrap > section > #writtingContent
-{
-	height : 250px;
-}
-
-#wrap > section > #writtingOther
-{
-	height : 250px;
-}
-
-#wrap > section > #writtingOther > #writtingFile
-{
-	width : 400px;
-}
-
-#wrap > section > #writtingOther > #writtingNoneUse
-{
-	width : 400px;
-}
-
-#wrap > section > #writtingOther > #writtingEtc
-{
-	width : 400px;
-}
-
-#wrap > section > #writtingOther > #writtingFile > #lookingFileImage
-{
-	width : 200px;
-	height : 200px;
-}
-
-#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPlace
-{
-	height : 50px;
-}
-
-#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPlace > #inputTradingPlace
-{
-	width : 300px;
-}
-
-#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPicture
-{
-	height : 130px;
-}
-
-#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPrice
-{
-	height : 50px;
-}
-
-#wrap > section > #writtingOther > #writtingEtc > #writtingTradingPrice > #inputTradingPrice
-{
-	width : 200px;
+	height : 20px;
 }
 
 #wrap > #showGoodsTitle
@@ -572,7 +508,58 @@ header > #user-field
 	height : 500px;
 }
 
-footer
+/* goodsInput.html */
+
+#wrap > #sellMainTitleArea
+{
+	height : 50px;	
+}
+
+#wrap > #sellImageArea
+{
+	height : 220px;
+}
+
+#wrap > #sellImageArea > #sellGoodsImageArea > #sellGoodsImage
+{
+	width : 150px;
+	height : 150px;
+}
+
+#wrap > #sellTitleArea
+{
+	height : 50px;
+}
+
+#wrap > #sellDetailArea
+{
+	height : 250px;
+}
+
+#wrap > #sellCostArea
+{
+	height : 50px;
+}
+
+#wrap > #sellTradingPlaceArea
 {
 	height : 200px;
+}
+
+#wrap > #sellTradingPlaceArea > #sellTradingPlaceText
+{
+	height : 50px;
+}
+
+#wrap > #sellTradingPlaceArea > #sellLocationArea
+{
+	height : 150px;
+}
+
+/* footer */
+
+footer
+{
+	height : 40px;
+	background-color:#c0c0c0;
 }

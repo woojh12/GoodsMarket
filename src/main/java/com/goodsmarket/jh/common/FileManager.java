@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileManager {
-	public static final String FILE_UPLOAD_PATH = "C:\\Spring\\Market\\marketUpload";
+	public static final String FILE_UPLOAD_PATH = "C:\\jh\\SpringProject\\marketUpload";
 	
 	public static String saveFile(int userId, MultipartFile file)
 	{

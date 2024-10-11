@@ -3,72 +3,48 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
-<title>물품 거래 작성</title>
+<title>물품 판매글 작성</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-	<div id="wrap" class="bg-dark">
-		<header class="d-flex">
-			<ul id="mainMenu">
-			  <li>
-			    <a href="#">
-			    	<img class="menuBtn" width="50px" height="50px" src="https://cdn-icons-png.flaticon.com/128/2976/2976215.png">
-			    </a>
-			    	<ul id="subMenu">
-			    		<li class="mt-3"><a href="#">중고거래판</a></li>
-			    		<li class="mt-3"><a href="#">자유게시판</a></li>
-			    	</ul>
-			  </li>
-			</ul>
-			<div id="titleName" class="d-flex align-items-center justify-content-center">
-				<h2>마켓플레이스</h2>
+	<div id="wrap">
+		<th:block th:replace="~{fragments/header :: header}"></th:block>
+		<div id="sellMainTitleArea" class="d-flex align-items-center justify-content-center">
+			<h3>물건 판매글 작성</h3>
+		</div>
+		<div id="sellTitleArea" class="mt-2 d-flex align-items-center justify-content-center">
+			<input type="text" class="form-control" placeholder="제목을 입력해주세요." id="inputSellTitle">
+		</div>
+		<div id="sellDetailArea">
+			<textarea rows="10" cols="160" class="form-control" placeholder="내용을 입력해주세요." id="inputSellContents"></textarea>
+		</div>
+		<div id="sellCostArea" class="d-flex align-items-center">
+			<label>판매가격 : </label>
+			<input type="text" class="ml-2 form-control col-1" id="inputTradingPrice">
+			<label class="ml-1">원</label>
+		</div>
+		<div id="sellImageArea" class=" mt-2">
+			<div>
+				<h5>이미지 업로드</h5>
 			</div>
-			<div id="user-field" class="d-flex align-items-center justify-content-between">
-				<h2 th:text="${session.userName}">홍길동</h2>
-				<h2 class="mr-2">logout</h2>
+			<div id="sellGoodsImageArea" class="d-flex">
+				<div id="sellGoodsImage" class="bg-light"></div>
 			</div>
-		</header>
-		<div id="allGoodsTitle" class="mt-5 d-flex">
-			<div id="noneUseAllGoodsTitle1"></div>
-			<div id="useAllGoodsTitle" class="d-flex align-items-center justify-content-center">
-				<h2>판매 게시글 작성</h2>
+			<div class="d-flex mt-1">
+				<input type="file" id="inputFile">
 			</div>
 		</div>
-		<section class="mt-5">
-			<div id="writtingTitle" class="bg-light d-flex">
-				<div class="d-flex align-items-center">
-					<h3>글 제목 : </h3>				
-				</div>
-				<input type="text" class="form-control col-6 ml-3 mt-2" id="inputSellTitle">			
+		<div id="sellTradingPlaceArea">
+			<div id="sellTradingPlaceText" class="d-flex align-items-center">
+				<label class="mt-2">판매 장소 : </label>
+				<input type="text" class="mt-2 ml-2 form-control col-3" placeholder="판매장소" id="inputTradingPlace">
 			</div>
-			<div id="writtingContent" class="bg-light mt-2">
-				<textarea rows="8" cols="155" class="form-control" id="inputSellContents"></textarea>
-			</div>
-			<div id="writtingOther" class="mt-2 d-flex">
-				<div id="writtingFile">
-					<input type="file" class="ml-3" id="inputFile">
-					<div id="lookingFileImage" class="mt-3 ml-3 bg-light">
-					</div>
-				</div>
-				<div id="writtingNoneUse"></div>
-				<div id="writtingEtc">
-					<div id="writtingTradingPlace" class="bg-light mr-3 d-flex align-items-center">
-						<label>거래장소 : </label>
-						<input type="text" class="form-control ml-2" id="inputTradingPlace">
-					</div>
-					<div id="writtingTradingPicture" class="bg-light mt-2 mr-3"></div>
-					<div id="writtingTradingPrice" class="bg-light mt-2 mr-3 d-flex align-items-center">
-						<label>판매가격 : </label>
-						<input type="text" class="form-control ml-2" id="inputTradingPrice">
-						<label class="ml-2">원</label>
-					</div>
-				</div>
-			</div>
-		</section>
-		<footer class="mt-5 d-flex align-items-end justify-content-between">
-			<button type="button" class="btn btn-secondary ml-3 mt-3" id="cancleBtn">취소</button>
-			<button type="button" class="btn btn-secondary mr-3 mt-3" id="createBtn">작성하기</button>
+			<div id="sellLocationArea" class="bg-light"></div>
+		</div>
+		<footer class="mt-5 d-flex align-items-center justify-content-between">
+			<button type="button" class="btn btn-secondary" id="cancleBtn">취소</button>
+			<button type="button" class="btn btn-secondary" id="createBtn">작성하기</button>
 		</footer>
 	</div>
 	
@@ -77,7 +53,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	
 	<script>
-		$(document).ready(function(){	
+		$(document).ready(function(){
 			// 헤더 부분 기능
 			$("#subMenu").hide()
 			
@@ -133,7 +109,6 @@
 					{
 						if(data.result == "success")
 						{
-							alert("작성완료");
 							parent.location.href="/goodsPost/list-view";
 						}
 						else
@@ -148,11 +123,6 @@
 				});
 			});
 			
-			// 취소 버튼 기능
-			$("#cancleBtn").on("click", function(){
-				location.href="/goodsPost/list-view";
-			});
-			
 			// 파일 미리보기 기능
 			$(function(){
     			$("#inputFile").change(function(event){
@@ -163,12 +133,17 @@
 
     				image.src = ImageTempUrl;
 					
-    				image.width = 200;
-    				image.height = 200;
+    				image.width = 150;
+    				image.height = 150;
     				
-    				$("#lookingFileImage").append(image);
+    				$("#sellGoodsImage").append(image);
     			});
     		});
+			
+			// 취소 버튼 기능
+			$("#cancleBtn").on("click", function(){
+				location.href="/goodsPost/list-view";
+			});
 		});
 	</script>
 </body>

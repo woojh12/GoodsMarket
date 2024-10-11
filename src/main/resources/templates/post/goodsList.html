@@ -8,34 +8,13 @@
 <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-	<div id="wrap" class="bg-dark">
-		<header class="d-flex">
-			<ul id="mainMenu">
-			  <li>
-			    <a href="#">
-			    	<img class="menuBtn" width="50px" height="50px" src="https://cdn-icons-png.flaticon.com/128/2976/2976215.png">
-			    </a>
-			    	<ul id="subMenu">
-			    		<li class="mt-3"><a href="#">중고거래판</a></li>
-			    		<li class="mt-3"><a href="#">자유게시판</a></li>
-			    	</ul>
-			  </li>
-			</ul>
-			<div id="titleName" class="d-flex align-items-center justify-content-center">
-				<h2>마켓플레이스</h2>
-			</div>
-			<div id="user-field" class="d-flex align-items-center justify-content-between">
-				<h2 th:text="${session.userName}">홍길동</h2>
-				<a href="/user/logout">
-					<button class="mr-2 btn btn-dark" id="logoutBtn">로그아웃</button>
-				</a>
-			</div>
-		</header>
+	<div id="wrap">
+		<th:block th:replace="~{fragments/header :: header}"></th:block>
 		<div id="articleBanner" class="mt-5"></div>
 		<div id="allGoodsTitle" class="mt-5 d-flex">
 			<div id="noneUseAllGoodsTitle1"></div>
 			<div id="useAllGoodsTitle" class="d-flex align-items-center justify-content-center">
-				<h2>전체 판매 매물</h2>
+				<h3>전체 판매 매물</h3>
 			</div>
 			<div id="noneUseAllGoodsTitle2" class="d-flex align-items-center justify-content-end">
 				<div class="input-group">
@@ -47,20 +26,20 @@
 		<section class="mt-5" th:each="goodsPost:${goodsPostList}">
 			<a th:href="@{/goodsPost/show-view(id=${goodsPost.id})}">
 				<span class="goodsList bg-light d-flex">
-					<span class="goodsPicture d-flex align-items-center justify-content-center">
+					<span class="goodsPictureArea d-flex align-items-center justify-content-center">
 						<img class="goodsPictureSize" th:unless="${goodsPost.imagePath == null}" th:src="@{${goodsPost.imagePath}}">
 						<img class="goodsPictureSize" th:if="${goodsPost.imagePath == null}" src="https://cdn-icons-png.flaticon.com/128/10701/10701484.png">
 					</span>
-					<span class="goodsInfo">
-						<span class="goodsInfoTitle d-flex align-items-center text-dark" th:text="'제목 : ' + ${goodsPost.title}">고양이 관람표</span>
-						<span class="goodsInfoPlace d-flex align-items-center text-dark" th:text="'거래장소 : ' + ${goodsPost.location}">서울시</span>
-						<span class="goodsInfoUser d-flex align-items-center text-dark" th:text="'작성자 : ' + ${goodsPost.sellerName}">작성자 : 홍길동</span>
+					<span class="goodsInfoArea">
+						<span class="mt-3 bg-warning goodsInfoTitle d-flex align-items-center text-dark" th:text="'제목 : ' + ${goodsPost.title}">고양이 관람표</span>
+						<span class="bg-primary goodsInfoPlace d-flex align-items-center text-dark" th:text="'거래장소 : ' + ${goodsPost.location}">서울시</span>
+						<span class="bg-secondary goodsInfoUser d-flex align-items-center text-dark" th:text="'작성자 : ' + ${goodsPost.sellerName}">작성자 : 홍길동</span>
 					</span>
 				</span>
 			</a>	
 		</section>
 		<footer class="mt-5 d-flex align-items-end justify-content-end">
-			<button type="button" class="btn btn-secondary mr-3 mt-3" id="createBtn">판매글 작성하기</button>
+			<button type="button" class="btn btn-secondary mt-3" id="createBtn">판매글 작성</button>
 		</footer>
 	</div>
 	
