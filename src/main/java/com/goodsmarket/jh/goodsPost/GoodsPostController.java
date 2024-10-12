@@ -11,15 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodsmarket.jh.goodsPost.domain.GoodsPost;
 import com.goodsmarket.jh.goodsPost.service.GoodsPostService;
+import com.goodsmarket.jh.shoppingcart.service.ShoppingCartService;
 
 @RequestMapping("/goodsPost")
 @Controller
 public class GoodsPostController {
 	private GoodsPostService goodsPostService;
+	private ShoppingCartService shoppingCartService;
 	
-	public GoodsPostController(GoodsPostService goodsPostService)
+	public GoodsPostController(GoodsPostService goodsPostService, ShoppingCartService shoppingCartService)
 	{
 		this.goodsPostService = goodsPostService;
+		this.shoppingCartService = shoppingCartService;
 	}
 	
 	@GetMapping("/list-view")
@@ -43,9 +46,17 @@ public class GoodsPostController {
 	@GetMapping("/show-view")
 	public String goodsShow(Model model
 			, @RequestParam("id") int id)
-	{
+	{		
 		GoodsPost goodsPost = goodsPostService.getUsedTrade(id);
 		model.addAttribute("goodsPost", goodsPost);
+	
+		// 장바구니 버튼 누른 사용자 수 조회
+		List<GoodsPost> goodsPostList = goodsPostService.getAllUsedTrade();
+		for(GoodsPost sellPost:goodsPostList)
+		{
+			int shoppingCartCount = shoppingCartService.getAllShoppingCartCount(sellPost.getId());			
+			model.addAttribute("shoppingCartCount", shoppingCartCount);
+		}
 		
 		return "post/goodsPost";
 	}
