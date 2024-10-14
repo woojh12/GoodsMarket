@@ -1,8 +1,11 @@
 package com.goodsmarket.jh.shoppingcart.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.goodsmarket.jh.shoppingcart.domain.ShoppingCart;
 import com.goodsmarket.jh.shoppingcart.repository.ShoppingCartRepository;
 
 @Service
@@ -33,9 +36,15 @@ public class ShoppingCartService {
 		return shoppingCartRepository.deleteShoppingCart(userTradeId, userId);
 	}
 	
-	// 장바구니 선택한 모든 인원수 조회 Service
+	// 장바구니 선택한 모든 인원수 조회 service
 	public int getAllShoppingCartCount(int userTradeId)
 	{
 		return shoppingCartRepository.countAllShoppingCart(userTradeId);
+	}
+	
+	// 장바구니에 담긴 게시글 정보 가져오기 service
+	public List<ShoppingCart> getUserShopingCartList(int userId)
+	{
+		return shoppingCartRepository.selectUserShopingCartList(userId);
 	}
 }

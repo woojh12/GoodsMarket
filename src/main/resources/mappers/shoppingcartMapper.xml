@@ -40,4 +40,15 @@
  			`shopping_cart`
  		WHERE `usedTradeId` = #{usedTradeId} AND `userId` = #{userId}
  	</delete>
+ 	
+ 	<select id="selectUserShopingCartList" parameterType="int" resultType="com.goodsmarket.jh.shoppingcart.domain.ShoppingCart">
+ 		SELECT
+ 			`id`
+ 			, `usedTradeId`
+ 			, `userId`
+ 			, `createdAt`
+ 		FROM
+ 			`shopping_cart`
+ 		WHERE `userId` = #{userId}
+ 	</select>
  </mapper>

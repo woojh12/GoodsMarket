@@ -61,4 +61,10 @@ public class GoodsPostService {
 			return false;
 		}
 	}
+	
+	// 장바구니 목록 불러오기 Service
+	public List<GoodsPost> getAllShoppingCartList(int usedTradeId)
+	{
+		return goodsPostRepository.selectAllShoppingCartList(usedTradeId);
+	}
 }

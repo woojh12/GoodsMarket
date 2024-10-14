@@ -9,26 +9,7 @@
 </head>
 <body>
 	<div id="wrap" class="bg-dark">
-		<header class="d-flex">
-			<ul id="mainMenu">
-			  <li>
-			    <a href="#">
-			    	<img class="menuBtn" width="50px" height="50px" src="https://cdn-icons-png.flaticon.com/128/2976/2976215.png">
-			    </a>
-			    	<ul id="subMenu">
-			    		<li class="mt-3"><a href="#">중고거래판</a></li>
-			    		<li class="mt-3"><a href="#">자유게시판</a></li>
-			    	</ul>
-			  </li>
-			</ul>
-			<div id="titleName" class="d-flex align-items-center justify-content-center">
-				<h2>마켓플레이스</h2>
-			</div>
-			<div id="user-field" class="d-flex align-items-center justify-content-between">
-				<h2 th:text="${session.userName}">홍길동</h2>
-				<h2 class="mr-2">logout</h2>
-			</div>
-		</header>
+		<th:block th:replace="~{fragments/header :: header}"></th:block>
 		<div id="userinfo" class="mt-3 d-flex">
 			<div id="noneUserinfo1"></div>
 			<div id="useUserinfo">
@@ -46,14 +27,14 @@
 					</div>
 				</div>
 				<div id="myinfoUpdateArea" class="bg-light mt-5 d-flex align-items-center">
-					<a href="/my/info-update-view">
+					<a href="/my/info/update-view">
 						<h2 class="text-dark">내 정보 수정하기</h2>
 					</a>
 				</div>
 				<div id="myinfoEtcArea" class="bg-light mt-5">
 					<div id="myinfoWish">
-						<a href="#">
-							<h2 class="text-dark">찜 목록 확인</h2>
+						<a href="/my/info/shoppingcart-view">
+							<h2 class="text-dark">장바구니 바로가기</h2>
 						</a>
 					</div>
 					<div id="myinfoBuy">
@@ -107,7 +88,7 @@
 			
 			// 마이페이지 돌아가기 버튼 기능
 			$("#backBtn").on("click", function(){
-				history.back();
+				location.href="/my/info/view";
 			});
 		});	
 	</script>

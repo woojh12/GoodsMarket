@@ -22,4 +22,7 @@ public interface GoodsPostRepository {
 	public GoodsPost selectUsedTrade(@Param("id") int id);
 	
 	public int updateUsedTradeViews(@Param("id") int id);
+	
+	// 장바구니 저장 목록 불러오기 Repository
+	public List<GoodsPost> selectAllShoppingCartList(@Param("id") int id);
 }
