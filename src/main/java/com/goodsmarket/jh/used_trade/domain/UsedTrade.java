@@ -1,8 +1,8 @@
-package com.goodsmarket.jh.goodsPost.domain;
+package com.goodsmarket.jh.used_trade.domain;
 
 import java.time.LocalDateTime;
 
-public class GoodsPost {
+public class UsedTrade {
 	private int id;
 	private int userId;
 	private String title;

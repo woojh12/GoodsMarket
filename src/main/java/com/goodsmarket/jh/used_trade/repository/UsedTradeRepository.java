@@ -1,14 +1,14 @@
-package com.goodsmarket.jh.goodsPost.repository;
+package com.goodsmarket.jh.used_trade.repository;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.goodsmarket.jh.goodsPost.domain.GoodsPost;
+import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 
 @Mapper
-public interface GoodsPostRepository {
+public interface UsedTradeRepository {
 	public int insertUsedTrade(@Param("userId") int userId
 			, @Param("title") String title
 			, @Param("contents") String contents
@@ -17,12 +17,12 @@ public interface GoodsPostRepository {
 			, @Param("sellerName") String sellerName
 			, @Param("sellPrice") int sellPrice);
 	
-	public List<GoodsPost> selectAllUsedTrade();
+	public List<UsedTrade> selectAllUsedTrade();
 	
-	public GoodsPost selectUsedTrade(@Param("id") int id);
+	public UsedTrade selectUsedTrade(@Param("id") int id);
 	
 	public int updateUsedTradeViews(@Param("id") int id);
 	
 	// 장바구니 저장 목록 불러오기 Repository
-	public List<GoodsPost> selectAllShoppingCartList(@Param("id") int id);
+	public List<UsedTrade> selectAllShoppingCartList(@Param("id") int id);
 }

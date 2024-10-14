@@ -1,4 +1,4 @@
-package com.goodsmarket.jh.goodsPost;
+package com.goodsmarket.jh.used_trade;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.goodsmarket.jh.goodsPost.service.GoodsPostService;
+import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/goodsPost")
-public class GoodsPostRestController {
-	private GoodsPostService goodsPostService;
+@RequestMapping("/usedtrade")
+public class UsedTradeRestController {
+	private UsedTradeService usedTradeService;
 	
 	@Autowired
-	public GoodsPostRestController(GoodsPostService goodsPostService)
+	public UsedTradeRestController(UsedTradeService usedTradeService)
 	{
-		this.goodsPostService = goodsPostService;
+		this.usedTradeService = usedTradeService;
 	}
 	
 	// 판매 작성글 API
@@ -40,7 +40,7 @@ public class GoodsPostRestController {
 		int userId = (Integer)session.getAttribute("userId");
 		String sellerName = (String)session.getAttribute("userName");
 		
-		int count = goodsPostService.addUsedTrade(userId, title, contents, imagePath, location, sellerName, sellPrice);
+		int count = usedTradeService.addUsedTrade(userId, title, contents, imagePath, location, sellerName, sellPrice);
 		
 		if(count == 1)
 		{
@@ -60,7 +60,7 @@ public class GoodsPostRestController {
 	{
 		Map<String, String> resultMap = new HashMap<>();
 		
-		boolean check = goodsPostService.countUpUsedTradeViews(id);
+		boolean check = usedTradeService.countUpUsedTradeViews(id);
 		
 		if(check == true)
 		{

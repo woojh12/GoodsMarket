@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="com.goodsmarket.jh.goodsPost.repository.GoodsPostRepository">
+ <mapper namespace="com.goodsmarket.jh.used_trade.repository.UsedTradeRepository">
  	<insert id="insertUsedTrade" parameterType="map">
  		INSERT INTO
  			`used_trade`
@@ -27,7 +27,7 @@
  		)
  	</insert>
  	
- 	<select id="selectAllUsedTrade" resultType="com.goodsmarket.jh.goodsPost.domain.GoodsPost">
+ 	<select id="selectAllUsedTrade" resultType="com.goodsmarket.jh.used_trade.domain.UsedTrade">
  		SELECT
  			`id`
  			, `userId`
@@ -44,7 +44,7 @@
  			`used_trade`
  	</select>
  	
- 	<select id="selectUsedTrade" resultType="com.goodsmarket.jh.goodsPost.domain.GoodsPost" parameterType="int">
+ 	<select id="selectUsedTrade" resultType="com.goodsmarket.jh.used_trade.domain.UsedTrade" parameterType="int">
  		SELECT
  			`id`
  			, `userId`
@@ -80,7 +80,7 @@
  			`id` = #{id}
  	</update>
  	
- 	<select id="selectAllShoppingCartList" parameterType="int" resultType="com.goodsmarket.jh.goodsPost.domain.GoodsPost">
+ 	<select id="selectAllShoppingCartList" parameterType="int" resultType="com.goodsmarket.jh.used_trade.domain.UsedTrade">
  		SELECT
  			`id`
  			, `userId`
