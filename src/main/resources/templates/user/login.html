@@ -16,26 +16,29 @@
 			</div>
 		</div>
 		<div id = "noneUseLoginArea2"></div>
-		<div id = "loginIdFiled" class = "d-flex">
-			<div id = "noneUseIdField"></div>
-			<div id = "useIdField" class = "d-flex justify-content-center align-items-center">
-				<h1>ID : </h1>
-				<input type="text" class="ml-3 form-control col-5" id="inputId">
+		<form id="loginForm">
+			<div id = "loginIdFiled" class = "d-flex">
+				<div id = "noneUseIdField"></div>
+				<div id = "useIdField" class = "d-flex justify-content-center align-items-center">
+					<h1>ID : </h1>
+					<input type="text" class="ml-3 form-control col-5" id="inputId">
+				</div>
 			</div>
-		</div>
-		<div id = "loginPwFiled" class = "d-flex mt-5">
-			<div id = "noneUsePwField"></div>
-			<div id = "usePwField" class="d-flex justify-content-center align-items-center">
-				<h1>PW : </h1>
-				<input type="text" class="ml-3 form-control col-5" id="inputPassword">
-			</div>
-		</div>
+			<div id = "loginPwFiled" class = "d-flex mt-5">
+				<div id = "noneUsePwField"></div>
+				<div id = "usePwField" class="d-flex justify-content-center align-items-center">
+					<h1>PW : </h1>
+					<input type="text" class="ml-3 form-control col-5" id="inputPassword">
+				</div>
+			</div>	
+		</form>
+		
 		<div id = "noneUseLoginArea3"></div>
 		<div id = "loginBtnsArea" class = "d-flex">
 			<div id = "noneUseloginBtnsField"></div>
 			<div id = "useLoginBtnsField" class="d-flex justify-content-between align-items-between">
 				<button type="button" class="btn btn-dark btn-lg" id="joinBtn">회원가입</button>
-				<button type="button" class="btn btn-dark btn-lg" id="loginBtn">로그인</button>
+				<button type="submit" class="btn btn-dark btn-lg" id="loginBtn">로그인</button>
 			</div>
 		</div>
 		<footer class = "bg-secondary"></footer>
@@ -49,6 +52,15 @@
 		$(document).ready(function(){
 			$("#joinBtn").on("click", function(){
 				location.href="/user/join-view";
+			});
+			
+			// 엔터키로 로그인하는 기능
+			$("#inputPassword").on("keypress", function(e)
+			{
+				if(e.keyCode == "13")
+				{
+					$("#loginBtn").click();
+				}
 			});
 			
 			$("#loginBtn").on("click", function(){

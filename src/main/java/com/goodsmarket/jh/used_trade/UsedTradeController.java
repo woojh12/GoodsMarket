@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.goodsmarket.jh.shoppingcart.service.ShoppingCartService;
+import com.goodsmarket.jh.favorite.service.FavoriteService;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 
@@ -17,12 +17,12 @@ import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 @Controller
 public class UsedTradeController {
 	private UsedTradeService usedTradeService;
-	private ShoppingCartService shoppingCartService;
+	private FavoriteService favoriteService;
 	
-	public UsedTradeController(UsedTradeService usedTradeService, ShoppingCartService shoppingCartService)
+	public UsedTradeController(UsedTradeService usedTradeService, FavoriteService favoriteService)
 	{
 		this.usedTradeService = usedTradeService;
-		this.shoppingCartService = shoppingCartService;
+		this. favoriteService =  favoriteService;
 	}
 	
 	@GetMapping("/list-view")
@@ -34,13 +34,13 @@ public class UsedTradeController {
 		
 		model.addAttribute("usedTradeList", usedTradeList);
 		
-		return "usedtrade/goodsList";
+		return "usedtrade/postList";
 	}
 	
 	@GetMapping("/create-view")
 	public String goodsCreate()
 	{
-		return "usedtrade/goodsInput";
+		return "usedtrade/input";
 	}
 	
 	@GetMapping("/show-view")
@@ -53,12 +53,11 @@ public class UsedTradeController {
 		// 장바구니 버튼 누른 사용자 수 조회   --> 기능 서비스로 이동 예정
 		List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
 		
-		for(UsedTrade sellPost:usedTradeList)
-		{
-			int shoppingCartCount = shoppingCartService.getAllShoppingCartCount(sellPost.getId());			
-			model.addAttribute("shoppingCartCount", shoppingCartCount);
-		}
+		// 선택한 게시글의 찜 수 조회
+		int shoppingCartCount =  favoriteService.getAllShoppingCartCount(id);
 		
-		return "usedtrade/goodsPost";
+		model.addAttribute("shoppingCartCount", shoppingCartCount);
+		
+		return "usedtrade/post";
 	}
 }

@@ -60,10 +60,4 @@ public class UsedTradeService {
 			return false;
 		}
 	}
-	
-	// 장바구니 목록 불러오기 Service
-	public List<UsedTrade> getAllShoppingCartList(int usedTradeId)
-	{
-		return usedTradeRepository.selectAllShoppingCartList(usedTradeId);
-	}
 }

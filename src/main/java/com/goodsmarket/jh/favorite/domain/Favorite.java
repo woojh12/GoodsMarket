@@ -1,8 +1,8 @@
-package com.goodsmarket.jh.shoppingcart.domain;
+package com.goodsmarket.jh.favorite.domain;
 
 import java.time.LocalDateTime;
 
-public class ShoppingCart {
+public class Favorite {
 	private int id;
 	private int usedTradeId;
 	private int userId;

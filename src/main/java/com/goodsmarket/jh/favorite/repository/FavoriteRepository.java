@@ -1,14 +1,14 @@
-package com.goodsmarket.jh.shoppingcart.repository;
+package com.goodsmarket.jh.favorite.repository;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.goodsmarket.jh.shoppingcart.domain.ShoppingCart;
+import com.goodsmarket.jh.favorite.domain.Favorite;
 
 @Mapper
-public interface ShoppingCartRepository {
+public interface FavoriteRepository {
 	public int insertShoppingCart(@Param("usedTradeId") int usedTradeId
 			, @Param("userId") int userId);
 	
@@ -21,5 +21,5 @@ public interface ShoppingCartRepository {
 	public int countAllShoppingCart(@Param("usedTradeId") int usedTradeId);
 	
 	// 장바구니에 담긴 게시글 정보 가져오기 repository
-	public List<ShoppingCart> selectUserShopingCartList(@Param("userId") int userId);
+	public int[] selectUserShopingCartList(@Param("userId") int userId);
 }

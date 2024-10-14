@@ -1,6 +1,5 @@
 package com.goodsmarket.jh.info;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.goodsmarket.jh.shoppingcart.domain.ShoppingCart;
-import com.goodsmarket.jh.shoppingcart.service.ShoppingCartService;
+import com.goodsmarket.jh.favorite.service.FavoriteService;
+import com.goodsmarket.jh.info.service.InfoService;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 import com.goodsmarket.jh.user.domain.User;
@@ -19,21 +18,24 @@ import com.goodsmarket.jh.user.service.UserService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/my/info")
+@RequestMapping("/info")
 public class InfoController {
 	private UserService userService;
 	private UsedTradeService usedTradeService;
-	private ShoppingCartService shoppingCartService;
+	private InfoService infoService;
+	private FavoriteService favoriteService;
 	
 	@Autowired
-	public InfoController(UserService userService, UsedTradeService usedTradeService, ShoppingCartService shoppingCartService)
+	public InfoController(UserService userService, UsedTradeService usedTradeService
+			, InfoService infoService, FavoriteService favoriteService)
 	{
 		this.userService = userService;
 		this.usedTradeService = usedTradeService;
-		this.shoppingCartService = shoppingCartService;
+		this.infoService = infoService;
+		this. favoriteService = favoriteService;
 	}
 	
-	@GetMapping("/view")
+	@GetMapping("/my-view")
 	public String info(Model model
 			, HttpSession session)
 	{
@@ -58,24 +60,15 @@ public class InfoController {
 		return "/info/postList";
 	}
 	
-	@GetMapping("/shoppingcart-view")
+	@GetMapping("/favorite-view")
 	public String infoShoppingCart(Model model
 			, HttpSession session)
 	{
 		int userId = (Integer)session.getAttribute("userId");
+	
+		List<UsedTrade> usedTradeList =  favoriteService.getUserShopingCartList(userId);
 		
-		// 전체 장바구니 목록 가져오기
-		List<ShoppingCart> shoppingCartList = shoppingCartService.getUserShopingCartList(userId);
-		List<UsedTrade> usedTradeList = new ArrayList<UsedTrade>();
-
-				
-		for(ShoppingCart shoppingCart:shoppingCartList)
-		{
-			int usedTradeId = shoppingCart.getUsedTradeId();			
-					
-		}
-		model.addAttribute("goodsPostList", usedTradeList);	
-		
-		return "/info/shoppingcart";
+		model.addAttribute("usedTradeList", usedTradeList);
+		return "/info/favorite";
 	}
 }

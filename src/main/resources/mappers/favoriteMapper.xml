@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="com.goodsmarket.jh.shoppingcart.repository.ShoppingCartRepository">
+ <mapper namespace="com.goodsmarket.jh.favorite.repository.FavoriteRepository">
  	<insert id="insertShoppingCart" parameterType="map">
  		INSERT INTO
- 			`shopping_cart`
+ 			`favorite`
  		(
  			`usedTradeId`
  			, `userId`
@@ -21,7 +21,7 @@
  		SELECT 
  			COUNT(*)
  		FROM
- 			`shopping_cart`
+ 			`favorite`
  		WHERE `usedTradeId` = #{usedTradeId} AND `userId` = #{userId}
  	</select>
  	
@@ -29,7 +29,7 @@
  		SELECT 
  			COUNT(*)
  		FROM
- 			`shopping_cart`
+ 			`favorite`
  		WHERE `usedTradeId` = #{usedTradeId}
  	</select>
  	
@@ -37,18 +37,15 @@
  		DELETE
  		
  		FROM
- 			`shopping_cart`
+ 			`favorite`
  		WHERE `usedTradeId` = #{usedTradeId} AND `userId` = #{userId}
  	</delete>
  	
- 	<select id="selectUserShopingCartList" parameterType="int" resultType="com.goodsmarket.jh.shoppingcart.domain.ShoppingCart">
+ 	<select id="selectUserShopingCartList" parameterType="int" resultType="int">
  		SELECT
- 			`id`
- 			, `usedTradeId`
- 			, `userId`
- 			, `createdAt`
+ 			`usedTradeId`
  		FROM
- 			`shopping_cart`
+ 			`favorite`
  		WHERE `userId` = #{userId}
  	</select>
  </mapper>

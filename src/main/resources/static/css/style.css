@@ -31,6 +31,8 @@ header > #user-field
 	width : 300px;
 }
 
+/* login.html */
+
 #wrap > #noneUseLoginArea1
 {
 	height : 100px;
@@ -57,44 +59,44 @@ header > #user-field
 	height : 100px;
 }
 
-#wrap > #loginIdFiled
+#wrap > #loginForm > #loginIdFiled
 {
 	height : 200px;
 }
 
-#wrap > #loginIdFiled > #noneUseIdField
+#wrap > #loginForm > #loginIdFiled > #noneUseIdField
 {
 	width : 200px;
 }
 
-#wrap > #loginIdFiled > #useIdField
+#wrap > #loginForm > #loginIdFiled > #useIdField
 {
 	width : 800px;
 	background-color : #c0c0c0;
 }
 
-#wrap > #loginIdFiled > #useIdField > #inputId
+#wrap > #loginForm > #loginIdFiled > #useIdField > #inputId
 {
 	height : 50px;
 }
 
-#wrap > #loginPwFiled > #noneUsePwField
+#wrap > #loginForm > #loginPwFiled > #noneUsePwField
 {
 	width : 200px;
 }
 
-#wrap > #loginPwFiled > #usePwField
+#wrap > #loginForm > #loginPwFiled > #usePwField
 {
 	width : 800px;
 	background-color : #c0c0c0;
 }
 
-#wrap > #loginPwFiled > #usePwField > #inputPassword
+#wrap > #loginForm > #loginPwFiled > #usePwField > #inputPassword
 {
 	height : 50px;
 }
 
-#wrap > #loginPwFiled
+#wrap > #loginForm > #loginPwFiled
 {
 	height : 200px;
 }

@@ -100,7 +100,7 @@
     			
 				$.ajax({
 					type:"post"
-					, url:"/goodsPost/create"
+					, url:"/usedtrade/create"
 					, data:formData
 					, enctype:"multipart/form-data"
 					, processData:false
@@ -109,7 +109,7 @@
 					{
 						if(data.result == "success")
 						{
-							parent.location.href="/goodsPost/list-view";
+							parent.location.href="/usedtrade/list-view";
 						}
 						else
 						{
@@ -142,7 +142,7 @@
 			
 			// 취소 버튼 기능
 			$("#cancleBtn").on("click", function(){
-				location.href="/goodsPost/list-view";
+				location.href="/usedtrade/list-view";
 			});
 		});
 	</script>

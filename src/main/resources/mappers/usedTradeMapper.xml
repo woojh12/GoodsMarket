@@ -79,22 +79,4 @@
  		WHERE
  			`id` = #{id}
  	</update>
- 	
- 	<select id="selectAllShoppingCartList" parameterType="int" resultType="com.goodsmarket.jh.used_trade.domain.UsedTrade">
- 		SELECT
- 			`id`
- 			, `userId`
- 			, `title`
- 			, `contents`
- 			, `imagePath`
- 			, `location`
- 			, `sellerName`
- 			, `sellPrice`
- 			, `views`
- 			, `createdAt`
- 			, `updatedAt`
- 		FROM
- 			`used_trade`
- 		WHERE `id` = #{id};
- 	</select>
  </mapper>
