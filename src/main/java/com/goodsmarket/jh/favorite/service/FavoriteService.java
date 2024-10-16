@@ -55,13 +55,11 @@ public class FavoriteService {
 		// 게시물 정보를 담을 객체 리스트 생성
 		List<UsedTrade> usedTradeList = new ArrayList<UsedTrade>();
 		
-		// 게시물 정보를 임시로 저장하는 객체 생성
-		UsedTrade usedTrade = new UsedTrade();
-		
 		// 게시물 정보를 조회 후 게시물 리스트에 저장
 		for(int i = 0; i < usedTradeId.length; i++)
 		{
-			usedTrade = usedTradeRepository.selectUsedTrade(usedTradeId[i]);
+			// 게시물 정보를 임시로 저장하는 객체 생성
+			UsedTrade usedTrade = usedTradeRepository.selectUsedTrade(usedTradeId[i]);
 			
 			usedTradeList.add(usedTrade);
 		}

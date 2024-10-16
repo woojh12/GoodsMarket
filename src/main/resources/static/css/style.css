@@ -566,11 +566,6 @@ header > #user-field
 	height : 50px;
 }
 
-#wrap > #sellTradingPlaceArea
-{
-	height : 200px;
-}
-
 #wrap > #sellTradingPlaceArea > #sellTradingPlaceText
 {
 	height : 50px;
@@ -578,7 +573,7 @@ header > #user-field
 
 #wrap > #sellTradingPlaceArea > #sellLocationArea
 {
-	height : 150px;
+	height : 300px;
 }
 
 /* footer */
