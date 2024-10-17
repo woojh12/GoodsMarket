@@ -58,6 +58,6 @@ public class UsedTradeController {
 		
 		model.addAttribute("shoppingCartCount", shoppingCartCount);
 		
-		return "usedtrade/post";
+		return "usedtrade/detail";
 	}
 }

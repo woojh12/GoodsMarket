@@ -391,6 +391,16 @@ header > #user-field
 	height : 200px;
 }
 
+#wrap > section > #checkTradingPlace
+{
+	height : 50px;
+}
+
+#wrap > section > #showTradingPlace
+{
+	height : 300px;
+}
+
 #wrap > section > #showOther > #showFile > #lookingFileImage > #sellImage
 {
 	width : 200px;
