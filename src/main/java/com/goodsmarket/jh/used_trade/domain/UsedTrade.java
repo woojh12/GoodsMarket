@@ -9,6 +9,7 @@ public class UsedTrade {
 	private String contents;
 	private String imagePath;
 	private String location;
+	private String addTradingPlace;		// 사용자가 주소를 추가적으로 적은 것을 저장하는 변수
 	private String sellerName;
 	private int sellPrice;
 	private int views;
@@ -50,6 +51,12 @@ public class UsedTrade {
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	public String getAddTradingPlace() {
+		return addTradingPlace;
+	}
+	public void setAddTradingPlace(String addTradingPlace) {
+		this.addTradingPlace = addTradingPlace;
 	}
 	public String getSellerName() {
 		return sellerName;

@@ -26,12 +26,13 @@ public class UsedTradeService {
 			, String contents
 			, MultipartFile file
 			, String location
+			, String addTradingPlace
 			, String sellerName
 			, int sellPrice)
 	{
 		String imagePath = FileManager.saveFile(userid, file);
 		
-		return usedTradeRepository.insertUsedTrade(userid, title, contents, imagePath, location, sellerName, sellPrice);
+		return usedTradeRepository.insertUsedTrade(userid, title, contents, imagePath, location, addTradingPlace, sellerName, sellPrice);
 	}
 	
 	// 전체 판매목록 불러오기 Service

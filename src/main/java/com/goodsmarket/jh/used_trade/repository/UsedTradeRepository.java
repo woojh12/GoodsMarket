@@ -14,6 +14,7 @@ public interface UsedTradeRepository {
 			, @Param("contents") String contents
 			, @Param("imagePath") String imagePath
 			, @Param("location") String location
+			, @Param("addTradingPlace") String addTradingPlace
 			, @Param("sellerName") String sellerName
 			, @Param("sellPrice") int sellPrice);
 	

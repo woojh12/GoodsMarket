@@ -12,6 +12,7 @@
  			, `contents`
  			, `imagePath`
  			, `location`
+ 			, `addTradingPlace`
  			, `sellerName`
  			, `sellPrice`
  		)
@@ -22,6 +23,7 @@
  			, #{contents}
  			, #{imagePath}
  			, #{location}
+ 			, #{addTradingPlace}
  			, #{sellerName}
  			, #{sellPrice}
  		)
@@ -35,6 +37,7 @@
  			, `contents`
  			, `imagePath`
  			, `location`
+ 			, `addTradingPlace`
  			, `sellerName`
  			, `sellPrice`
  			, `views`
@@ -52,6 +55,7 @@
  			, `contents`
  			, `imagePath`
  			, `location`
+ 			, `addTradingPlace`
  			, `sellerName`
  			, `sellPrice`
  			, `views`

@@ -31,6 +31,7 @@ public class UsedTradeRestController {
 			, @RequestParam("contents") String contents
 			, @RequestParam(value="imagePath", required=false) MultipartFile imagePath
 			, @RequestParam("location") String location
+			, @RequestParam(value="addTradingPlace", required=false) String addTradingPlace
 			, @RequestParam("sellPrice") int sellPrice
 			, HttpSession session)
 	{
@@ -40,7 +41,7 @@ public class UsedTradeRestController {
 		int userId = (Integer)session.getAttribute("userId");
 		String sellerName = (String)session.getAttribute("userName");
 		
-		int count = usedTradeService.addUsedTrade(userId, title, contents, imagePath, location, sellerName, sellPrice);
+		int count = usedTradeService.addUsedTrade(userId, title, contents, imagePath, location, addTradingPlace, sellerName, sellPrice);
 		
 		if(count == 1)
 		{
