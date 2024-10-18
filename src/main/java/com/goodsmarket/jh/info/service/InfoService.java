@@ -37,5 +37,4 @@ public class InfoService {
 		
 		return infoRepository.updateUserInfo(userId, encryptPassword, phone, email, nickName, imagePath);
 	}
-	
 }

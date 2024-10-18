@@ -58,7 +58,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	
 	<!-- kakao map API -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey='키 입력'&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey='앱키 입력'&libraries=services"></script>
 
 	<script>
 		$(document).ready(function(){
@@ -209,9 +209,11 @@
 				let title = $("#inputSellTitle").val();
 				let contents = $("#inputSellContents").val();
 				let location = $("#inputTradingPlace").val();
-				let addTradingPlace;		// 주소를 추가로 적은 경우 저장하는 변수
+				
 				let sellPrice = $("#inputTradingPrice").val();
 				let inputFile = $("#inputFile")[0].files[0];
+				
+				let formData = new FormData();
 				
 				// 사용자가 주소를 추가적으로 입력한 경우
 				let tradingPlace = $("#tradingPlace").val();
@@ -225,6 +227,8 @@
 					// 추가로 작성한 주소를 추출하는 부분
 					if(location != detailAddr)
 					{
+						let addTradingPlace;		// 주소를 추가로 적은 경우 저장하는 변수
+						
 						// 사용자가 주소를 추가로 입력한 부분을 추출하는 과정
 						addTradingPlace = tradingPlace.substr(detailAddr.length, tradingPlace.length);
 						
@@ -235,13 +239,34 @@
 						
 						// 지도로 클릭한 주소 추출(추가로 작성한 주소를 제외한 부분을 추출)
 						location = location.substr(0, location.length - addTradingPlace.length);
+						
+		    			formData.append("title", title);
+		    			formData.append("contents", contents);
+		    			formData.append("imagePath", inputFile);
+		    			formData.append("location", location);
+		    			formData.append("addTradingPlace", addTradingPlace);
+		    			formData.append("sellPrice", sellPrice);
+					}
+					else
+					{
+		    			formData.append("title", title);
+		    			formData.append("contents", contents);
+		    			formData.append("imagePath", inputFile);
+		    			formData.append("location", location);
+		    			formData.append("sellPrice", sellPrice);
 					}
 				}
 				else	// 맵을 클릭하지 않고 직접 주소를 입력한 경우
 				{
 					location = tradingPlace;
+					
+	    			formData.append("title", title);
+	    			formData.append("contents", contents);
+	    			formData.append("imagePath", inputFile);
+	    			formData.append("location", location);
+	    			formData.append("sellPrice", sellPrice);
 				}
-								
+				
 				if(title == "")
     			{
     				alert("제목을 입력해주세요.");
@@ -252,15 +277,7 @@
     				alert("내용을 입력해주세요.");
     				return;
     			}
-					
-    			let formData = new FormData();
-    			formData.append("title", title);
-    			formData.append("contents", contents);
-    			formData.append("imagePath", inputFile);
-    			formData.append("location", location);
-    			formData.append("addTradingPlace", addTradingPlace);
-    			formData.append("sellPrice", sellPrice);
-    			
+				
 				$.ajax({
 					type:"post"
 					, url:"/usedtrade/create"

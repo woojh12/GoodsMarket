@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,4 +94,26 @@ public class UserRestController {
 		
 		return resultMap;
 	}
+	
+	// 회원탈퇴 API
+		@DeleteMapping("/delete")
+		public Map<String, String> deleteUser(HttpSession session)
+		{
+			int userId = (Integer)session.getAttribute("userId");
+			
+			Map<String, String> resultMap = new HashMap<>();
+			
+			int count = userService.removeUser(userId);
+			
+			if(count == 1)
+			{
+				resultMap.put("result", "success");
+			}
+			else
+			{
+				resultMap.put("result", "fail");
+			}
+			
+			return resultMap;
+		}
 }

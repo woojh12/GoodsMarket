@@ -58,4 +58,13 @@
  			`user`
  		WHERE `id` = #{id}
  	</select>
+ 	
+ 	<delete id="deleteUser" parameterType="int">
+ 		DELETE
+ 		
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  </mapper>

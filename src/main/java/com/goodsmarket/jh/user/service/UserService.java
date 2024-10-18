@@ -46,4 +46,10 @@ public class UserService {
 	{
 		return userRepository.selectProfileImage(userId);
 	}
+	
+	// 회원정보 탈퇴 Service	--- 작성한 게시글 및 즐겨찾기도 삭제
+	public int removeUser(int id)
+	{
+		return userRepository.deleteUser(id);
+	}
 }
