@@ -41,6 +41,14 @@
  		WHERE `usedTradeId` = #{usedTradeId} AND `userId` = #{userId}
  	</delete>
  	
+ 	<delete id="deleteAllShoppingCart" parameterType="int">
+ 		DELETE
+ 		
+ 		FROM
+ 			`favorite`
+ 		WHERE `userId` = #{userId}
+ 	</delete>
+ 	
  	<select id="selectUserShopingCartList" parameterType="int" resultType="int">
  		SELECT
  			`usedTradeId`

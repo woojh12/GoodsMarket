@@ -1,5 +1,6 @@
 package com.goodsmarket.jh.used_trade.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,42 @@ public class UsedTradeService {
 		{
 			return false;
 		}
+	}
+	
+	// 사용자가 작성한 게시글 정보 조회 Service
+	public List<UsedTrade> getUsedTradeByUserId(int userId)
+	{
+		return usedTradeRepository.selectUsedTradeByUserId(userId);
+	}
+	
+	// 사용자가 작성한 모든 게시글 삭제 Service
+	public int removeAllUsedTrade(int userId)
+	{
+		String imagePath = "";
+		List<String> imagePaths = new ArrayList<>();
+		
+		// 게시물 저장 개수 추출 : 이미지 추출 반복에서 사용
+		int usedTradeCount = usedTradeRepository.countUsedTradeByUserId(userId);
+		
+		// 사용자가 작성한 게시물의 이미지 추출
+		for(int i = 0; i < usedTradeCount; i++)
+		{
+			//imagePath = usedTradeRepository.selectUsedTradeByUserId(userId).getImagePath();
+			//imagePaths.add(imagePath);
+			if(imagePath != null)
+			{
+				FileManager.removeFile(imagePath);				
+			}
+		}
+		
+		int count = usedTradeRepository.deleteAllUsedTrade(userId);
+		
+		return count;
+	}
+	
+	// 사용자가 작성한 모든 게시물의 개수 조회 Service
+	public int getUsedTradeCountByUserId(int userId)
+	{
+		return usedTradeRepository.countUsedTradeByUserId(userId);
 	}
 }

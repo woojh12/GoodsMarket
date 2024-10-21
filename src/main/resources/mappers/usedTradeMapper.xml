@@ -66,6 +66,33 @@
  		WHERE `id` = #{id};
  	</select>
  	
+ 	<select id="selectUsedTradeByUserId" parameterType="int" resultType="com.goodsmarket.jh.used_trade.domain.UsedTrade">
+ 		SELECT
+ 			`id`
+ 			, `userId`
+ 			, `title`
+ 			, `contents`
+ 			, `imagePath`
+ 			, `location`
+ 			, `addTradingPlace`
+ 			, `sellerName`
+ 			, `sellPrice`
+ 			, `views`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`used_trade`
+ 		WHERE `userId` = #{userId};
+ 	</select>
+ 	
+ 	<select id="countUsedTradeByUserId" parameterType="int" resultType="int">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`used_trade`
+ 		WHERE `userId` = #{userId};
+ 	</select>
+ 	
  	<select id="selectUsedTradeViews" parameterType="int" resultType="int">
  		SELECT
  			`usedTradeId`
@@ -83,4 +110,13 @@
  		WHERE
  			`id` = #{id}
  	</update>
+ 	
+ 	<delete id="deleteAllUsedTrade" parameterType="int">
+ 		DELETE
+ 		
+ 		FROM
+ 			`used_trade`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</delete>
  </mapper>

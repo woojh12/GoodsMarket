@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.goodsmarket.jh.favorite.service.FavoriteService;
+import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 import com.goodsmarket.jh.user.domain.User;
 import com.goodsmarket.jh.user.service.UserService;
 
@@ -19,11 +21,15 @@ import jakarta.servlet.http.HttpSession;
 @RestController
 public class UserRestController {
 	private UserService userService;
+	private UsedTradeService usedTradeService;
+	private FavoriteService favoriteService;
 	
 	@Autowired
-	public UserRestController(UserService userService)
+	public UserRestController(UserService userService, UsedTradeService usedTradeService, FavoriteService favoriteService)
 	{
 		this.userService = userService;
+		this.usedTradeService = usedTradeService;
+		this.favoriteService = favoriteService;
 	}
 	
 	@PostMapping("join")
@@ -102,6 +108,10 @@ public class UserRestController {
 			Map<String, String> resultMap = new HashMap<>();
 			
 			int count = userService.removeUser(id);
+			
+			// 즐겨찾기 개수 리턴 후 1개 이상인 경우 삭제 되게 구현해야함
+			int favoriteCount = favoriteService.removeAllShoppingCart(id);
+			int usedTradeCount = usedTradeService.removeAllUsedTrade(id);
 			
 			if(count == 1)
 			{
