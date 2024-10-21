@@ -69,7 +69,7 @@
 		</div>
 		<footer class="mt-5 d-flex align-items-end justify-content-between">
 			<button type="button" class="btn btn-dark ml-3 mt-3" id="backBtn">돌아가기</button>
-			<button type="button" class="btn btn-dark mr-3 mt-3" id="deleteBtn">회원탈퇴</button>
+			<button type="button" class="btn btn-dark mr-3 mt-3" id="deleteBtn" th:data-user-id="${session.userId}">회원탈퇴</button>
 		</footer>
 	</div>
 </body>
@@ -183,8 +183,9 @@
 			
 			// 회원탈퇴 기능
 			$("#deleteBtn").on("click", function(){
-				let id = "";
+				let id = $("#deleteBtn").data("user-id");
 				
+				alert("id : " + id);
 				$.ajax({
 					type:"delete"
 					, url:"/user/delete"

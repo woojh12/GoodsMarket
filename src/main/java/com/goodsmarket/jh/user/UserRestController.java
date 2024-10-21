@@ -97,13 +97,11 @@ public class UserRestController {
 	
 	// 회원탈퇴 API
 		@DeleteMapping("/delete")
-		public Map<String, String> deleteUser(HttpSession session)
+		public Map<String, String> deleteUser(@RequestParam("id") int id)
 		{
-			int userId = (Integer)session.getAttribute("userId");
-			
 			Map<String, String> resultMap = new HashMap<>();
 			
-			int count = userService.removeUser(userId);
+			int count = userService.removeUser(id);
 			
 			if(count == 1)
 			{
