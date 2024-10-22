@@ -85,14 +85,6 @@
  		WHERE `userId` = #{userId};
  	</select>
  	
- 	<select id="countUsedTradeByUserId" parameterType="int" resultType="int">
- 		SELECT
- 			COUNT(*)
- 		FROM
- 			`used_trade`
- 		WHERE `userId` = #{userId};
- 	</select>
- 	
  	<select id="selectUsedTradeViews" parameterType="int" resultType="int">
  		SELECT
  			`usedTradeId`

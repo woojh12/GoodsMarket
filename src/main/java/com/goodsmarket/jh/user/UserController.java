@@ -21,6 +21,12 @@ public class UserController {
 		return "user/login";
 	}
 	
+	@GetMapping("/additional/join-view")
+	public String additionalLogin()
+	{
+		return "user/additionalJoin";
+	}
+	
 	@GetMapping("/logout")
 	public String logout(HttpSession session)
 	{

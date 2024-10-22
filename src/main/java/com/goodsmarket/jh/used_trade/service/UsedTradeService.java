@@ -73,30 +73,25 @@ public class UsedTradeService {
 	public int removeAllUsedTrade(int userId)
 	{
 		String imagePath = "";
-		List<String> imagePaths = new ArrayList<>();
+		List<UsedTrade> imagePaths = new ArrayList<>();
 		
+		imagePaths = usedTradeRepository.selectUsedTradeByUserId(userId);
 		// 게시물 저장 개수 추출 : 이미지 추출 반복에서 사용
-		int usedTradeCount = usedTradeRepository.countUsedTradeByUserId(userId);
+		int imageCount = imagePaths.size();
 		
 		// 사용자가 작성한 게시물의 이미지 추출
-		for(int i = 0; i < usedTradeCount; i++)
+		for(int i = 0; i < imageCount; i++)
 		{
-			//imagePath = usedTradeRepository.selectUsedTradeByUserId(userId).getImagePath();
-			//imagePaths.add(imagePath);
+			imagePath = imagePaths.get(i).getImagePath();	// 각 게시글에 저장된 이미지를 한개씩 호출
+			// 게시글에 이미지가 존재하면 삭제
 			if(imagePath != null)
 			{
-				FileManager.removeFile(imagePath);				
+				FileManager.removeFile(imagePath);
 			}
 		}
 		
 		int count = usedTradeRepository.deleteAllUsedTrade(userId);
 		
 		return count;
-	}
-	
-	// 사용자가 작성한 모든 게시물의 개수 조회 Service
-	public int getUsedTradeCountByUserId(int userId)
-	{
-		return usedTradeRepository.countUsedTradeByUserId(userId);
 	}
 }

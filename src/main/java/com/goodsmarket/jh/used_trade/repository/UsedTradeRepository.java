@@ -30,7 +30,4 @@ public interface UsedTradeRepository {
 	
 	// 사용자가 작성한 게시글 모두 조회 Repository(사용자 PK로 판단)
 	public List<UsedTrade> selectUsedTradeByUserId(@Param("userId") int userId);
-	
-	// 사용자가 작성한 게시글의 개수 조회 Repository(사용자 PK로 판단)		---> 삭제 예정 불필요
-	public int countUsedTradeByUserId(@Param("userId") int userId);
 }
