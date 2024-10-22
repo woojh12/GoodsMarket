@@ -111,4 +111,28 @@
  		WHERE
  			`userId` = #{userId}
  	</delete>
+ 	
+ 	<delete id="deleteUsedTradeById" parameterType="int">
+ 		DELETE
+ 		
+ 		FROM
+ 			`used_trade`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
+ 	
+ 	<update id="updateUsedTradeById" parameterType="int">
+ 		UPDATE
+ 			`used_trade`
+ 		SET
+ 			, `title`
+ 			, `contents`
+ 			, `imagePath`
+ 			, `location`
+ 			, `addTradingPlace`
+ 			, `sellerName`
+ 			, `sellPrice`
+ 		WHERE
+ 			`id` = #{id}
+ 	</update>
  </mapper>

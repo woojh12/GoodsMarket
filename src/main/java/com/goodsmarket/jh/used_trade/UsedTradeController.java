@@ -28,9 +28,17 @@ public class UsedTradeController {
 	@GetMapping("/list-view")
 	public String goodsList(Model model)
 	{
-		List<UsedTrade> usedTradeList = new ArrayList<>();
+		List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
 		
-		usedTradeList = usedTradeService.getAllUsedTrade();
+		int id[] = usedTradeService.getAllUsedTradeId();
+		
+		List<int[]> count = new ArrayList<>();
+		
+		for(int i = 0; i < id.length; i++)
+		{
+			int temp = favoriteService.getAllShoppingCartCount(i);
+			count.add(id);
+		}
 		
 		model.addAttribute("usedTradeList", usedTradeList);
 		
@@ -50,7 +58,7 @@ public class UsedTradeController {
 		UsedTrade usedTrade = usedTradeService.getUsedTrade(id);
 		model.addAttribute("usedTrade", usedTrade);
 	
-		// 장바구니 버튼 누른 사용자 수 조회   --> 기능 서비스로 이동 예정
+		// 장바구니 버튼 누른 사용자 수 조회
 		List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
 		
 		// 선택한 게시글의 찜 수 조회

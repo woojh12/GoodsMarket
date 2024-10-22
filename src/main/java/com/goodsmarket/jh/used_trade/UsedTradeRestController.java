@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +29,7 @@ public class UsedTradeRestController {
 	
 	// 판매 작성글 API
 	@PostMapping("/create")
-	public Map<String, String> sellCreate(@RequestParam("title") String title
+	public Map<String, String> usedTradeCreate(@RequestParam("title") String title
 			, @RequestParam("contents") String contents
 			, @RequestParam(value="imagePath", required=false) MultipartFile imagePath
 			, @RequestParam("location") String location
@@ -64,6 +66,46 @@ public class UsedTradeRestController {
 		boolean check = usedTradeService.countUpUsedTradeViews(id);
 		
 		if(check == true)
+		{
+			resultMap.put("result", "success");
+		}
+		else
+		{
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
+	}
+	
+	// 게시글 삭제
+	@DeleteMapping("/delete")
+	public Map<String, String> usedTradeDelete(@RequestParam("id") int id)
+	{
+		Map<String, String> resultMap = new HashMap<>();
+		
+		int count = usedTradeService.removeUsedTradeById(id);
+		
+		if(count == 1)
+		{
+			resultMap.put("result", "success");
+		}
+		else
+		{
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
+	}
+	
+	// 게시글 수정
+	@PutMapping("/update")
+	public Map<String, String> usedTradeUpdate(@RequestParam("id") int id)
+	{
+Map<String, String> resultMap = new HashMap<>();
+		
+		int count = usedTradeService.changeUsedTradeById(id);
+		
+		if(count == 1)
 		{
 			resultMap.put("result", "success");
 		}

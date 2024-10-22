@@ -28,6 +28,12 @@ public interface UsedTradeRepository {
 	// 모든 게시글 삭제 Repository
 	public int deleteAllUsedTrade(@Param("userId") int userId);
 	
+	// 게시글 1개 삭제 Repository
+	public int deleteUsedTradeById(@Param("id") int id);
+	
+	// 게시글 수정 Repository
+	public int updateUsedTradeById(@Param("id") int id);
+	
 	// 사용자가 작성한 게시글 모두 조회 Repository(사용자 PK로 판단)
 	public List<UsedTrade> selectUsedTradeByUserId(@Param("userId") int userId);
 }

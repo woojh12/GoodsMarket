@@ -73,7 +73,7 @@ public class UsedTradeService {
 	public int removeAllUsedTrade(int userId)
 	{
 		String imagePath = "";
-		List<UsedTrade> imagePaths = new ArrayList<>();
+		List<UsedTrade> imagePaths;
 		
 		imagePaths = usedTradeRepository.selectUsedTradeByUserId(userId);
 		// 게시물 저장 개수 추출 : 이미지 추출 반복에서 사용
@@ -93,5 +93,40 @@ public class UsedTradeService {
 		int count = usedTradeRepository.deleteAllUsedTrade(userId);
 		
 		return count;
+	}
+	
+	// 게시글 한개 삭제 Service
+	public int removeUsedTradeById(int id)
+	{
+		String imagePath = usedTradeRepository.selectUsedTrade(id).getImagePath();
+		
+		if(imagePath != null)
+		{
+			FileManager.removeFile(imagePath);
+		}
+		
+		return usedTradeRepository.deleteUsedTradeById(id);
+	}
+	
+	// 게시글 수정 Service
+	public int changeUsedTradeById(int id)
+	{
+		return usedTradeRepository.updateUsedTradeById(id);
+	}
+	
+	// 게시글 리스트의 각 id값 반환 Service
+	public int[] getAllUsedTradeId()
+	{
+		List<UsedTrade> usedTradeList = usedTradeRepository.selectAllUsedTrade();
+		
+		int id[] = new int[usedTradeList.size()];
+		
+		// 반복문으로 각 행의 정보를 추출
+		for(int i = 0; i < usedTradeList.size(); i++)
+		{
+			id[i] = usedTradeList.get(i).getId();
+		}
+		
+		return id;
 	}
 }
