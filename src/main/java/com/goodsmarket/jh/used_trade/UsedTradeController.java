@@ -29,17 +29,7 @@ public class UsedTradeController {
 	public String goodsList(Model model)
 	{
 		List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
-		
-		int id[] = usedTradeService.getAllUsedTradeId();
-		
-		List<int[]> count = new ArrayList<>();
-		
-		for(int i = 0; i < id.length; i++)
-		{
-			int temp = favoriteService.getAllShoppingCartCount(i);
-			count.add(id);
-		}
-		
+	
 		model.addAttribute("usedTradeList", usedTradeList);
 		
 		return "usedtrade/postList";
@@ -67,5 +57,26 @@ public class UsedTradeController {
 		model.addAttribute("shoppingCartCount", shoppingCartCount);
 		
 		return "usedtrade/detail";
+	}
+	
+	@GetMapping("/update-view")
+	public String goodsUpdate(@RequestParam("id") int id
+			, Model model)
+	{
+		UsedTrade usedTrade = usedTradeService.getUsedTrade(id);
+		model.addAttribute("usedTrade", usedTrade);
+		
+		return "/usedTrade/update";
+	}
+	
+	@GetMapping("/search-view")
+	public String search(@RequestParam("title") String title
+			, Model model)
+	{
+		List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTradeByTitle(title);
+		
+		model.addAttribute("usedTradeList", usedTradeList);
+		
+		return "/usedTrade/search";
 	}
 }

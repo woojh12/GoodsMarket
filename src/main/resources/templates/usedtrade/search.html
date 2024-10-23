@@ -3,7 +3,7 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
-<title>물품 거래 게시판</title>
+<title>물품 검색</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="/static/css/style.css">
 </head>
@@ -14,7 +14,7 @@
 		<div id="allGoodsTitle" class="mt-2 d-flex">
 			<div id="noneUseAllGoodsTitle1"></div>
 			<div id="useAllGoodsTitle" class="d-flex align-items-center justify-content-center">
-				<h3>전체 판매 매물</h3>
+				<h3>검색된 물품</h3>
 			</div>
 			<div id="noneUseAllGoodsTitle2" class="d-flex align-items-center justify-content-end">
 				<div class="input-group">
@@ -39,7 +39,8 @@
 				</span>
 			</a>	
 		</section>
-		<footer class="mt-2 d-flex align-items-end justify-content-end">
+		<footer class="mt-2 d-flex align-items-end justify-content-between">
+			<button type="button" class="btn btn-secondary mt-3" id="backBtn">돌아가기</button>
 			<button type="button" class="btn btn-secondary mt-3" id="createBtn">판매글 작성</button>
 		</footer>
 	</div>
@@ -71,6 +72,11 @@
 			// 판매글 작성 이동 버튼
 			$("#createBtn").on("click", function(){
 				location.href="/usedtrade/create-view"
+			});
+			
+			// 이전 화면으로 이동 버튼
+			$("#backBtn").on("click",function(){
+				location.href="/usedtrade/list-view";
 			});
 			
 			// 검색 기능

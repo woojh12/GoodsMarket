@@ -99,11 +99,21 @@ public class UsedTradeRestController {
 	
 	// 게시글 수정
 	@PutMapping("/update")
-	public Map<String, String> usedTradeUpdate(@RequestParam("id") int id)
+	public Map<String, String> usedTradeUpdate(@RequestParam("id") int id
+			, @RequestParam("title") String title
+			, @RequestParam("contents") String contents
+			, @RequestParam(value="imagePath", required=false) MultipartFile imagePath
+			, @RequestParam("location") String location
+			, @RequestParam(value="addTradingPlace", required=false) String addTradingPlace
+			, @RequestParam("sellPrice") int sellPrice
+			, HttpSession session)
 	{
-Map<String, String> resultMap = new HashMap<>();
+		Map<String, String> resultMap = new HashMap<>();
 		
-		int count = usedTradeService.changeUsedTradeById(id);
+		int userId = (Integer)session.getAttribute("userId");
+		String sellerName = (String)session.getAttribute("userName");
+		
+		int count = usedTradeService.changeUsedTrade(id, userId, title, contents, imagePath, location, addTradingPlace, sellPrice);
 		
 		if(count == 1)
 		{

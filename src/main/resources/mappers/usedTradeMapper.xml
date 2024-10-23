@@ -47,6 +47,25 @@
  			`used_trade`
  	</select>
  	
+ 	<select id="selectAllUsedTradeByTitle" parameterType="string" resultType="com.goodsmarket.jh.used_trade.domain.UsedTrade">
+ 		SELECT
+ 			`id`
+ 			, `userId`
+ 			, `title`
+ 			, `contents`
+ 			, `imagePath`
+ 			, `location`
+ 			, `addTradingPlace`
+ 			, `sellerName`
+ 			, `sellPrice`
+ 			, `views`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`used_trade`
+ 		WHERE
+ 			`title` = #{title}
+ 	</select>
  	<select id="selectUsedTrade" resultType="com.goodsmarket.jh.used_trade.domain.UsedTrade" parameterType="int">
  		SELECT
  			`id`
@@ -121,17 +140,16 @@
  			`id` = #{id}
  	</delete>
  	
- 	<update id="updateUsedTradeById" parameterType="int">
+ 	<update id="updateUsedTrade" parameterType="map">
  		UPDATE
  			`used_trade`
  		SET
- 			, `title`
- 			, `contents`
- 			, `imagePath`
- 			, `location`
- 			, `addTradingPlace`
- 			, `sellerName`
- 			, `sellPrice`
+ 			`title` = #{title}
+ 			, `contents` = #{contents}
+ 			, `imagePath` = #{imagePath}
+ 			, `location` = #{location}
+ 			, `addTradingPlace` = #{addTradingPlace}
+ 			, `sellPrice` = #{sellPrice}
  		WHERE
  			`id` = #{id}
  	</update>

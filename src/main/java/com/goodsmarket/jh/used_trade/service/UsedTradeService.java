@@ -42,6 +42,12 @@ public class UsedTradeService {
 		return usedTradeRepository.selectAllUsedTrade();
 	}
 	
+	// 물품 검색 기능에 사용되는 Service
+	public List<UsedTrade> getAllUsedTradeByTitle(String title)
+	{
+		return usedTradeRepository.selectAllUsedTradeByTitle(title);
+	}
+	
 	// 선택된 판매글 불러오기 Service
 	public UsedTrade getUsedTrade(int id)
 	{
@@ -109,9 +115,11 @@ public class UsedTradeService {
 	}
 	
 	// 게시글 수정 Service
-	public int changeUsedTradeById(int id)
+	public int changeUsedTrade(int id, int userId, String title, String contents, MultipartFile file, String location, String addTradingPlace, int sellPrice)
 	{
-		return usedTradeRepository.updateUsedTradeById(id);
+		String imagePath = FileManager.saveFile(userId, file);
+		
+		return usedTradeRepository.updateUsedTrade(id, title, contents, imagePath, location, addTradingPlace, sellPrice);
 	}
 	
 	// 게시글 리스트의 각 id값 반환 Service

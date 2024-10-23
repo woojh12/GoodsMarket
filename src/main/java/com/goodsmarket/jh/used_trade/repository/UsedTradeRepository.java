@@ -20,6 +20,9 @@ public interface UsedTradeRepository {
 	
 	public List<UsedTrade> selectAllUsedTrade();
 	
+	// 물품 검색 기능에 사용될 Repository
+	public List<UsedTrade> selectAllUsedTradeByTitle(@Param("title") String title);
+	
 	public UsedTrade selectUsedTrade(@Param("id") int id);
 	
 	// 조회수 증가 Repository
@@ -32,7 +35,13 @@ public interface UsedTradeRepository {
 	public int deleteUsedTradeById(@Param("id") int id);
 	
 	// 게시글 수정 Repository
-	public int updateUsedTradeById(@Param("id") int id);
+	public int updateUsedTrade(@Param("id") int id
+			, @Param("title") String title
+			, @Param("contents") String contents
+			, @Param("imagePath") String imagePath
+			, @Param("location") String location
+			, @Param("addTradingPlace") String addTradingPlace
+			, @Param("sellPrice") int sellPrice);
 	
 	// 사용자가 작성한 게시글 모두 조회 Repository(사용자 PK로 판단)
 	public List<UsedTrade> selectUsedTradeByUserId(@Param("userId") int userId);
