@@ -407,7 +407,8 @@ header > #user-field
 	height : 200px;
 }
 
-#wrap > #userinfo
+/* myinfo.html */
+#wrap > #infoTitleArea
 {
 	background-color : #c0c0c0;
 }
@@ -420,7 +421,6 @@ header > #user-field
 #wrap > #userinfo > #useUserinfo
 {
 	width : 1100px;
-	background-color : #c0c0c0;
 }
 
 #wrap > #userinfo > #noneUserinfo2
@@ -446,7 +446,7 @@ header > #user-field
 
 #wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoTextArea
 {
-	width : 800px;
+	width : 790px;
 }
 
 #wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoTextArea > #myinfoUserName
@@ -461,15 +461,8 @@ header > #user-field
 	height : 150px;
 }
 
-#wrap > #userinfo > #useUserinfo > #myinfoUpdateArea
-{
-	height : 100px;
-}
 
-#wrap > #userinfo > #useUserinfo > #myinfoEtcArea
-{
-	height : 300px;
-}
+
 
 #wrap > #userinfo > #useUserinfo > #myinfoEtcArea > #myinfoWish
 {
@@ -486,14 +479,9 @@ header > #user-field
 	height : 100px;
 }
 
-#wrap > #userinfo > #useUserinfo > #myinfoPost
-{
-	height : 150px;
-}
-
+/* myinfoUpdate.html */
 #wrap > #infoUpdateArea
 {
-	height : 150px;
 	background-color : #c0c0c0;
 }
 
@@ -508,23 +496,15 @@ header > #user-field
 	height : 350px;
 }
 
-#wrap > #useInfoUpdateArea > #profileImageArea > #profileImageChangeLogo
-{
-	height : 50px;
-	background-color : #c0c0c0;
-}
-
 #wrap > #useInfoUpdateArea > #profileImageArea > #profileImageChangeArea
 {
-	height : 285px;
-	background-color : #c0c0c0;
+	height : 300px;
 }
 
 #wrap > #useInfoUpdateArea > #userInfoArea
 {
 	width : 850px;
-	height : 350px;
-	background-color : #c0c0c0;
+	height : 230px;
 }
 
 #wrap >#infoPostTitle
