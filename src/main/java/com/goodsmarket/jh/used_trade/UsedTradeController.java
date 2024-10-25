@@ -10,18 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodsmarket.jh.favorite.service.FavoriteService;
+import com.goodsmarket.jh.used_trade.domain.FileImage;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
+import com.goodsmarket.jh.used_trade.service.FileImageService;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 
 @RequestMapping("/usedtrade")
 @Controller
 public class UsedTradeController {
 	private UsedTradeService usedTradeService;
+	private FileImageService fileImageService;
 	private FavoriteService favoriteService;
 	
-	public UsedTradeController(UsedTradeService usedTradeService, FavoriteService favoriteService)
+	public UsedTradeController(UsedTradeService usedTradeService, FileImageService fileImageService, FavoriteService favoriteService)
 	{
 		this.usedTradeService = usedTradeService;
+		this.fileImageService = fileImageService;
 		this. favoriteService =  favoriteService;
 	}
 	
@@ -29,8 +33,20 @@ public class UsedTradeController {
 	public String goodsList(Model model)
 	{
 		List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
-	
+		List<List<FileImage>> fileImagesList = new ArrayList<>();
+		List<FileImage> fileList;
+		
+		// 각 게시글의 파일 이미지를 가져오는 부분
+		for(int i = 0; i < usedTradeList.size(); i++)
+		{
+			fileList = fileImageService.getFileImages(i);
+			fileImagesList.add(fileList);
+		}
+		
+		// fileImagesList.get(0).get(0).getImagePath()
 		model.addAttribute("usedTradeList", usedTradeList);
+		model.addAttribute("fileImagesList", fileImagesList);
+//		model.addAttribute("fileList", fileList);
 		
 		return "usedtrade/postList";
 	}

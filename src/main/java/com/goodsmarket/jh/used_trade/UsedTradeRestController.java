@@ -38,7 +38,8 @@ public class UsedTradeRestController {
 	{
 		Map<String, String> resultMap = new HashMap<>();
 		
-		int count = usedTradeService.addUsedTrade(usedTrade, files);
+		int userId = (Integer)session.getAttribute("userId");
+		int count = usedTradeService.addUsedTrade(usedTrade, userId, files);
 		
 		if(count != 0)
 		{
@@ -73,6 +74,7 @@ public class UsedTradeRestController {
 	}
 	
 	// 게시글 삭제
+	/*
 	@DeleteMapping("/delete")
 	public Map<String, String> usedTradeDelete(@RequestParam("id") int id)
 	{
@@ -91,6 +93,7 @@ public class UsedTradeRestController {
 		
 		return resultMap;
 	}
+	*/
 	
 	// 게시글 수정
 	@PutMapping("/update")

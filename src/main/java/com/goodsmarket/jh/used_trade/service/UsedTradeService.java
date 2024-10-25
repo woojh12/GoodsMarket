@@ -11,42 +11,42 @@ import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.repository.FileImageRepository;
 import com.goodsmarket.jh.used_trade.repository.UsedTradeRepository;
 
-import jakarta.servlet.http.HttpSession;
-
 @Service
 public class UsedTradeService {
 	private UsedTradeRepository usedTradeRepository;
 	private FileImageRepository fileImageRepository;
-	private FileImageService fileImageService;
 	
 	@Autowired
 	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService)
 	{
 		this.usedTradeRepository = usedTradeRepository;
 		this.fileImageRepository = fileImageRepository;
-		this.fileImageService = fileImageService;
 	}
 	
 	// 판매 작성글 저장 Service		---> 게시물 id(autoincrement) 값 가져오기 위해 useGeneratedKeys 사용해야함으로 파라미터 타입을 객체로 바꿔줘야함
-	public int addUsedTrade(UsedTrade usedTrade, MultipartFile[] files)
+	public int addUsedTrade(UsedTrade usedTrade, int userId, MultipartFile[] files)
 	{
-		int usedTradeId = 2;
-		int userId = 2;
+		int count = usedTradeRepository.insertUsedTrade(usedTrade);		// 게시글의 PK를 반환받아야하니 파일 생성보다 게시글 생성을 먼저 해줘야함
 		
 		// 파일 저장
-		for(int i = 0; i < files.length; i++)
+		if(files != null)
 		{
-			String imagePath = FileManager.saveFile(userId, files[i]);			 
-			fileImageRepository.insertFileImage(usedTradeId, userId, imagePath);
+			for(int i = 0; i < files.length; i++)
+			{
+				String imagePath = FileManager.saveFile(userId, files[i]);			 
+				fileImageRepository.insertFileImage(usedTrade.getId(), userId, imagePath);
+			}			
 		}
-		
-		return usedTradeRepository.insertUsedTrade(usedTrade);
+			
+		return count;
 	}
 	
-	// 전체 판매목록 불러오기 Service
+	// 전체 판매목록 불러오기 Service		--> DTO 작성 필요 : 게시물의 정보와 파일 정보를 합쳐야함
 	public List<UsedTrade> getAllUsedTrade()
 	{
-		return usedTradeRepository.selectAllUsedTrade();
+		List<UsedTrade> usedTradeList = usedTradeRepository.selectAllUsedTrade();
+	
+		return usedTradeList; 
 	}
 	
 	// 물품 검색 기능에 사용되는 Service
@@ -93,6 +93,7 @@ public class UsedTradeService {
 		int imageCount = imagePaths.size();
 		
 		// 사용자가 작성한 게시물의 이미지 추출
+		/*
 		for(int i = 0; i < imageCount; i++)
 		{
 			imagePath = imagePaths.get(i).getImagePath();	// 각 게시글에 저장된 이미지를 한개씩 호출
@@ -102,13 +103,14 @@ public class UsedTradeService {
 				FileManager.removeFile(imagePath);
 			}
 		}
-		
+		*/
 		int count = usedTradeRepository.deleteAllUsedTrade(userId);
 		
 		return count;
 	}
 	
 	// 게시글 한개 삭제 Service
+	/*
 	public int removeUsedTradeById(int id)
 	{
 		String imagePath = usedTradeRepository.selectUsedTrade(id).getImagePath();
@@ -120,6 +122,7 @@ public class UsedTradeService {
 		
 		return usedTradeRepository.deleteUsedTradeById(id);
 	}
+	*/
 	
 	// 게시글 수정 Service
 	public int changeUsedTrade(int id, int userId, String title, String contents, MultipartFile file, String location, String addTradingPlace, int sellPrice)

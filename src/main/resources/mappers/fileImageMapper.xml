@@ -18,4 +18,17 @@
  			, #{imagePath} 		
  		)
  	</insert>
+ 	
+ 	<select id="selectAllFileImage" parameterType="int">
+ 		SELECT
+ 			`id`
+ 			, `usedTradeId`
+ 			, `userId`
+ 			, `imagePath`
+ 			, `createdAt`
+ 		FROM
+ 			`used_trade_image`
+ 		WHERE
+ 			`usedTradeId` = #{usedTradeId}
+ 	</select>
  </mapper>

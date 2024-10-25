@@ -34,7 +34,6 @@
  			, `userId`
  			, `title`
  			, `contents`
- 			, `imagePath`
  			, `location`
  			, `addTradingPlace`
  			, `sellerName`
