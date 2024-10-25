@@ -1,6 +1,5 @@
 package com.goodsmarket.jh.used_trade.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,31 +11,36 @@ import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.repository.FileImageRepository;
 import com.goodsmarket.jh.used_trade.repository.UsedTradeRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class UsedTradeService {
 	private UsedTradeRepository usedTradeRepository;
 	private FileImageRepository fileImageRepository;
+	private FileImageService fileImageService;
 	
 	@Autowired
-	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository)
+	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService)
 	{
 		this.usedTradeRepository = usedTradeRepository;
 		this.fileImageRepository = fileImageRepository;
+		this.fileImageService = fileImageService;
 	}
 	
 	// 판매 작성글 저장 Service		---> 게시물 id(autoincrement) 값 가져오기 위해 useGeneratedKeys 사용해야함으로 파라미터 타입을 객체로 바꿔줘야함
-	public int addUsedTrade(int userid
-			, String title
-			, String contents
-			, MultipartFile file
-			, String location
-			, String addTradingPlace
-			, String sellerName
-			, int sellPrice)
+	public int addUsedTrade(UsedTrade usedTrade, MultipartFile[] files)
 	{
-		String imagePath = FileManager.saveFile(userid, file);
+		int usedTradeId = 2;
+		int userId = 2;
 		
-		return usedTradeRepository.insertUsedTrade(userid, title, contents, imagePath, location, addTradingPlace, sellerName, sellPrice);
+		// 파일 저장
+		for(int i = 0; i < files.length; i++)
+		{
+			String imagePath = FileManager.saveFile(userId, files[i]);			 
+			fileImageRepository.insertFileImage(usedTradeId, userId, imagePath);
+		}
+		
+		return usedTradeRepository.insertUsedTrade(usedTrade);
 	}
 	
 	// 전체 판매목록 불러오기 Service

@@ -9,14 +9,7 @@ import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 
 @Mapper
 public interface UsedTradeRepository {
-	public int insertUsedTrade(@Param("userId") int userId
-			, @Param("title") String title
-			, @Param("contents") String contents
-			, @Param("imagePath") String imagePath
-			, @Param("location") String location
-			, @Param("addTradingPlace") String addTradingPlace
-			, @Param("sellerName") String sellerName
-			, @Param("sellPrice") int sellPrice);
+	public int insertUsedTrade(UsedTrade usedTrade);
 	
 	public List<UsedTrade> selectAllUsedTrade();
 	

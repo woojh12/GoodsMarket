@@ -541,6 +541,12 @@ header > #user-field
 	height : 150px;
 }
 
+#wrap > #sellImageArea > #sellGoodsImageArea > #sellGoodsImage2
+{
+	width : 150px;
+	height : 150px;
+}
+
 #wrap > #sellTitleArea
 {
 	height : 50px;

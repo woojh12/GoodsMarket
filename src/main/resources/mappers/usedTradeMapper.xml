@@ -3,14 +3,14 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.goodsmarket.jh.used_trade.repository.UsedTradeRepository">
- 	<insert id="insertUsedTrade" parameterType="map">
+ 	<insert id="insertUsedTrade" parameterType="com.goodsmarket.jh.used_trade.domain.UsedTrade"
+ 			useGeneratedKeys="true" keyProperty="id">
  		INSERT INTO
  			`used_trade`
  		(
  			`userId`
  			, `title`
  			, `contents`
- 			, `imagePath`
  			, `location`
  			, `addTradingPlace`
  			, `sellerName`
@@ -21,7 +21,6 @@
  			#{userId}
  			, #{title}
  			, #{contents}
- 			, #{imagePath}
  			, #{location}
  			, #{addTradingPlace}
  			, #{sellerName}

@@ -30,9 +30,10 @@
 			</div>
 			<div id="sellGoodsImageArea" class="d-flex">
 				<div id="sellGoodsImage" class="bg-light"></div>
+				<div id="sellGoodsImage2" class="ml-5 bg-light"></div>
 			</div>
 			<div class="d-flex mt-1">
-				<input type="file" id="inputFile">
+				<input type="file" id="file" multiple>
 			</div>
 		</div>
 		<div id="sellTradingPlaceArea">
@@ -49,7 +50,7 @@
 		</div>
 		<footer class="mt-5 d-flex align-items-center justify-content-between">
 			<button type="button" class="btn btn-secondary" id="cancleBtn">취소</button>
-			<button type="button" class="btn btn-secondary" id="createBtn">작성하기</button>
+			<button type="button" class="btn btn-secondary" id="createBtn" th:data-user-id="${session.userId}" th:data-user-name="${session.userName}">작성하기</button>
 		</footer>
 	</div>
 	
@@ -205,14 +206,25 @@
 			
 			// 판매 작성 버튼 기능
 			$("#createBtn").on("click", function(){
+				let userId =  $("#createBtn").data("user-id");
 				let title = $("#inputSellTitle").val();
 				let contents = $("#inputSellContents").val();
 				let location = $("#inputTradingPlace").val();
-				
+				let sellerName =  $("#createBtn").data("user-name");
 				let sellPrice = $("#inputTradingPrice").val();
-				let inputFile = $("#inputFile")[0].files[0];
+				//let inputFile = $("#inputFile")[0].files[0];
+				let files = $("#file")[0].files;
 				
 				let formData = new FormData();
+				
+				for(let i = 0; i < files.length; i++)
+				{
+					let inputFile = files[i];
+					formData.append("inputFile", inputFile);
+				}
+				
+				formData.append("sellerName", sellerName);
+				formData.append("userId", userId);
 				
 				// 사용자가 주소를 추가적으로 입력한 경우
 				let tradingPlace = $("#tradingPlace").val();
@@ -241,7 +253,7 @@
 						
 		    			formData.append("title", title);
 		    			formData.append("contents", contents);
-		    			formData.append("imagePath", inputFile);
+		    			//formData.append("imagePath", inputFile);
 		    			formData.append("location", location);
 		    			formData.append("addTradingPlace", addTradingPlace);
 		    			formData.append("sellPrice", sellPrice);
@@ -250,7 +262,7 @@
 					{
 		    			formData.append("title", title);
 		    			formData.append("contents", contents);
-		    			formData.append("imagePath", inputFile);
+		    			//formData.append("imagePath", inputFile);
 		    			formData.append("location", location);
 		    			formData.append("sellPrice", sellPrice);
 					}
@@ -261,7 +273,7 @@
 					
 	    			formData.append("title", title);
 	    			formData.append("contents", contents);
-	    			formData.append("imagePath", inputFile);
+	    			//formData.append("imagePath", inputFile);
 	    			formData.append("location", location);
 	    			formData.append("sellPrice", sellPrice);
 				}
@@ -277,6 +289,7 @@
     				return;
     			}
 				
+    			
 				$.ajax({
 					type:"post"
 					, url:"/usedtrade/create"
@@ -288,7 +301,7 @@
 					{
 						if(data.result == "success")
 						{
-							parent.location.href="/usedtrade/list-view";
+							alert("작성완료");
 						}
 						else
 						{

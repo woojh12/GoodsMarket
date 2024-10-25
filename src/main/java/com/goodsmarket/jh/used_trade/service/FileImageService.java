@@ -17,11 +17,18 @@ public class FileImageService {
 		this.fileImageRepository = fileImageRepository;
 	}
 	
-	// 파일 이미지 업로드 Service
-	public int addFileImage(int usedTradeId, int userId, MultipartFile file)
+	// 파일 이미지 업로드 Service ---> 불필요해서 삭제예정
+	/*
+	public int addFileImage(int usedTradeId, int userId, MultipartFile[] files)
 	{
-		String imagePath = FileManager.saveFile(userId, file);
+		int count = 0;
+		for(int i = 0; i < files.length; i++)
+		{
+			String imagePath = FileManager.saveFile(userId, files[i]);			 
+			count = fileImageRepository.insertFileImage(usedTradeId, userId, imagePath);
+		}
 		
-		return fileImageRepository.insertFileImage(usedTradeId, userId, imagePath);
+		return count;
 	}
+	*/
 }

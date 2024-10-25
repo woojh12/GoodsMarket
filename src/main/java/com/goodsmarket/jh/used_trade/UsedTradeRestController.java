@@ -1,10 +1,12 @@
 package com.goodsmarket.jh.used_trade;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,23 +32,15 @@ public class UsedTradeRestController {
 	
 	// 판매 작성글 API
 	@PostMapping("/create")
-	public Map<String, String> usedTradeCreate(@RequestParam("title") String title
-			, @RequestParam("contents") String contents
-			, @RequestParam(value="imagePath", required=false) MultipartFile imagePath
-			, @RequestParam("location") String location
-			, @RequestParam(value="addTradingPlace", required=false) String addTradingPlace
-			, @RequestParam("sellPrice") int sellPrice
+	public Map<String, String> usedTradeCreate(@ModelAttribute UsedTrade usedTrade
+			, @RequestParam(value="inputFile", required=false) MultipartFile[] files
 			, HttpSession session)
 	{
 		Map<String, String> resultMap = new HashMap<>();
-	
-		// 판매 작성하는 사용자의 세션 정보 받아오기
-		int userId = (Integer)session.getAttribute("userId");
-		String sellerName = (String)session.getAttribute("userName");
 		
-		int count = usedTradeService.addUsedTrade(userId, title, contents, imagePath, location, addTradingPlace, sellerName, sellPrice);
+		int count = usedTradeService.addUsedTrade(usedTrade, files);
 		
-		if(count == 1)
+		if(count != 0)
 		{
 			resultMap.put("result", "success");
 		}
