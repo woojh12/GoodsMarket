@@ -11,7 +11,7 @@
  			`userId`
  			, `title`
  			, `contents`
- 			, `location`
+ 			, `place`
  			, `addTradingPlace`
  			, `sellerName`
  			, `sellPrice`
@@ -21,7 +21,7 @@
  			#{userId}
  			, #{title}
  			, #{contents}
- 			, #{location}
+ 			, #{place}
  			, #{addTradingPlace}
  			, #{sellerName}
  			, #{sellPrice}
@@ -34,7 +34,7 @@
  			, `userId`
  			, `title`
  			, `contents`
- 			, `location`
+ 			, `place`
  			, `addTradingPlace`
  			, `sellerName`
  			, `sellPrice`
@@ -52,7 +52,7 @@
  			, `title`
  			, `contents`
  			, `imagePath`
- 			, `location`
+ 			, `place`
  			, `addTradingPlace`
  			, `sellerName`
  			, `sellPrice`
@@ -71,7 +71,7 @@
  			, `title`
  			, `contents`
  			, `imagePath`
- 			, `location`
+ 			, `place`
  			, `addTradingPlace`
  			, `sellerName`
  			, `sellPrice`
@@ -90,7 +90,7 @@
  			, `title`
  			, `contents`
  			, `imagePath`
- 			, `location`
+ 			, `place`
  			, `addTradingPlace`
  			, `sellerName`
  			, `sellPrice`
@@ -145,7 +145,7 @@
  			`title` = #{title}
  			, `contents` = #{contents}
  			, `imagePath` = #{imagePath}
- 			, `location` = #{location}
+ 			, `place` = #{place}
  			, `addTradingPlace` = #{addTradingPlace}
  			, `sellPrice` = #{sellPrice}
  		WHERE

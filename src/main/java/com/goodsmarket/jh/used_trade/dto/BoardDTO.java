@@ -1,31 +1,19 @@
-package com.goodsmarket.jh.used_trade.domain;
+package com.goodsmarket.jh.used_trade.dto;
 
-import java.time.LocalDateTime;
-
-public class UsedTrade {
+public class BoardDTO {
 	private int id;
-	private int userId;
 	private String title;
 	private String contents;
 	private String place;
 	private String addTradingPlace;		// 사용자가 주소를 추가적으로 적은 것을 저장하는 변수
 	private String sellerName;
-	private int sellPrice;
-	private int views;
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private String imagePath;
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 	public String getTitle() {
 		return title;
@@ -57,28 +45,10 @@ public class UsedTrade {
 	public void setSellerName(String sellerName) {
 		this.sellerName = sellerName;
 	}
-	public int getSellPrice() {
-		return sellPrice;
+	public String getImagePath() {
+		return imagePath;
 	}
-	public void setSellPrice(int sellPrice) {
-		this.sellPrice = sellPrice;
-	}
-	public int getViews() {
-		return views;
-	}
-	public void setViews(int views) {
-		this.views = views;
-	}
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 }

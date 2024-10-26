@@ -1,5 +1,6 @@
 package com.goodsmarket.jh.used_trade.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.goodsmarket.jh.common.FileManager;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
+import com.goodsmarket.jh.used_trade.dto.BoardDTO;
 import com.goodsmarket.jh.used_trade.repository.FileImageRepository;
 import com.goodsmarket.jh.used_trade.repository.UsedTradeRepository;
 
@@ -15,12 +17,14 @@ import com.goodsmarket.jh.used_trade.repository.UsedTradeRepository;
 public class UsedTradeService {
 	private UsedTradeRepository usedTradeRepository;
 	private FileImageRepository fileImageRepository;
+	private FileImageService fileImageService;
 	
 	@Autowired
 	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService)
 	{
 		this.usedTradeRepository = usedTradeRepository;
 		this.fileImageRepository = fileImageRepository;
+		this.fileImageService = fileImageService;
 	}
 	
 	// 판매 작성글 저장 Service		---> 게시물 id(autoincrement) 값 가져오기 위해 useGeneratedKeys 사용해야함으로 파라미터 타입을 객체로 바꿔줘야함
@@ -42,11 +46,42 @@ public class UsedTradeService {
 	}
 	
 	// 전체 판매목록 불러오기 Service		--> DTO 작성 필요 : 게시물의 정보와 파일 정보를 합쳐야함
-	public List<UsedTrade> getAllUsedTrade()
+	public List<BoardDTO> getAllUsedTrade()
 	{
 		List<UsedTrade> usedTradeList = usedTradeRepository.selectAllUsedTrade();
 	
-		return usedTradeList; 
+		List<BoardDTO> boardDTOList = new ArrayList<>();
+		
+		// 각 게시글의 첫번째 파일 가져오기
+		for(int i = 0; i < usedTradeList.size(); i++)
+		{
+			BoardDTO boardDTO = new BoardDTO();
+			
+			int id = usedTradeList.get(i).getId();
+			String title = usedTradeList.get(i).getTitle();
+			String contents = usedTradeList.get(i).getContents();
+			String place = usedTradeList.get(i).getPlace();
+			String addTradingPlace = usedTradeList.get(i).getAddTradingPlace();
+			String sellerName = usedTradeList.get(i).getSellerName();
+			
+			boardDTO.setId(id);
+			boardDTO.setTitle(title);
+			boardDTO.setContents(contents);
+			boardDTO.setPlace(place);
+			boardDTO.setAddTradingPlace(addTradingPlace);
+			boardDTO.setSellerName(sellerName);
+			
+			
+			// 이미지가 담긴 게시글이라면
+			if(!fileImageService.getFileImages(id).isEmpty())
+			{
+				String fileImage = fileImageService.getFileImages(id).get(0).getImagePath();
+				boardDTO.setImagePath(fileImage);
+			}
+			boardDTOList.add(boardDTO);
+		}
+		
+		return boardDTOList;
 	}
 	
 	// 물품 검색 기능에 사용되는 Service

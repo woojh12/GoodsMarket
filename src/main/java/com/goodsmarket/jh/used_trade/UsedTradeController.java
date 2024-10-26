@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodsmarket.jh.favorite.service.FavoriteService;
-import com.goodsmarket.jh.used_trade.domain.FileImage;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
+import com.goodsmarket.jh.used_trade.dto.BoardDTO;
+import com.goodsmarket.jh.used_trade.repository.UsedTradeRepository;
 import com.goodsmarket.jh.used_trade.service.FileImageService;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 
@@ -19,36 +20,24 @@ import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 @Controller
 public class UsedTradeController {
 	private UsedTradeService usedTradeService;
-	private FileImageService fileImageService;
 	private FavoriteService favoriteService;
+	private FileImageService fileImageService;
 	
-	public UsedTradeController(UsedTradeService usedTradeService, FileImageService fileImageService, FavoriteService favoriteService)
+	public UsedTradeController(UsedTradeService usedTradeService, FavoriteService favoriteService, FileImageService fileImageService)
 	{
 		this.usedTradeService = usedTradeService;
+		this.favoriteService =  favoriteService;
 		this.fileImageService = fileImageService;
-		this. favoriteService =  favoriteService;
 	}
 	
 	@GetMapping("/list-view")
 	public String goodsList(Model model)
 	{
-		List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
-		List<List<FileImage>> fileImagesList = new ArrayList<>();
-		List<FileImage> fileList;
-		
-		// 각 게시글의 파일 이미지를 가져오는 부분
-		for(int i = 0; i < usedTradeList.size(); i++)
-		{
-			fileList = fileImageService.getFileImages(i);
-			fileImagesList.add(fileList);
-		}
-		
-		// fileImagesList.get(0).get(0).getImagePath()
+		List<BoardDTO> usedTradeList = usedTradeService.getAllUsedTrade();
+
 		model.addAttribute("usedTradeList", usedTradeList);
-		model.addAttribute("fileImagesList", fileImagesList);
-//		model.addAttribute("fileList", fileList);
 		
-		return "usedtrade/postList";
+		return "usedtrade/list";
 	}
 	
 	@GetMapping("/create-view")
@@ -65,7 +54,7 @@ public class UsedTradeController {
 		model.addAttribute("usedTrade", usedTrade);
 	
 		// 장바구니 버튼 누른 사용자 수 조회
-		List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
+		//List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
 		
 		// 선택한 게시글의 찜 수 조회
 		int shoppingCartCount =  favoriteService.getAllShoppingCartCount(id);

@@ -32,7 +32,7 @@ public interface UsedTradeRepository {
 			, @Param("title") String title
 			, @Param("contents") String contents
 			, @Param("imagePath") String imagePath
-			, @Param("location") String location
+			, @Param("place") String place
 			, @Param("addTradingPlace") String addTradingPlace
 			, @Param("sellPrice") int sellPrice);
 	

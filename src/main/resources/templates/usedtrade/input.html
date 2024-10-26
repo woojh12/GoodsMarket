@@ -209,10 +209,9 @@
 				let userId =  $("#createBtn").data("user-id");
 				let title = $("#inputSellTitle").val();
 				let contents = $("#inputSellContents").val();
-				let location = $("#inputTradingPlace").val();
+				let place = $("#inputTradingPlace").val();
 				let sellerName =  $("#createBtn").data("user-name");
 				let sellPrice = $("#inputTradingPrice").val();
-				//let inputFile = $("#inputFile")[0].files[0];
 				let files = $("#file")[0].files;
 				
 				let formData = new FormData();
@@ -230,13 +229,13 @@
 				let tradingPlace = $("#tradingPlace").val();
 				
 				// 입력된 주소 저장
-				location = tradingPlace;
+				place = tradingPlace;
 				
 				// 맵을 클릭한 경우
 				if(detailAddr != null)
 				{
 					// 추가로 작성한 주소를 추출하는 부분
-					if(location != detailAddr)
+					if(place != detailAddr)
 					{
 						let addTradingPlace;		// 주소를 추가로 적은 경우 저장하는 변수
 						
@@ -249,12 +248,11 @@
 						addTradingPlace = temp;
 						
 						// 지도로 클릭한 주소 추출(추가로 작성한 주소를 제외한 부분을 추출)
-						location = location.substr(0, location.length - addTradingPlace.length);
+						place = place.substr(0, place.length - addTradingPlace.length);
 						
 		    			formData.append("title", title);
 		    			formData.append("contents", contents);
-		    			//formData.append("imagePath", inputFile);
-		    			formData.append("location", location);
+		    			formData.append("place", place);
 		    			formData.append("addTradingPlace", addTradingPlace);
 		    			formData.append("sellPrice", sellPrice);
 					}
@@ -262,19 +260,17 @@
 					{
 		    			formData.append("title", title);
 		    			formData.append("contents", contents);
-		    			//formData.append("imagePath", inputFile);
-		    			formData.append("location", location);
+		    			formData.append("place", place);
 		    			formData.append("sellPrice", sellPrice);
 					}
 				}
 				else	// 맵을 클릭하지 않고 직접 주소를 입력한 경우
 				{
-					location = tradingPlace;
+					place = tradingPlace;
 					
 	    			formData.append("title", title);
 	    			formData.append("contents", contents);
-	    			//formData.append("imagePath", inputFile);
-	    			formData.append("location", location);
+	    			formData.append("place", place);
 	    			formData.append("sellPrice", sellPrice);
 				}
 				
@@ -301,7 +297,7 @@
 					{
 						if(data.result == "success")
 						{
-							alert("작성완료");
+							location.href="/usedtrade/list-view";
 						}
 						else
 						{
@@ -317,7 +313,7 @@
 			
 			// 파일 미리보기 기능
 			$(function(){
-    			$("#inputFile").change(function(event){
+    			$("#file").change(function(event){
     				const file = event.target.files;
 
     				var image = new Image();
