@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.goodsmarket.jh.common.FileManager;
+import com.goodsmarket.jh.used_trade.domain.FileImage;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.dto.BoardDTO;
+import com.goodsmarket.jh.used_trade.dto.ItemDTO;
 import com.goodsmarket.jh.used_trade.repository.FileImageRepository;
 import com.goodsmarket.jh.used_trade.repository.UsedTradeRepository;
 
@@ -78,6 +80,11 @@ public class UsedTradeService {
 				String fileImage = fileImageService.getFileImages(id).get(0).getImagePath();
 				boardDTO.setImagePath(fileImage);
 			}
+			else
+			{
+				boardDTO.setImagePath(null);
+			}
+			
 			boardDTOList.add(boardDTO);
 		}
 		
@@ -90,10 +97,45 @@ public class UsedTradeService {
 		return usedTradeRepository.selectAllUsedTradeByTitle(title);
 	}
 	
-	// 선택된 판매글 불러오기 Service
-	public UsedTrade getUsedTrade(int id)
+	// 상세페이지 불러오기 Service
+	public ItemDTO getUsedTrade(int id)
 	{
-		return usedTradeRepository.selectUsedTrade(id);
+		UsedTrade usedTrade = usedTradeRepository.selectUsedTrade(id);
+		
+		List<FileImage> fileImage = fileImageService.getFileImages(id);
+		List<String> imageList = new ArrayList<>();
+		
+		// 해당하는 게시글에 저장된 이미지 불러오기
+		if(!fileImage.isEmpty())
+		{
+			for(int i = 0; i < fileImage.size(); i++)
+			{
+				String imagePath;
+				imagePath = fileImage.get(i).getImagePath();
+				imageList.add(imagePath);
+			}
+		}
+		else
+		{
+			imageList.add(null);
+		}
+		
+		ItemDTO item = new ItemDTO();
+		
+		item.setId(usedTrade.getId());
+		item.setUserId(usedTrade.getUserId());
+		item.setTitle(usedTrade.getTitle());
+		item.setContents(usedTrade.getContents());
+		item.setPlace(usedTrade.getPlace());
+		item.setAddTradingPlace(usedTrade.getAddTradingPlace());
+		item.setSellerName(usedTrade.getSellerName());
+		item.setSellPrice(usedTrade.getSellPrice());
+		item.setFileImage(imageList);
+		item.setViews(usedTrade.getViews());
+		item.setCreatedAt(usedTrade.getCreatedAt());
+		item.setUpdatedAt(usedTrade.getUpdatedAt());
+		
+		return item;
 	}
 	
 	// 게시글 조회수 Service
@@ -120,51 +162,47 @@ public class UsedTradeService {
 	// 사용자가 작성한 모든 게시글 삭제 Service
 	public int removeAllUsedTrade(int userId)
 	{
-		String imagePath = "";
-		List<UsedTrade> imagePaths;
+		// 사용자가 업로드한 모든 파일 이미지 조회
+		List<FileImage> fileList =fileImageService.getAllFileImagesByUserId(userId);
 		
-		imagePaths = usedTradeRepository.selectUsedTradeByUserId(userId);
-		// 게시물 저장 개수 추출 : 이미지 추출 반복에서 사용
-		int imageCount = imagePaths.size();
-		
-		// 사용자가 작성한 게시물의 이미지 추출
-		/*
-		for(int i = 0; i < imageCount; i++)
+		// 폴더에서 사용자가 업로드한 파일 제거		
+		for(int i = 0; i < fileList.size(); i++)
 		{
-			imagePath = imagePaths.get(i).getImagePath();	// 각 게시글에 저장된 이미지를 한개씩 호출
-			// 게시글에 이미지가 존재하면 삭제
-			if(imagePath != null)
-			{
-				FileManager.removeFile(imagePath);
-			}
-		}
-		*/
-		int count = usedTradeRepository.deleteAllUsedTrade(userId);
+			String imagePath = fileList.get(i).getImagePath();
+			FileManager.removeFile(imagePath);
+		}			
+
 		
-		return count;
+		// 사용자가 작성한 모든 파일 삭제
+		fileImageService.removeFileImagesByUserId(userId);
+						
+		return usedTradeRepository.deleteAllUsedTrade(userId);
 	}
 	
-	// 게시글 한개 삭제 Service
-	/*
+	// 사용자가 작성한 게시글 삭제 Service
 	public int removeUsedTradeById(int id)
 	{
-		String imagePath = usedTradeRepository.selectUsedTrade(id).getImagePath();
+		// 해당 게시글의 이미지 추출
+		List<FileImage> fileImageList = fileImageService.getFileImages(id);
 		
-		if(imagePath != null)
+		for(int i = 0; i < fileImageList.size(); i++)
 		{
+			String imagePath = fileImageList.get(i).getImagePath();
+			
 			FileManager.removeFile(imagePath);
 		}
 		
+		fileImageService.removeFileImagesByUsedTradeId(id);
+		
 		return usedTradeRepository.deleteUsedTradeById(id);
 	}
-	*/
 	
 	// 게시글 수정 Service
-	public int changeUsedTrade(int id, int userId, String title, String contents, MultipartFile file, String location, String addTradingPlace, int sellPrice)
+	public int changeUsedTrade(int id, int userId, String title, String contents, List<MultipartFile> file, String location, String addTradingPlace, int sellPrice)
 	{
-		String imagePath = FileManager.saveFile(userId, file);
+		fileImageService.changeFileImagesByUsedTradeId(id, file);
 		
-		return usedTradeRepository.updateUsedTrade(id, title, contents, imagePath, location, addTradingPlace, sellPrice);
+		return usedTradeRepository.updateUsedTrade(userId, title, contents, addTradingPlace, addTradingPlace, sellPrice);
 	}
 	
 	// 게시글 리스트의 각 id값 반환 Service

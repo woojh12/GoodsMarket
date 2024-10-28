@@ -16,6 +16,7 @@ public interface UsedTradeRepository {
 	// 물품 검색 기능에 사용될 Repository
 	public List<UsedTrade> selectAllUsedTradeByTitle(@Param("title") String title);
 	
+	// 상세 페이지 조회 Repository
 	public UsedTrade selectUsedTrade(@Param("id") int id);
 	
 	// 조회수 증가 Repository
@@ -31,7 +32,6 @@ public interface UsedTradeRepository {
 	public int updateUsedTrade(@Param("id") int id
 			, @Param("title") String title
 			, @Param("contents") String contents
-			, @Param("imagePath") String imagePath
 			, @Param("place") String place
 			, @Param("addTradingPlace") String addTradingPlace
 			, @Param("sellPrice") int sellPrice);

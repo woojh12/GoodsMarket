@@ -74,7 +74,6 @@ public class UsedTradeRestController {
 	}
 	
 	// 게시글 삭제
-	/*
 	@DeleteMapping("/delete")
 	public Map<String, String> usedTradeDelete(@RequestParam("id") int id)
 	{
@@ -93,15 +92,14 @@ public class UsedTradeRestController {
 		
 		return resultMap;
 	}
-	*/
 	
 	// 게시글 수정
 	@PutMapping("/update")
 	public Map<String, String> usedTradeUpdate(@RequestParam("id") int id
 			, @RequestParam("title") String title
 			, @RequestParam("contents") String contents
-			, @RequestParam(value="imagePath", required=false) MultipartFile imagePath
-			, @RequestParam("location") String location
+			, @RequestParam(value="inputFile", required=false) List<MultipartFile> files
+			, @RequestParam("place") String place
 			, @RequestParam(value="addTradingPlace", required=false) String addTradingPlace
 			, @RequestParam("sellPrice") int sellPrice
 			, HttpSession session)
@@ -111,7 +109,7 @@ public class UsedTradeRestController {
 		int userId = (Integer)session.getAttribute("userId");
 		String sellerName = (String)session.getAttribute("userName");
 		
-		int count = usedTradeService.changeUsedTrade(id, userId, title, contents, imagePath, location, addTradingPlace, sellPrice);
+		int count = usedTradeService.changeUsedTrade(id, userId, title, contents, files, sellerName, addTradingPlace, sellPrice);
 		
 		if(count == 1)
 		{

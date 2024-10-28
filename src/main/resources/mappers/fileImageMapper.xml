@@ -19,7 +19,7 @@
  		)
  	</insert>
  	
- 	<select id="selectAllFileImage" parameterType="int">
+ 	<select id="selectAllFileImage" parameterType="int" resultType="com.goodsmarket.jh.used_trade.domain.FileImage">
  		SELECT
  			`id`
  			, `usedTradeId`
@@ -31,4 +31,44 @@
  		WHERE
  			`usedTradeId` = #{usedTradeId}
  	</select>
+ 	
+ 	<delete id="deleteAllFileImageByUserId" parameterType="int">
+ 		DELETE
+ 		
+ 		FROM
+ 			`used_trade_image`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</delete>
+ 	
+ 	<delete id="deleteFileImageByUsedTradeId" parameterType="int">
+ 		DELETE
+ 		
+ 		FROM
+ 			`used_trade_image`
+ 		WHERE
+ 			`usedTradeId` = #{usedTradeId}
+ 	</delete>
+ 	
+ 	<select id="selectAllFileImageByUserId" parameterType="int" resultType="com.goodsmarket.jh.used_trade.domain.FileImage">
+ 		SELECT
+ 			`id`
+ 			, `usedTradeId`
+ 			, `userId`
+ 			, `imagePath`
+ 			, `createdAt`
+ 		FROM
+ 			`used_trade_image`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</select>
+ 	
+ 	<update id="updateFileImageByUsedTradeId" parameterType="int">
+ 		UPDATE
+ 			`used_trade_image`
+ 		SET
+ 			`imagePath` = #{imagePath}
+ 		WHERE
+ 			`usedTradeId` = #{usedTradeId}
+ 	</update>
  </mapper>

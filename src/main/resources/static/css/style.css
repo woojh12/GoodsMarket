@@ -376,7 +376,7 @@ header > #user-field
 
 #wrap > section > #showOther > #showFile
 {
-	width : 400px;
+	width : 1200px;
 }
 
 #wrap > section > #showOther > #showFile > #checkImage
@@ -385,9 +385,14 @@ header > #user-field
 	height : 50px;
 }
 
-#wrap > section > #showOther > #showFile > #lookingFileImage
+#wrap > section > #showOther > #showFile > #lookingFileImageArea
 {
-	width : 200px;
+	height : 200px;
+}
+
+#wrap > section > #showOther > #showFile > #lookingFileImageArea > #lookingFileImage
+{
+	width : 1200px;
 	height : 200px;
 }
 
@@ -401,7 +406,7 @@ header > #user-field
 	height : 300px;
 }
 
-#wrap > section > #showOther > #showFile > #lookingFileImage > #sellImage
+#wrap > section > #showOther > #showFile > #lookingFileImageArea > #lookingFileImage > #sellImage
 {
 	width : 200px;
 	height : 200px;
@@ -535,13 +540,31 @@ header > #user-field
 	height : 220px;
 }
 
-#wrap > #sellImageArea > #sellGoodsImageArea > #sellGoodsImage
+#wrap > #sellImageArea > #sellGoodsImageArea > #sellGoodsImage1
 {
 	width : 150px;
 	height : 150px;
 }
 
 #wrap > #sellImageArea > #sellGoodsImageArea > #sellGoodsImage2
+{
+	width : 150px;
+	height : 150px;
+}
+
+#wrap > #sellImageArea > #sellGoodsImageArea > #sellGoodsImage3
+{
+	width : 150px;
+	height : 150px;
+}
+
+#wrap > #sellImageArea > #sellGoodsImageArea > #sellGoodsImage4
+{
+	width : 150px;
+	height : 150px;
+}
+
+#wrap > #sellImageArea > #sellGoodsImageArea > #sellGoodsImage5
 {
 	width : 150px;
 	height : 150px;

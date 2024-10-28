@@ -29,9 +29,7 @@
 				<h5>이미지 업로드</h5>
 			</div>
 			<div id="sellGoodsImageArea" class="d-flex">
-				<div id="sellGoodsImage" class="bg-light" th:data-imagepath="${usedTrade.imagePath}">
-					
-				</div>
+				<div th:each="file:${usedTrade.fileImage}" th:id="'sellGoodsImage' + ${fileStat.count}" class="bg-light ml-2" th:value="${file}" th:data-size="${fileStat.size}"></div>			
 			</div>
 			<div class="d-flex mt-1">
 				<input type="file" id="inputFile">
@@ -45,7 +43,7 @@
 			</div>
 			<div class="d-flex align-items-center">
 				<label>주소 확인 : </label>
-				<input type="text" class="mt-2 ml-2 form-control col-3" id="tradingPlace" th:value="${usedTrade.location}">			
+				<input type="text" class="mt-2 ml-2 form-control col-3" id="tradingPlace" th:value="${usedTrade.place}">			
 			</div>
 			<div id="sellLocationArea" class="bg-light"></div>
 		</div>
@@ -221,13 +219,22 @@
 		/* 지도 기능 구현 끝*/
 		
     	// 기존에 등록한 이미지 구현 기능
-		let image = new Image();
-		let originImagePath = $("#sellGoodsImage").data("imagepath");
-		
-		image.src = originImagePath;
-		image.width = 150;
-		image.height = 150;
-		$("#sellGoodsImage").append(image);
+    	console.log($("#sellGoodsImageArea").childNodes);
+    	//let test = $("#sellGoodsImageArea").firstChild.data("size");
+    	//alert(test);
+    	/*
+		let originImagePath = $("#sellGoodsImageArea").data("imagepath");
+		alert(originImagePath);
+	
+		for(let i = 0; i < originImagePath.length; i++)
+		{
+			let image = new Image();
+			image.src = originImagePath(i);
+			image.width = 150;
+			image.height = 150;
+			$("#sellGoodsImage"+(i+1)).append(image);
+		}
+		*/ 
 		
 		// 파일 미리보기 기능
 		$(function(){
@@ -251,7 +258,7 @@
 			
 			let title = $("#inputSellTitle").val();
 			let contents = $("#inputSellContents").val();
-			let location = $("#inputTradingPlace").val();
+			let place = $("#inputTradingPlace").val();
 			
 			let sellPrice = $("#inputTradingPrice").val();
 			let inputFile = $("#inputFile")[0].files[0];
@@ -262,13 +269,13 @@
 			let tradingPlace = $("#tradingPlace").val();
 			
 			// 입력된 주소 저장
-			location = tradingPlace;
+			place = tradingPlace;
 			
 			// 맵을 클릭한 경우
 			if(detailAddr != null)
 			{
 				// 추가로 작성한 주소를 추출하는 부분
-				if(location != detailAddr)
+				if(place != detailAddr)
 				{
 					let addTradingPlace;		// 주소를 추가로 적은 경우 저장하는 변수
 					
@@ -281,13 +288,13 @@
 					addTradingPlace = temp;
 					
 					// 지도로 클릭한 주소 추출(추가로 작성한 주소를 제외한 부분을 추출)
-					location = location.substr(0, location.length - addTradingPlace.length);
+					place = place.substr(0, place.length - addTradingPlace.length);
 					
 					formData.append("id", id);
 	    			formData.append("title", title);
 	    			formData.append("contents", contents);
 	    			formData.append("imagePath", inputFile);
-	    			formData.append("location", location);
+	    			formData.append("place", place);
 	    			formData.append("addTradingPlace", addTradingPlace);
 	    			formData.append("sellPrice", sellPrice);
 				}
@@ -297,19 +304,19 @@
 	    			formData.append("title", title);
 	    			formData.append("contents", contents);
 	    			formData.append("imagePath", inputFile);
-	    			formData.append("location", location);
+	    			formData.append("place", place);
 	    			formData.append("sellPrice", sellPrice);
 				}
 			}
 			else	// 맵을 클릭하지 않고 직접 주소를 입력한 경우
 			{
-				location = tradingPlace;
+				place = tradingPlace;
 				
 				formData.append("id", id);
     			formData.append("title", title);
     			formData.append("contents", contents);
     			formData.append("imagePath", inputFile);
-    			formData.append("location", location);
+    			formData.append("place", place);
     			formData.append("sellPrice", sellPrice);
 			}
 			
@@ -336,7 +343,7 @@
 					if(data.result == "success")
 					{
 						alert("수정완료");
-						parent.location.href="/usedtrade/list-view";
+						location.href="/usedtrade/list-view";
 					}
 					else
 					{

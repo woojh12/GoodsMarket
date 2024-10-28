@@ -110,8 +110,8 @@ public class UserRestController {
 			int count = userService.removeUser(id);
 			
 			// 즐겨찾기 개수 리턴 후 1개 이상인 경우 삭제 되게 구현해야함
-			int favoriteCount = favoriteService.removeAllShoppingCart(id);
-			int usedTradeCount = usedTradeService.removeAllUsedTrade(id);
+			//int favoriteCount = favoriteService.removeAllShoppingCart(id);
+			//int usedTradeCount = usedTradeService.removeAllUsedTrade(id);
 			
 			if(count == 1)
 			{

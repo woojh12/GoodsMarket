@@ -1,6 +1,5 @@
 package com.goodsmarket.jh.used_trade;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodsmarket.jh.favorite.service.FavoriteService;
+import com.goodsmarket.jh.used_trade.domain.FileImage;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.dto.BoardDTO;
-import com.goodsmarket.jh.used_trade.repository.UsedTradeRepository;
+import com.goodsmarket.jh.used_trade.dto.ItemDTO;
 import com.goodsmarket.jh.used_trade.service.FileImageService;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 
@@ -46,13 +46,14 @@ public class UsedTradeController {
 		return "usedtrade/input";
 	}
 	
-	@GetMapping("/show-view")
+	@GetMapping("/detail-view")
 	public String goodsShow(Model model
 			, @RequestParam("id") int id)
 	{		
-		UsedTrade usedTrade = usedTradeService.getUsedTrade(id);
+		ItemDTO usedTrade = new ItemDTO();
+		usedTrade = usedTradeService.getUsedTrade(id);
 		model.addAttribute("usedTrade", usedTrade);
-	
+		
 		// 장바구니 버튼 누른 사용자 수 조회
 		//List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
 		
@@ -68,7 +69,7 @@ public class UsedTradeController {
 	public String goodsUpdate(@RequestParam("id") int id
 			, Model model)
 	{
-		UsedTrade usedTrade = usedTradeService.getUsedTrade(id);
+		ItemDTO usedTrade = usedTradeService.getUsedTrade(id);
 		model.addAttribute("usedTrade", usedTrade);
 		
 		return "/usedTrade/update";

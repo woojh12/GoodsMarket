@@ -70,7 +70,6 @@
  			, `userId`
  			, `title`
  			, `contents`
- 			, `imagePath`
  			, `place`
  			, `addTradingPlace`
  			, `sellerName`
@@ -144,7 +143,6 @@
  		SET
  			`title` = #{title}
  			, `contents` = #{contents}
- 			, `imagePath` = #{imagePath}
  			, `place` = #{place}
  			, `addTradingPlace` = #{addTradingPlace}
  			, `sellPrice` = #{sellPrice}
