@@ -2,6 +2,8 @@ package com.goodsmarket.jh.used_trade.domain;
 
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class UsedTrade {
 	private int id;
 	private int userId;

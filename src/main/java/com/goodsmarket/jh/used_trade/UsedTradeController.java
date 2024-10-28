@@ -50,8 +50,8 @@ public class UsedTradeController {
 	public String goodsShow(Model model
 			, @RequestParam("id") int id)
 	{		
-		ItemDTO usedTrade = new ItemDTO();
-		usedTrade = usedTradeService.getUsedTrade(id);
+		ItemDTO usedTrade = usedTradeService.getUsedTrade(id);
+		
 		model.addAttribute("usedTrade", usedTrade);
 		
 		// 장바구니 버튼 누른 사용자 수 조회

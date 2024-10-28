@@ -29,7 +29,7 @@
 				<h5>이미지 업로드</h5>
 			</div>
 			<div id="sellGoodsImageArea" class="d-flex">
-				<div th:each="file:${usedTrade.fileImage}" th:id="'sellGoodsImage' + ${fileStat.count}" class="bg-light ml-2" th:value="${file}" th:data-size="${fileStat.size}"></div>			
+				<div th:each="file:${usedTrade.fileImage}" th:id="'sellGoodsImage' + ${fileStat.count}" class="bg-light ml-2" th:data-imagePath="${file}" th:data-size="${fileStat.size}"></div>			
 			</div>
 			<div class="d-flex mt-1">
 				<input type="file" id="inputFile">
@@ -219,9 +219,22 @@
 		/* 지도 기능 구현 끝*/
 		
     	// 기존에 등록한 이미지 구현 기능
-    	console.log($("#sellGoodsImageArea").childNodes);
-    	//let test = $("#sellGoodsImageArea").firstChild.data("size");
-    	//alert(test);
+		// 하위요소 접근
+    	let size = $("#sellGoodsImageArea").children().data("size");
+    	
+		alert($("#sellGoodsImage1").data("size"));
+		/*
+ 		for(let i = 0; i < size; i++)
+ 		{
+ 			let imagePath = $("#sellGoodsImage"+(i+1)).data("imagePath");
+ 			if(imagePath == null)
+ 			{
+	 			alert("값없음");
+ 				
+ 			}
+ 		}
+		*/
+		
     	/*
 		let originImagePath = $("#sellGoodsImageArea").data("imagepath");
 		alert(originImagePath);
