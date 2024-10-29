@@ -44,19 +44,4 @@ public class FileImageService {
 	{
 		return fileImageRepository.selectAllFileImageByUserId(userId);
 	}
-	
-	// 사용자가 작성한 게시글의 이미지 수정 Service
-	public int changeFileImagesByUsedTradeId(int usedTradeId, List<MultipartFile> file)
-	{
-		List<String> imagePathList = new ArrayList<>();
-		
-		// 수정한 이미지들 저장
-		for(int i = 0; i < file.size(); i++)
-		{
-			String imagePath = FileManager.saveFile(i, file.get(i));
-			imagePathList.add(imagePath);
-		}
-		
-		return fileImageRepository.updateFileImageByUsedTradeId(usedTradeId, imagePathList);
-	}
 }

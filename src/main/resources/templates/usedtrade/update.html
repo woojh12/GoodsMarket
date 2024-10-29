@@ -29,10 +29,10 @@
 				<h5>이미지 업로드</h5>
 			</div>
 			<div id="sellGoodsImageArea" class="d-flex">
-				<div th:each="file:${usedTrade.fileImage}" th:id="'sellGoodsImage' + ${fileStat.count}" class="bg-light ml-2" th:data-imagePath="${file}" th:data-size="${fileStat.size}"></div>			
+				<div th:each="file:${usedTrade.fileImage}" class="bg-light ml-2" th:id="'sellGoodsImage' + ${fileStat.count}" th:data-imagepath="${file}" th:data-size="${fileStat.size}"></div>			
 			</div>
 			<div class="d-flex mt-1">
-				<input type="file" id="inputFile">
+				<input type="file" id="file" multiple>
 			</div>
 		</div>
 		<div id="sellTradingPlaceArea">
@@ -219,50 +219,47 @@
 		/* 지도 기능 구현 끝*/
 		
     	// 기존에 등록한 이미지 구현 기능
-		// 하위요소 접근
-    	let size = $("#sellGoodsImageArea").children().data("size");
+    	let size = $("#sellGoodsImageArea").children().data("size");			// 하위요소로 접근하여 저장된 이미지의 개수 반환
     	
-		alert($("#sellGoodsImage1").data("size"));
-		/*
- 		for(let i = 0; i < size; i++)
- 		{
- 			let imagePath = $("#sellGoodsImage"+(i+1)).data("imagePath");
- 			if(imagePath == null)
- 			{
-	 			alert("값없음");
- 				
- 			}
- 		}
-		*/
-		
-    	/*
-		let originImagePath = $("#sellGoodsImageArea").data("imagepath");
-		alert(originImagePath);
-	
-		for(let i = 0; i < originImagePath.length; i++)
-		{
-			let image = new Image();
-			image.src = originImagePath(i);
-			image.width = 150;
-			image.height = 150;
-			$("#sellGoodsImage"+(i+1)).append(image);
-		}
-		*/ 
-		
+    	for(let i = 0; i < size; i++)
+    	{
+    		let image = new Image();
+    		let imagePath = $("#sellGoodsImage"+(i+1)).data("imagepath");
+    		image.src = imagePath;
+    		image.width = 150;
+    		image.height = 150;
+    		$("#sellGoodsImage"+(i+1)).append(image);
+    	}
+ 		
 		// 파일 미리보기 기능
 		$(function(){
-    		$("#inputFile").change(function(event){
-    			$("#sellGoodsImage").remove(image);		// 기존에 등록한 파일 이미지 삭제
-    			const file = event.target.files;
-
-    			var ImageTempUrl = window.URL.createObjectURL(file[0]);
-
-   				image.src = ImageTempUrl;
-					 
-   				image.width = 150;
-   				image.height = 150;
-    				
-   				$("#sellGoodsImage").append(image);
+    		$("#file").change(function(event){
+    			let files = $("#file")[0].files;
+    			
+    			// 파일이 선택된 시에 이미지 미리보기 창 삭제 
+    			$("#sellGoodsImageArea").empty();
+    			
+    			// 클릭한 파일의 개수에 맞게 미리보기 창 생성
+    			for(let i = 1; i <= files.length; i++)
+    			{
+	    			$("#sellGoodsImageArea").append(
+	    				$("<div>").prop({
+	    					id: "sellGoodsImage"+i,
+	    					className: "bg-light ml-2"
+	    				})	
+	    			);
+    			} 
+    			
+    			// 파일 미리보기
+    			for(let i = 0; i < files.length; i++)
+				{
+    				var image = new Image();
+    				var ImageTempUrl = window.URL.createObjectURL(files[i]);
+    				image.src = ImageTempUrl;
+    				image.width = 150;
+    				image.height = 150;
+    				$("#sellGoodsImage"+(i+1)).append(image);					
+				}   	
     		});
     	});
 		
@@ -272,11 +269,24 @@
 			let title = $("#inputSellTitle").val();
 			let contents = $("#inputSellContents").val();
 			let place = $("#inputTradingPlace").val();
-			
 			let sellPrice = $("#inputTradingPrice").val();
-			let inputFile = $("#inputFile")[0].files[0];
+			let files = $("#file")[0].files;
 			
 			let formData = new FormData();
+			
+			formData.append("id", id);
+			formData.append("title", title);
+			formData.append("contents", contents);
+			formData.append("sellPrice", sellPrice);
+			
+			if(files != null)
+			{
+				for(let i = 0; i < files.length; i++)
+				{
+					let inputFile = files[i];
+					formData.append("inputFile", inputFile);
+				}				
+			}
 			
 			// 사용자가 주소를 추가적으로 입력한 경우
 			let tradingPlace = $("#tradingPlace").val();
@@ -303,45 +313,19 @@
 					// 지도로 클릭한 주소 추출(추가로 작성한 주소를 제외한 부분을 추출)
 					place = place.substr(0, place.length - addTradingPlace.length);
 					
-					formData.append("id", id);
-	    			formData.append("title", title);
-	    			formData.append("contents", contents);
-	    			formData.append("imagePath", inputFile);
 	    			formData.append("place", place);
 	    			formData.append("addTradingPlace", addTradingPlace);
-	    			formData.append("sellPrice", sellPrice);
 				}
 				else
 				{
-					formData.append("id", id);
-	    			formData.append("title", title);
-	    			formData.append("contents", contents);
-	    			formData.append("imagePath", inputFile);
 	    			formData.append("place", place);
-	    			formData.append("sellPrice", sellPrice);
 				}
 			}
 			else	// 맵을 클릭하지 않고 직접 주소를 입력한 경우
 			{
 				place = tradingPlace;
 				
-				formData.append("id", id);
-    			formData.append("title", title);
-    			formData.append("contents", contents);
-    			formData.append("imagePath", inputFile);
     			formData.append("place", place);
-    			formData.append("sellPrice", sellPrice);
-			}
-			
-			if(title == "")
-			{
-				alert("제목을 입력해주세요.");
-				return;
-			}
-			if(contents == "")
-			{
-				alert("내용을 입력해주세요.");
-				return;
 			}
 			
 			$.ajax({

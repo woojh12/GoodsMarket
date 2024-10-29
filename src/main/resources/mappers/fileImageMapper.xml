@@ -63,7 +63,7 @@
  			`userId` = #{userId}
  	</select>
  	
- 	<update id="updateFileImageByUsedTradeId" parameterType="int">
+ 	<update id="updateFileImageByUsedTradeId" parameterType="map">
  		UPDATE
  			`used_trade_image`
  		SET

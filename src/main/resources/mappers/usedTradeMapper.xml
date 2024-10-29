@@ -51,7 +51,6 @@
  			, `userId`
  			, `title`
  			, `contents`
- 			, `imagePath`
  			, `place`
  			, `addTradingPlace`
  			, `sellerName`
@@ -88,7 +87,6 @@
  			, `userId`
  			, `title`
  			, `contents`
- 			, `imagePath`
  			, `place`
  			, `addTradingPlace`
  			, `sellerName`

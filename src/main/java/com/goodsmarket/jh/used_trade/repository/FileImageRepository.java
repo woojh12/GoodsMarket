@@ -27,5 +27,5 @@ public interface FileImageRepository {
 	public List<FileImage> selectAllFileImageByUserId(@Param("userId") int userId);
 	
 	// 사용자가 업로드한 파일 수정 Repository
-	public int updateFileImageByUsedTradeId(@Param("usedTradeId") int usedTradeId, @Param("imagePath") List<String> imagePath);
+	public int updateFileImageByUsedTradeId(@Param("usedTradeId") int usedTradeId, @Param("imagePath") String imagePath);
 }

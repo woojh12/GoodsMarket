@@ -198,9 +198,35 @@ public class UsedTradeService {
 	}
 	
 	// 게시글 수정 Service
-	public int changeUsedTrade(int id, int userId, String title, String contents, List<MultipartFile> file, String location, String addTradingPlace, int sellPrice)
+	public int changeUsedTrade(int id, int userId, String title, String contents, List<MultipartFile> files, String place, String addTradingPlace, int sellPrice)
 	{
-		fileImageService.changeFileImagesByUsedTradeId(id, file);
+		// 변경된 파일이 있는 경우
+		if(files != null)
+		{
+			// 변경되기 전의 이미지 파일 삭제 
+			List<FileImage> deleteImagePathList = fileImageRepository.selectAllFileImage(id);
+			
+			if(deleteImagePathList != null)
+			{
+				for(int i = 0; i < deleteImagePathList.size(); i++)
+				{
+					String deleteImagePath = deleteImagePathList.get(i).getImagePath();
+					FileManager.removeFile(deleteImagePath);
+				}			
+				fileImageRepository.deleteFileImageByUsedTradeId(id);
+			}
+			
+			// 변경된 파일 수정
+			if(files != null)
+			{
+				for(int i = 0; i < files.size(); i++)
+				{
+					String imagePath = FileManager.saveFile(userId, files.get(i));
+					fileImageRepository.insertFileImage(id, userId, imagePath);
+				}			
+			}
+			return 1;		
+		}
 		
 		return usedTradeRepository.updateUsedTrade(userId, title, contents, addTradingPlace, addTradingPlace, sellPrice);
 	}

@@ -96,20 +96,19 @@ public class UsedTradeRestController {
 	// 게시글 수정
 	@PutMapping("/update")
 	public Map<String, String> usedTradeUpdate(@RequestParam("id") int id
-			, @RequestParam("title") String title
-			, @RequestParam("contents") String contents
+			, @RequestParam(value="title", required=false) String title
+			, @RequestParam(value="contents", required=false) String contents
 			, @RequestParam(value="inputFile", required=false) List<MultipartFile> files
-			, @RequestParam("place") String place
+			, @RequestParam(value="place", required=false) String place
 			, @RequestParam(value="addTradingPlace", required=false) String addTradingPlace
-			, @RequestParam("sellPrice") int sellPrice
+			, @RequestParam(value="sellPrice", required=false) int sellPrice
 			, HttpSession session)
 	{
 		Map<String, String> resultMap = new HashMap<>();
 		
 		int userId = (Integer)session.getAttribute("userId");
-		String sellerName = (String)session.getAttribute("userName");
 		
-		int count = usedTradeService.changeUsedTrade(id, userId, title, contents, files, sellerName, addTradingPlace, sellPrice);
+		int count = usedTradeService.changeUsedTrade(id, userId, title, contents, files, place, addTradingPlace, sellPrice);
 		
 		if(count == 1)
 		{
