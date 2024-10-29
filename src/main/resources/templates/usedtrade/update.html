@@ -48,7 +48,7 @@
 			<div id="sellLocationArea" class="bg-light"></div>
 		</div>
 		<footer class="mt-5 d-flex align-items-center justify-content-between">
-			<a th:href="@{/usedtrade/show-view(id=${usedTrade.id})}">
+			<a th:href="@{/usedtrade/detail-view(id=${usedTrade.id})}">
 					<button class="btn btn-secondary">취소</button>
 			</a>
 			<button type="button" class="btn btn-secondary" id="updateBtn" th:data-postid="${usedTrade.id}">수정하기</button>

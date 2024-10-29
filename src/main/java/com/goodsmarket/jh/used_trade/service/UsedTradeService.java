@@ -92,9 +92,39 @@ public class UsedTradeService {
 	}
 	
 	// 물품 검색 기능에 사용되는 Service
-	public List<UsedTrade> getAllUsedTradeByTitle(String title)
+	public List<BoardDTO> getAllUsedTradeByTitle(String title)
 	{
-		return usedTradeRepository.selectAllUsedTradeByTitle(title);
+		List<UsedTrade> usedTradeList = usedTradeRepository.selectAllUsedTradeByTitle(title);
+		List<BoardDTO> boardList = new ArrayList<>();
+		
+		// 각 게시글의 첫번째 파일 가져오기
+		for(int i = 0; i < usedTradeList.size(); i++)
+		{
+			BoardDTO board= new BoardDTO();
+			
+			board.setId(usedTradeList.get(i).getId());
+			board.setTitle(usedTradeList.get(i).getTitle());
+			board.setContents(usedTradeList.get(i).getContents());
+			board.setPlace(usedTradeList.get(i).getPlace());
+			board.setAddTradingPlace(usedTradeList.get(i).getAddTradingPlace());
+			board.setSellerName(usedTradeList.get(i).getSellerName());
+			
+			
+			// 이미지가 담긴 게시글이라면
+			if(!fileImageService.getFileImages(board.getId()).isEmpty())
+			{
+				String fileImage = fileImageService.getFileImages(board.getId()).get(0).getImagePath();
+				board.setImagePath(fileImage);
+			}
+			else
+			{
+				board.setImagePath(null);
+			}
+			
+			boardList.add(board);
+		}
+		
+		return boardList;
 	}
 	
 	// 상세페이지 불러오기 Service

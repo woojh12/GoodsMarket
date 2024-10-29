@@ -96,12 +96,12 @@ public class UsedTradeRestController {
 	// 게시글 수정
 	@PutMapping("/update")
 	public Map<String, String> usedTradeUpdate(@RequestParam("id") int id
-			, @RequestParam(value="title", required=false) String title
-			, @RequestParam(value="contents", required=false) String contents
+			, @RequestParam("title") String title
+			, @RequestParam("contents") String contents
 			, @RequestParam(value="inputFile", required=false) List<MultipartFile> files
-			, @RequestParam(value="place", required=false) String place
+			, @RequestParam("place") String place
 			, @RequestParam(value="addTradingPlace", required=false) String addTradingPlace
-			, @RequestParam(value="sellPrice", required=false) int sellPrice
+			, @RequestParam("sellPrice") int sellPrice
 			, HttpSession session)
 	{
 		Map<String, String> resultMap = new HashMap<>();

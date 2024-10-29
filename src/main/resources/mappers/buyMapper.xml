@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.goodsmarket.jh.buy.repository.BuyRepository">
+ 	<insert id="insertUsedTrade" parameterType="map">
+ 		INSERT INTO
+ 			`buy`
+ 		(
+ 			`usedTradeId`
+ 			, `userId`
+ 		)
+ 		VALUE
+ 		(
+ 			#{usedTradeId}
+ 			, #{userId} 		
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectAllBuy" resultType="com.goodsmarket.jh.buy.domain.Buy" parameterType="int">
+ 		SELECT
+ 			`id`
+ 			, `usedTradeId`
+ 			, `userId`
+ 			, `createdAt`
+ 		FROM
+ 			`buy`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</select>
+ </mapper>

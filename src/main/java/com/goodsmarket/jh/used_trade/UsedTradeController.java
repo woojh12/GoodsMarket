@@ -79,9 +79,9 @@ public class UsedTradeController {
 	public String search(@RequestParam("title") String title
 			, Model model)
 	{
-		List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTradeByTitle(title);
+		List<BoardDTO> boardList = usedTradeService.getAllUsedTradeByTitle(title);
 		
-		model.addAttribute("usedTradeList", usedTradeList);
+		model.addAttribute("usedTradeList", boardList);
 		
 		return "/usedTrade/search";
 	}
