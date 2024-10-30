@@ -16,5 +16,10 @@ public interface BuyRepository {
 	// 사용자가 구매한 전체 물품을 출력하는 Repository
 	public List<Buy> selectAllBuyByUserId(@Param("userId") int userId);
 	
+	// 물품 구매한 사용자 정보 확인 Repository
+	public Buy selectBuyByUsedTradeId(@Param("usedTradeId") int usedTradeId);
 	
+	// 구매 취소하는 Repository
+	public int deleteBuy(@Param("usedTradeId") int usedTradeId
+			, @Param("userId") int userId);
 }

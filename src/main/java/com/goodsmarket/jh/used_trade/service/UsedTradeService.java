@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.goodsmarket.jh.buy.domain.Buy;
+import com.goodsmarket.jh.buy.service.BuyService;
 import com.goodsmarket.jh.common.FileManager;
 import com.goodsmarket.jh.used_trade.domain.FileImage;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
@@ -20,13 +22,15 @@ public class UsedTradeService {
 	private UsedTradeRepository usedTradeRepository;
 	private FileImageRepository fileImageRepository;
 	private FileImageService fileImageService;
+	private BuyService buyService;
 	
 	@Autowired
-	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService)
+	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService, BuyService buyService)
 	{
 		this.usedTradeRepository = usedTradeRepository;
 		this.fileImageRepository = fileImageRepository;
 		this.fileImageService = fileImageService;
+		this.buyService = buyService;
 	}
 	
 	// 판매 작성글 저장 Service		---> 게시물 id(autoincrement) 값 가져오기 위해 useGeneratedKeys 사용해야함으로 파라미터 타입을 객체로 바꿔줘야함
@@ -164,6 +168,13 @@ public class UsedTradeService {
 		item.setViews(usedTrade.getViews());
 		item.setCreatedAt(usedTrade.getCreatedAt());
 		item.setUpdatedAt(usedTrade.getUpdatedAt());
+
+		Buy buy = buyService.getBuyByUsedTradeId(id);
+		
+		if(buy != null)
+		{
+			item.setBuyerId(buy.getUserId());			
+		}
 		
 		return item;
 	}

@@ -17,7 +17,7 @@
  		)
  	</insert>
  	
- 	<select id="selectAllBuy" resultType="com.goodsmarket.jh.buy.domain.Buy" parameterType="int">
+ 	<select id="selectAllBuyByUserId" resultType="com.goodsmarket.jh.buy.domain.Buy" parameterType="int">
  		SELECT
  			`id`
  			, `usedTradeId`
@@ -28,4 +28,25 @@
  		WHERE
  			`userId` = #{userId}
  	</select>
+ 	
+ 	<select id="selectBuyByUsedTradeId" resultType="com.goodsmarket.jh.buy.domain.Buy" parameterType="int">
+ 		SELECT
+ 			`id`
+ 			, `usedTradeId`
+ 			, `userId`
+ 			, `createdAt`
+ 		FROM
+ 			`buy`
+ 		WHERE
+ 			`usedTradeId` = #{usedTradeId}
+ 	</select>
+ 	
+ 	<delete id="deleteBuy" parameterType="map">
+ 		DELETE
+ 		
+ 		FROM
+ 			`buy`
+ 		WHERE 
+ 			`usedTradeId` = #{usedTradeId} AND `userId` = #{userId}
+ 	</delete>
  </mapper>

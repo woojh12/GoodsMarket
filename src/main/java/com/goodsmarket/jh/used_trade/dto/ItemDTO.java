@@ -8,6 +8,7 @@ import com.goodsmarket.jh.used_trade.domain.FileImage;
 public class ItemDTO {
 	private int id;
 	private int userId;
+	private int	buyerId;				// 구매한 사용자의 id 
 	private String title;
 	private String contents;
 	private String place;
@@ -30,6 +31,12 @@ public class ItemDTO {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public int getBuyerId() {
+		return buyerId;
+	}
+	public void setBuyerId(int buyerId) {
+		this.buyerId = buyerId;
 	}
 	public String getTitle() {
 		return title;

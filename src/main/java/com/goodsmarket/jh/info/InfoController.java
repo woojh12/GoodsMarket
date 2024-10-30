@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.goodsmarket.jh.favorite.service.FavoriteService;
 import com.goodsmarket.jh.info.service.InfoService;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
+import com.goodsmarket.jh.used_trade.dto.BoardDTO;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 import com.goodsmarket.jh.user.domain.User;
 import com.goodsmarket.jh.user.service.UserService;
@@ -66,9 +67,15 @@ public class InfoController {
 	{
 		int userId = (Integer)session.getAttribute("userId");
 	
-		List<UsedTrade> usedTradeList =  favoriteService.getUserShopingCartList(userId);
+		List<BoardDTO> usedTradeList =  favoriteService.getUserShopingCartList(userId);
 		
 		model.addAttribute("usedTradeList", usedTradeList);
 		return "/info/favorite";
+	}
+	
+	@GetMapping("/buy-view")
+	public String buyList(Model model, HttpSession session)
+	{
+		return "/info/buyList";
 	}
 }

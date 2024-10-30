@@ -83,7 +83,7 @@
 		<footer class="mt-3 d-flex align-items-end justify-content-between">
 			<button type="button" class="btn btn-secondary mt-3" id="backBtn">돌아가기</button>
 			<button th:if="${usedTrade.userId == session.userId}" type="button" class="btn btn-secondary mt-3" id="deleteBtn">삭제하기</button>
-			<button th:if="${usedTrade.userId != session.userId}" class="btn btn-secondary" id="buyBtn">구매신청</button>
+			<button th:if="${usedTrade.userId != session.userId}" class="btn btn-secondary" id="buyBtn" th:data-buy="${usedTrade.buyerId}" th:data-user-id="${session.userId}">구매신청</button>
 		</footer>
 	</div>
 	
@@ -118,6 +118,15 @@
 			$("#backBtn").on("click",function(){
 				location.href="/usedtrade/list-view";
 			});
+			
+			// 현재 접속한 사용자 세션 아이디
+			let userId = $("#buyBtn").data("user-id"); 
+			
+			// 구매 버튼을 누른 사용자의 id 조회
+			let buyerId = $("#buyBtn").data("buy");		
+			
+			// 구매 버튼이 클릭된 상태인지 확인하는 변수
+			let buyBtn = false;
 			
 			// 게시글 id 가져오기
 			let id = $("#postViews").data("post-id");
@@ -309,22 +318,19 @@
 			}
 			// 지도 기능 구현 끝 //
 			
+			// 클릭한 상세페이지의 구매자가 있으면 구매완료 버튼으로 변경
+			if(buyerId != 0)
+			{
+				$("#buyBtn").text("구매완료");
+				buyBtn = true;
+			}
+			
 			// 구매 신청 기능
 			$("#buyBtn").on("click",function(){
-				let buyBtn;
+			
 				
-				if(buyBtn)
-				{
-					$("#buyBtn").text("구매완료");
-					buyBtn = false;
-				}
-				else
-				{
-					$("#buyBtn").text("구매신청");
-					buyBtn = true;
-				}
-				
-				if(buyBtn)
+				// 구매 신청 및 취소 기능
+				if(!buyBtn && (buyerId == 0))	// 구매 버튼을 클릭하지 않고 구매 신청을 하지 않은 상태인경우
 				{
 					$.ajax({
 						type:"post"
@@ -334,7 +340,9 @@
 						{
 							if(data.result == "success")
 							{
-								alert("구매완료");
+								buyBtn = true;
+								$("#buyBtn").text("구매완료");
+								location.reload();
 							}
 							else
 							{
@@ -345,7 +353,32 @@
 						{
 							alert("구매 신청 오류발생");
 						}
-					});					
+					});
+				}
+				else if(buyBtn && (userId == buyerId))	// 구매 버튼을 클릭하고 구매 신청을 누른 사람인 경우
+				{
+					$.ajax({
+						type:"delete"
+						, url:"/buy/delete"
+						, data:{"usedTradeId": id}
+						, success:function(data)
+						{
+							if(data.result == "success")
+							{
+								buyBtn = false;
+								$("#buyBtn").text("구매신청")
+								location.reload();
+							}
+							else
+							{
+								alert("취소실패");
+							}
+						}
+						, error:function(data)
+						{
+							alert("구매 취소 오류발생");
+						}
+					});
 				}
 			});
 		});

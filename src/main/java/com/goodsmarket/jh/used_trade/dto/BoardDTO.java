@@ -2,6 +2,7 @@ package com.goodsmarket.jh.used_trade.dto;
 
 public class BoardDTO {
 	private int id;
+	private int buyerId;				// 물품 구매한 사용자 id
 	private String title;
 	private String contents;
 	private String place;
@@ -14,6 +15,12 @@ public class BoardDTO {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getBuyerId() {
+		return buyerId;
+	}
+	public void setBuyerId(int buyerId) {
+		this.buyerId = buyerId;
 	}
 	public String getTitle() {
 		return title;
