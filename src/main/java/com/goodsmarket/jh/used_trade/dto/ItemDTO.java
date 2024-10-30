@@ -3,7 +3,7 @@ package com.goodsmarket.jh.used_trade.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.goodsmarket.jh.used_trade.domain.FileImage;
+import com.goodsmarket.jh.used_trade.domain.Comment;
 
 public class ItemDTO {
 	private int id;
@@ -17,6 +17,8 @@ public class ItemDTO {
 	private int sellPrice;
 	private List<String> fileImage;
 	private int views;
+	private List<String> commentWriters;		// 댓글 작성자
+	private List<String> comments;		// 게시글의 댓글 내용
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	
@@ -85,6 +87,18 @@ public class ItemDTO {
 	}
 	public void setViews(int views) {
 		this.views = views;
+	}
+	public List<String> getCommentWriters() {
+		return commentWriters;
+	}
+	public void setCommentWriters(List<String> commentWriters) {
+		this.commentWriters = commentWriters;
+	}
+	public List<String> getComments() {
+		return comments;
+	}
+	public void setComments(List<String> comments) {
+		this.comments = comments;
 	}
 	public LocalDateTime getCreatedAt() {
 		return createdAt;

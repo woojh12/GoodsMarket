@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodsmarket.jh.favorite.service.FavoriteService;
-import com.goodsmarket.jh.used_trade.domain.FileImage;
-import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.dto.BoardDTO;
 import com.goodsmarket.jh.used_trade.dto.ItemDTO;
+import com.goodsmarket.jh.used_trade.service.CommentService;
 import com.goodsmarket.jh.used_trade.service.FileImageService;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 

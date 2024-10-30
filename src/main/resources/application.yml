@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/Market
     username: root
-    password: root
+    password: ${mysql.password}
   thymeleaf:
    cache: false
   mvc:
