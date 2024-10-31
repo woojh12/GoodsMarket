@@ -8,7 +8,8 @@ import com.goodsmarket.jh.used_trade.domain.Comment;
 public class ItemDTO {
 	private int id;
 	private int userId;
-	private int	buyerId;				// 구매한 사용자의 id 
+	private int	buyerId;				// 구매한 사용자의 id
+	private boolean isSell;				// 판매 된 물품인지 확인하는 변수
 	private String title;
 	private String contents;
 	private String place;
@@ -37,6 +38,12 @@ public class ItemDTO {
 	}
 	public void setBuyerId(int buyerId) {
 		this.buyerId = buyerId;
+	}
+	public boolean isSell() {
+		return isSell;
+	}
+	public void setSell(boolean isSell) {
+		this.isSell = isSell;
 	}
 	public String getTitle() {
 		return title;

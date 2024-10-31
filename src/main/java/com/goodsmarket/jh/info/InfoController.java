@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goodsmarket.jh.favorite.service.FavoriteService;
 import com.goodsmarket.jh.info.service.InfoService;
-import com.goodsmarket.jh.used_trade.domain.UsedTrade;
+import com.goodsmarket.jh.sell.domain.Sell;
+import com.goodsmarket.jh.sell.service.SellService;
 import com.goodsmarket.jh.used_trade.dto.BoardDTO;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 import com.goodsmarket.jh.user.domain.User;
@@ -25,15 +26,17 @@ public class InfoController {
 	private UsedTradeService usedTradeService;
 	private InfoService infoService;
 	private FavoriteService favoriteService;
+	private SellService sellService;
 	
 	@Autowired
 	public InfoController(UserService userService, UsedTradeService usedTradeService
-			, InfoService infoService, FavoriteService favoriteService)
+			, InfoService infoService, FavoriteService favoriteService, SellService sellService)
 	{
 		this.userService = userService;
 		this.usedTradeService = usedTradeService;
 		this.infoService = infoService;
 		this. favoriteService = favoriteService;
+		this.sellService = sellService;
 	}
 	
 	@GetMapping("/my-view")
@@ -77,5 +80,17 @@ public class InfoController {
 	public String buyList(Model model, HttpSession session)
 	{
 		return "/info/buyList";
+	}
+	
+	@GetMapping("/sell-view")
+	public String sellList(Model model, HttpSession session)
+	{
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<BoardDTO> usedTradeList = sellService.getAllSellByUserId(userId);
+		
+		model.addAttribute("usedTradeList", usedTradeList);
+		
+		return "/info/sellList";
 	}
 }

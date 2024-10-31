@@ -10,12 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.goodsmarket.jh.buy.domain.Buy;
 import com.goodsmarket.jh.buy.service.BuyService;
 import com.goodsmarket.jh.common.FileManager;
-import com.goodsmarket.jh.used_trade.domain.Comment;
+import com.goodsmarket.jh.sell.domain.Sell;
+import com.goodsmarket.jh.sell.service.SellService;
 import com.goodsmarket.jh.used_trade.domain.FileImage;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.dto.BoardDTO;
 import com.goodsmarket.jh.used_trade.dto.ItemDTO;
-import com.goodsmarket.jh.used_trade.repository.CommentRepository;
 import com.goodsmarket.jh.used_trade.repository.FileImageRepository;
 import com.goodsmarket.jh.used_trade.repository.UsedTradeRepository;
 
@@ -25,14 +25,16 @@ public class UsedTradeService {
 	private FileImageRepository fileImageRepository;
 	private FileImageService fileImageService;
 	private BuyService buyService;
+	private SellService sellService;
 	
 	@Autowired
-	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService, BuyService buyService)
+	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService, BuyService buyService, SellService sellService)
 	{
 		this.usedTradeRepository = usedTradeRepository;
 		this.fileImageRepository = fileImageRepository;
 		this.fileImageService = fileImageService;
 		this.buyService = buyService;
+		this.sellService = sellService;
 	}
 	
 	// 판매 작성글 저장 Service		---> 게시물 id(autoincrement) 값 가져오기 위해 useGeneratedKeys 사용해야함으로 파라미터 타입을 객체로 바꿔줘야함
@@ -171,11 +173,24 @@ public class UsedTradeService {
 		item.setCreatedAt(usedTrade.getCreatedAt());
 		item.setUpdatedAt(usedTrade.getUpdatedAt());
 	
+		// 구매한 사용자 정보를 저장하는 부분
 		Buy buy = buyService.getBuyByUsedTradeId(id);
 		
 		if(buy != null)
 		{
 			item.setBuyerId(buy.getUserId());			
+		}
+		
+		// 판매된 물품인지 확인하는 부분
+		Sell sell = sellService.getSell(id);
+		
+		if(sell != null)
+		{
+			item.setSell(true);
+		}
+		else
+		{
+			item.setSell(false);
 		}
 		
 		return item;
@@ -242,9 +257,7 @@ public class UsedTradeService {
 	
 	// 게시글 수정 Service
 	public int changeUsedTrade(int id, int userId, String title, String contents, List<MultipartFile> files, String place, String addTradingPlace, int sellPrice)
-	{
-		int check = 0;
-		
+	{	
 		// 변경된 파일이 있는 경우
 		if(files != null)
 		{
@@ -269,7 +282,6 @@ public class UsedTradeService {
 					String imagePath = FileManager.saveFile(userId, files.get(i));
 					fileImageRepository.insertFileImage(id, userId, imagePath);
 				}
-				check =  1;
 			}
 		}
 		else	// 변경된 파일이 없는 경우
@@ -285,8 +297,6 @@ public class UsedTradeService {
 					FileManager.removeFile(deleteImagePath);
 				}			
 				fileImageRepository.deleteFileImageByUsedTradeId(id);
-				
-				check = 1;
 			}
 		}
 		
