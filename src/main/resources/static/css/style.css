@@ -398,6 +398,12 @@ header > #user-field
 	height : 50px;	
 }
 
+#wrap > section > #commentsArea > #deleteCommentArea > .commentDeleteBtn
+{
+	width : 25px;
+	height : 25px;
+}
+
 #wrap > section > #showContent
 {
 	height : 100px;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodsmarket.jh.favorite.service.FavoriteService;
+import com.goodsmarket.jh.used_trade.domain.Comment;
 import com.goodsmarket.jh.used_trade.dto.BoardDTO;
 import com.goodsmarket.jh.used_trade.dto.ItemDTO;
 import com.goodsmarket.jh.used_trade.service.CommentService;
@@ -21,12 +22,14 @@ public class UsedTradeController {
 	private UsedTradeService usedTradeService;
 	private FavoriteService favoriteService;
 	private FileImageService fileImageService;
+	private CommentService commentService;
 	
-	public UsedTradeController(UsedTradeService usedTradeService, FavoriteService favoriteService, FileImageService fileImageService)
+	public UsedTradeController(UsedTradeService usedTradeService, FavoriteService favoriteService, FileImageService fileImageService, CommentService commentService)
 	{
 		this.usedTradeService = usedTradeService;
 		this.favoriteService =  favoriteService;
 		this.fileImageService = fileImageService;
+		this.commentService = commentService;
 	}
 	
 	@GetMapping("/list-view")
@@ -53,13 +56,14 @@ public class UsedTradeController {
 		
 		model.addAttribute("usedTrade", usedTrade);
 		
-		// 장바구니 버튼 누른 사용자 수 조회
-		//List<UsedTrade> usedTradeList = usedTradeService.getAllUsedTrade();
-		
-		// 선택한 게시글의 찜 수 조회
+		// 선택한 게시글의 즐겨찾기 수 조회
 		int shoppingCartCount =  favoriteService.getAllShoppingCartCount(id);
 		
 		model.addAttribute("shoppingCartCount", shoppingCartCount);
+		
+		List<Comment> commentsList = commentService.getAllCommentsByUsedTradeId(id);
+		
+		model.addAttribute("commentsList", commentsList);
 		
 		return "usedtrade/detail";
 	}

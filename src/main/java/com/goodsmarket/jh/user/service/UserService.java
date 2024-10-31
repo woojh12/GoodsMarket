@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.goodsmarket.jh.common.MD5HashingEncoder;
 import com.goodsmarket.jh.favorite.service.FavoriteService;
+import com.goodsmarket.jh.used_trade.service.CommentService;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 import com.goodsmarket.jh.user.domain.User;
 import com.goodsmarket.jh.user.repository.UserRepository;
@@ -14,13 +15,15 @@ public class UserService {
 	private UserRepository userRepository;
 	private UsedTradeService usedTradeService;
 	private FavoriteService favoriteService;
+	private CommentService commentService;
 	
 	@Autowired
-	public UserService(UserRepository userRepository, UsedTradeService usedTradeService ,FavoriteService favoriteService)
+	public UserService(UserRepository userRepository, UsedTradeService usedTradeService ,FavoriteService favoriteService, CommentService commentService)
 	{
 		this.userRepository = userRepository;
 		this.usedTradeService = usedTradeService;
 		this.favoriteService = favoriteService;
+		this.commentService = commentService;
 	}
 	
 	public int addUser(String loginId, String password, String name, String phone, String email, String nickName)
@@ -56,6 +59,7 @@ public class UserService {
 	{
 		favoriteService.removeAllShoppingCart(id);
 		usedTradeService.removeAllUsedTrade(id);
+		commentService.removeAllCommentsByUserId(id);
 		
 		return userRepository.deleteUser(id);
 	}

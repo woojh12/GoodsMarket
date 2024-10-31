@@ -24,13 +24,11 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/usedtrade")
 public class UsedTradeRestController {
 	private UsedTradeService usedTradeService;
-	private CommentService commentService;
 	
 	@Autowired
-	public UsedTradeRestController(UsedTradeService usedTradeService, CommentService commentService)
+	public UsedTradeRestController(UsedTradeService usedTradeService)
 	{
 		this.usedTradeService = usedTradeService;
-		this.commentService = commentService;
 	}
 	
 	// 판매 작성글 API
@@ -112,30 +110,6 @@ public class UsedTradeRestController {
 		int userId = (Integer)session.getAttribute("userId");
 		
 		int count = usedTradeService.changeUsedTrade(id, userId, title, contents, files, place, addTradingPlace, sellPrice);
-		
-		if(count == 1)
-		{
-			resultMap.put("result", "success");
-		}
-		else
-		{
-			resultMap.put("result", "fail");
-		}
-		
-		return resultMap;
-	}
-	
-	// 댓글 추가 API
-	@PostMapping("/add/comment")
-	public Map<String, String> commentAdd(@RequestParam("usedTradeId") int usedTradeId
-			, @RequestParam("contents") String contents
-			, HttpSession session)
-	{
-		Map<String, String> resultMap = new HashMap<>();
-		
-		int userId = (Integer)session.getAttribute("userId");
-		String userName = (String) session.getAttribute("userName");
-		int count = commentService.addComment(usedTradeId, userId, userName, contents);
 		
 		if(count == 1)
 		{

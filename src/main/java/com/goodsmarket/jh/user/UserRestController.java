@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.goodsmarket.jh.favorite.service.FavoriteService;
+import com.goodsmarket.jh.used_trade.service.CommentService;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
 import com.goodsmarket.jh.user.domain.User;
 import com.goodsmarket.jh.user.service.UserService;

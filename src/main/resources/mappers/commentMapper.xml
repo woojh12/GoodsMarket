@@ -34,4 +34,22 @@
  		WHERE
  			`usedTradeId` = #{usedTradeId}	
  	</select>
+ 	
+ 	<delete id="deleteCommentById" parameterType="int">
+ 		DELETE
+ 		
+ 		FROM
+ 			`comment`
+ 		WHERE
+ 			`id` = #{id};
+ 	</delete>
+ 	
+ 	<delete id="deleteAllCommentsByUserId" parameterType="int">
+ 		DELETE
+ 		
+ 		FROM
+ 			`comment`
+ 		WHERE
+ 			`userId` = #{userId};
+ 	</delete>
  </mapper>

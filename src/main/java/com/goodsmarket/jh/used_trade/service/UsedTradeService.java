@@ -23,16 +23,14 @@ import com.goodsmarket.jh.used_trade.repository.UsedTradeRepository;
 public class UsedTradeService {
 	private UsedTradeRepository usedTradeRepository;
 	private FileImageRepository fileImageRepository;
-	private CommentRepository commentRepository;
 	private FileImageService fileImageService;
 	private BuyService buyService;
 	
 	@Autowired
-	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, CommentRepository commentRepository, FileImageService fileImageService, BuyService buyService)
+	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService, BuyService buyService)
 	{
 		this.usedTradeRepository = usedTradeRepository;
 		this.fileImageRepository = fileImageRepository;
-		this.commentRepository = commentRepository;
 		this.fileImageService = fileImageService;
 		this.buyService = buyService;
 	}
@@ -140,26 +138,6 @@ public class UsedTradeService {
 	{
 		UsedTrade usedTrade = usedTradeRepository.selectUsedTrade(id);
 		
-		// 게시글 별로 모든 댓글을 불러오기
-		List<Comment> commentList = commentRepository.selectAllCommentsByUsedTradeId(id);
-		List<String> commentWriters = new ArrayList<>();	// 댓글을 작성한 사용자 이름
-		List<String> comments = new ArrayList<>();		// 댓글을 담는 변수
-		
-		if(!commentList.isEmpty())
-		{
-			for(int i = 0; i < commentList.size(); i++)
-			{
-				String commentWriter = commentList.get(i).getNickName();
-				String comment = commentList.get(i).getContents();
-				commentWriters.add(commentWriter);
-				comments.add(comment);
-			}
-		}
-		else
-		{
-			comments.add(null);
-		}
-		
 		List<FileImage> fileImage = fileImageService.getFileImages(id);
 		List<String> imageList = new ArrayList<>();
 		
@@ -192,9 +170,7 @@ public class UsedTradeService {
 		item.setViews(usedTrade.getViews());
 		item.setCreatedAt(usedTrade.getCreatedAt());
 		item.setUpdatedAt(usedTrade.getUpdatedAt());
-		item.setCommentWriters(commentWriters);
-		item.setComments(comments);
-		
+	
 		Buy buy = buyService.getBuyByUsedTradeId(id);
 		
 		if(buy != null)
@@ -267,6 +243,8 @@ public class UsedTradeService {
 	// 게시글 수정 Service
 	public int changeUsedTrade(int id, int userId, String title, String contents, List<MultipartFile> files, String place, String addTradingPlace, int sellPrice)
 	{
+		int check = 0;
+		
 		// 변경된 파일이 있는 경우
 		if(files != null)
 		{
@@ -290,12 +268,29 @@ public class UsedTradeService {
 				{
 					String imagePath = FileManager.saveFile(userId, files.get(i));
 					fileImageRepository.insertFileImage(id, userId, imagePath);
-				}			
+				}
+				check =  1;
 			}
-			return 1;		
+		}
+		else	// 변경된 파일이 없는 경우
+		{
+			// 변경되기 전의 이미지 파일 삭제 
+			List<FileImage> deleteImagePathList = fileImageRepository.selectAllFileImage(id);
+						
+			if(deleteImagePathList != null)
+			{
+				for(int i = 0; i < deleteImagePathList.size(); i++)
+				{
+					String deleteImagePath = deleteImagePathList.get(i).getImagePath();
+					FileManager.removeFile(deleteImagePath);
+				}			
+				fileImageRepository.deleteFileImageByUsedTradeId(id);
+				
+				check = 1;
+			}
 		}
 		
-		return usedTradeRepository.updateUsedTrade(userId, title, contents, addTradingPlace, addTradingPlace, sellPrice);
+		return usedTradeRepository.updateUsedTrade(userId, title, contents, place, addTradingPlace, sellPrice);
 	}
 	
 	// 게시글 리스트의 각 id값 반환 Service

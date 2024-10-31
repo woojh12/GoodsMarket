@@ -17,4 +17,10 @@ public interface CommentRepository {
 	
 	// 게시글 별로 댓글 출력하는 Repository
 	public List<Comment> selectAllCommentsByUsedTradeId(@Param("usedTradeId") int usedTradeId);
+	
+	// 작성한 댓글 삭제 Repository
+	public int deleteCommentById(@Param("id") int id);
+	
+	// 사용자가 작성한 모든 댓글 삭제 Repository
+	public int deleteAllCommentsByUserId(@Param("userId") int userId);
 }
