@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.goodsmarket.jh.sell.domain.Sell;
 import com.goodsmarket.jh.sell.repository.SellRepository;
+import com.goodsmarket.jh.used_trade.domain.FileImage;
 import com.goodsmarket.jh.used_trade.domain.UsedTrade;
 import com.goodsmarket.jh.used_trade.dto.BoardDTO;
 import com.goodsmarket.jh.used_trade.repository.FileImageRepository;
@@ -48,42 +49,37 @@ public class SellService {
 		// 전체 화면에서 보여지는 데이터 담기
 		List<BoardDTO> boardList = new ArrayList<>();
 		
-		List<Integer> postIdList = new ArrayList<>();
-		
+		// 각 게시물의 정보를 저장하는 부분
 		for(int i = 0; i < sellList.size(); i++)
 		{
-			Integer postId = sellList.get(i).getUsedTradeId();
+			// 판매한 게시물의 id 가져오기
+			UsedTrade usedTrade = usedTradeRepository.selectUsedTrade(sellList.get(i).getUsedTradeId());
 			
-			postIdList.add(postId);
-		}
-		
-		// 각 게시물의 정보를 저장하는 부분
-		for(int i = 0; i < postIdList.size(); i++)
-		{
-			UsedTrade usedTrade = usedTradeRepository.selectUsedTrade(i);
+			BoardDTO board = new BoardDTO(); 
 			
-			boardList.get(i).setId(postIdList.get(i));
-			boardList.get(i).setTitle(usedTrade.getTitle());
-			boardList.get(i).setPlace(usedTrade.getPlace());
-			boardList.get(i).setAddTradingPlace(usedTrade.getAddTradingPlace());
-			boardList.get(i).setSellerName(usedTrade.getSellerName());
-		}
-		
-		// 각 게시물의 첫번째 이미지를 저장하는 부분
-		for(int i = 0; i < postIdList.size(); i++)
-		{
-			String imagePath = fileImageRepository.selectAllFileImage(i).get(0).getImagePath();
+			board.setId(usedTrade.getId());
+			board.setTitle(usedTrade.getTitle());
+			board.setPlace(usedTrade.getPlace());
+			board.setAddTradingPlace(usedTrade.getAddTradingPlace());
+			board.setSellerName(usedTrade.getSellerName());
 			
-			if(imagePath != null)
+			// 게시글 id로 파일 이미지 리스트를 추출하는 부분
+			List<FileImage> fileImageList = fileImageRepository.selectAllFileImage(usedTrade.getId());
+			
+			// 각 게시물의 첫번째 이미지를 저장하는 부분
+			if(!fileImageList.isEmpty())
 			{
-				boardList.get(i).setImagePath(imagePath);
+				String imagePath = fileImageList.get(0).getImagePath();
+				board.setImagePath(imagePath);
 			}
 			else
 			{
-				boardList.get(i).setImagePath(null);
+				board.setImagePath(null);				
 			}
+					
+			boardList.add(board);
 		}
-		
+			
 		return boardList;
 	}
 }

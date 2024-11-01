@@ -328,6 +328,7 @@
     			formData.append("place", place);
 			}
 			
+			alert("id : " + id + " title : " + title + " contents : " + contents + " place : " + place + " sellPrice : " + sellPrice);
 			$.ajax({
 				type:"put"
 				, url:"/usedtrade/update"
@@ -343,12 +344,12 @@
 					}
 					else
 					{
-						alert("수정실패");
+						alert("수정 실패");
 					}
 				}
 				, error:function()
 				{
-					alert("수정 오류 발생");
+					alert("작성 오류 발생");
 				}
 			});
 		});

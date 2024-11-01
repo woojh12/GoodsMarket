@@ -111,7 +111,7 @@ public class UsedTradeRestController {
 		
 		int count = usedTradeService.changeUsedTrade(id, userId, title, contents, files, place, addTradingPlace, sellPrice);
 		
-		if(count == 1)
+		if(count == 1 || count == 0)
 		{
 			resultMap.put("result", "success");
 		}
