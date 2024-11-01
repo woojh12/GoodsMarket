@@ -10,7 +10,9 @@
 <body>
 	<div id="wrap">
 		<th:block th:replace="~{fragments/header :: header}"></th:block>
-		<div id="articleBanner" class="mt-2"></div>
+		<div id="articleBannerArea" class="mt-2">
+			<img id="articleBanner" src="https://cdn.pixabay.com/photo/2018/08/08/16/17/potatoes-3592527_640.jpg">
+		</div>
 		<div id="allGoodsTitle" class="mt-2 d-flex">
 			<div id="noneUseAllGoodsTitle1"></div>
 			<div id="useAllGoodsTitle" class="d-flex align-items-center justify-content-center">
@@ -67,6 +69,23 @@
 					$("#subMenu").hide();
 				}
 			})
+			
+			// 배너 기능 시작 //
+			let article = [];		// 배너에 담길 이미지 주소
+			article[0] = "https://cdn.pixabay.com/photo/2018/08/08/16/17/potatoes-3592527_640.jpg";
+			article[1] = "https://cdn.pixabay.com/photo/2017/10/11/10/18/books-2840585_640.jpg";
+			article[2] = "https://cdn.pixabay.com/photo/2018/10/28/18/18/used-clothing-3779483_640.jpg";
+			
+			let roll = 0;
+			setInterval(function(){
+				roll++;
+				if(roll > 3)
+				{
+					roll = 0;
+				}
+				$("#articleBanner").attr("src", article[roll]);	
+			}, 1000);
+			// 배너 기능 끝 //
 			
 			// 판매글 작성 이동 버튼
 			$("#createBtn").on("click", function(){

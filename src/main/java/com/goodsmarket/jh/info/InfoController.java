@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.goodsmarket.jh.buy.service.BuyService;
 import com.goodsmarket.jh.favorite.service.FavoriteService;
 import com.goodsmarket.jh.info.service.InfoService;
-import com.goodsmarket.jh.sell.domain.Sell;
 import com.goodsmarket.jh.sell.service.SellService;
 import com.goodsmarket.jh.used_trade.dto.BoardDTO;
 import com.goodsmarket.jh.used_trade.service.UsedTradeService;
@@ -27,16 +27,18 @@ public class InfoController {
 	private InfoService infoService;
 	private FavoriteService favoriteService;
 	private SellService sellService;
+	private BuyService buyService;
 	
 	@Autowired
-	public InfoController(UserService userService, UsedTradeService usedTradeService
-			, InfoService infoService, FavoriteService favoriteService, SellService sellService)
+	public InfoController(UserService userService, UsedTradeService usedTradeService, InfoService infoService
+			, FavoriteService favoriteService, SellService sellService, BuyService buyService)
 	{
 		this.userService = userService;
 		this.usedTradeService = usedTradeService;
 		this.infoService = infoService;
 		this. favoriteService = favoriteService;
 		this.sellService = sellService;
+		this.buyService = buyService;
 	}
 	
 	@GetMapping("/my-view")
@@ -59,8 +61,14 @@ public class InfoController {
 	}
 	
 	@GetMapping("/postList-view")
-	public String infoPostList()
+	public String infoPostList(HttpSession session, Model model)
 	{
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<BoardDTO> usedTradeList = usedTradeService.getUsedTradeByUserId(userId);
+		
+		model.addAttribute("usedTradeList", usedTradeList);
+		
 		return "/info/postList";
 	}
 	
@@ -79,6 +87,12 @@ public class InfoController {
 	@GetMapping("/buy-view")
 	public String buyList(Model model, HttpSession session)
 	{
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<BoardDTO> usedTradeList = buyService.getAllBuyByUserId(userId);
+		
+		model.addAttribute("usedTradeList", usedTradeList);
+		
 		return "/info/buyList";
 	}
 	

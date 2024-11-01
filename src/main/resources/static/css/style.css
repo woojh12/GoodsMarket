@@ -224,10 +224,16 @@ header > #user-field
 
 /* goodsList.html */
 
-#wrap > #articleBanner
+#wrap > #articleBannerArea
 {
 	height : 250px;
 	background-color : #c0c0c0;
+}
+
+#wrap > #articleBannerArea > #articleBanner
+{
+	width : 1200px;
+	height : 250px;
 }
 
 #wrap > #allGoodsTitle

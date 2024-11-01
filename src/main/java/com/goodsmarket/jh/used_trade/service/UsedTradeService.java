@@ -212,9 +212,49 @@ public class UsedTradeService {
 	}
 	
 	// 사용자가 작성한 게시글 정보 조회 Service
-	public List<UsedTrade> getUsedTradeByUserId(int userId)
+	public List<BoardDTO> getUsedTradeByUserId(int userId)
 	{
-		return usedTradeRepository.selectUsedTradeByUserId(userId);
+		// 사용자가 작성한 게시글 리스트 불러오기
+		List<UsedTrade> usedTradeList = usedTradeRepository.selectUsedTradeByUserId(userId);
+		
+		// 게시글 정보를 담는 board 리스트 생성
+		List<BoardDTO> boardList = new ArrayList<>();
+		
+		// 게시글 정보들을 boardList에 담는 과정
+		for(int i = 0; i < usedTradeList.size(); i++)
+		{
+			// 게시글 id로 게시물에 저장된 이미지 불러오기
+			List<FileImage> fileImageList = fileImageRepository.selectAllFileImage(usedTradeList.get(i).getId()); 
+						
+			BoardDTO board = new BoardDTO();
+			
+			int id = usedTradeList.get(i).getId();
+			String title = usedTradeList.get(i).getTitle();
+			String place = usedTradeList.get(i).getPlace();
+			String addTradingPlace = usedTradeList.get(i).getAddTradingPlace();
+			String sellerName = usedTradeList.get(i).getSellerName();
+			
+			board.setId(id);
+			board.setTitle(title);
+			board.setPlace(place);
+			board.setAddTradingPlace(addTradingPlace);
+			board.setSellerName(sellerName);
+			
+			// 이미지가 있는 경우면
+			if(!fileImageList.isEmpty())
+			{
+				String imagePath = fileImageList.get(0).getImagePath();
+							board.setImagePath(imagePath);
+			}
+			else
+			{
+				board.setImagePath(null);
+			}
+						
+			boardList.add(board);
+		}
+		
+		return boardList;
 	}
 	
 	// 사용자가 작성한 모든 게시글 삭제 Service

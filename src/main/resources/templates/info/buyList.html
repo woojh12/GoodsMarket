@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<section class="mt-2" th:each="usedTrade:${usedTradeList}">
-			<a th:href="@{/usedtrade/show-view(id=${usedTrade.id})}">
+			<a th:href="@{/usedtrade/detail-view(id=${usedTrade.id})}">
 				<span class="sellList d-flex">
 					<span class="goodsPictureArea d-flex align-items-center justify-content-center">
 						<img class="goodsPictureSize" th:unless="${usedTrade.imagePath == null}" th:src="@{${usedTrade.imagePath}}">
@@ -25,7 +25,7 @@
 					</span>
 					<span class="sellListInfoArea">
 						<span class="mt-2 sellListInfoTitle d-flex align-items-center text-dark font-weight-bold" th:text="'제목 : ' + ${usedTrade.title}">고양이 관람표</span>
-						<span class="mt-1 sellListInfoPlace d-flex align-items-center text-dark" th:text="'거래장소 : ' + ${usedTrade.location}">서울시</span>
+						<span class="mt-1 sellListInfoPlace d-flex align-items-center text-dark" th:text="'거래장소 : ' + ${usedTrade.place}">서울시</span>
 						<span class="mt-1 sellListInfoUser d-flex align-items-center text-dark" th:text="'작성자 : ' + ${usedTrade.sellerName}">작성자 : 홍길동</span>
 						<div class="mt-1 mr-5 sellListInfoOthers d-flex align-items-center justify-content-end text-dark">찜 : 10</div>
 					</span>

@@ -18,7 +18,8 @@
 			<div id="useUserinfo">
 				<div id="myinfoArea" class="bg-light mt-2 d-flex">
 					<div id="myinfoProfileArea">
-						<img th:src="@{${user.imagePath}}" id="myinfoProfileImage">
+						<img th:if="${user.imagePath != null}" th:src="@{${user.imagePath}}" id="myinfoProfileImage">
+						<img th:if="${user.imagePath == null}" src="https://cdn-icons-png.flaticon.com/128/847/847969.png">
 					</div>
 					<div id="myinfoTextArea" class="ml-2 bg-primary">
 						<div id="myinfoUserName" class="d-flex align-items-center">
@@ -41,7 +42,7 @@
 						</a>
 					</div>
 					<div id="myinfoBuy">
-						<a href="#">
+						<a href="/info/buy-view">
 							<h3 class="text-dark mt-4">구매한 물품 확인</h3>
 						</a>
 					</div>
@@ -52,7 +53,7 @@
 					</div>
 				</div>
 				<div id="myinfoPost" class="bg-light mt-2 d-flex align-items-center">
-					<a href="#">
+					<a href="/info/postList-view">
 						<h3 class="text-dark">작성한 게시글 확인</h3>
 					</a>
 				</div>
