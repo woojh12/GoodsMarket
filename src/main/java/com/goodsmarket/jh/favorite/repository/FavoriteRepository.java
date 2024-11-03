@@ -24,6 +24,6 @@ public interface FavoriteRepository {
 	
 	public int countAllShoppingCart(@Param("usedTradeId") int usedTradeId);
 	
-	// 장바구니에 담긴 게시글 정보 가져오기 repository
+	// 즐겨찾기에 담긴 게시글 정보 가져오기 repository
 	public int[] selectUserShopingCartList(@Param("userId") int userId);
 }

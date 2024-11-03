@@ -40,4 +40,13 @@
  		WHERE
  			`userId` = #{userId}
  	</select>
+ 	
+ 	<select id="countAllByUserId" parameterType="int">
+ 		SELECT
+ 			count(*)
+ 		FROM
+ 			`sell`
+ 		WHERE 
+ 			`userId` = #{userId}
+ 	</select>
  </mapper>

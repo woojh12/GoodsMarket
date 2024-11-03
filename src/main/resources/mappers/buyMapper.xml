@@ -49,4 +49,13 @@
  		WHERE 
  			`usedTradeId` = #{usedTradeId} AND `userId` = #{userId}
  	</delete>
+ 	
+ 	<select id="countAllByUserId" parameterType="int">
+ 		SELECT
+ 			count(*)
+ 		FROM
+ 			`buy`
+ 		WHERE 
+ 			`userId` = #{userId}
+ 	</select>
  </mapper>

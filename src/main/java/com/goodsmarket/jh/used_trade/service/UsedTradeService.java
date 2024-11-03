@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.goodsmarket.jh.buy.domain.Buy;
 import com.goodsmarket.jh.buy.service.BuyService;
 import com.goodsmarket.jh.common.FileManager;
+import com.goodsmarket.jh.favorite.service.FavoriteService;
 import com.goodsmarket.jh.sell.domain.Sell;
 import com.goodsmarket.jh.sell.service.SellService;
 import com.goodsmarket.jh.used_trade.domain.FileImage;
@@ -26,15 +27,17 @@ public class UsedTradeService {
 	private FileImageService fileImageService;
 	private BuyService buyService;
 	private SellService sellService;
+	private FavoriteService favoriteService;
 	
 	@Autowired
-	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService, BuyService buyService, SellService sellService)
+	public UsedTradeService(UsedTradeRepository usedTradeRepository, FileImageRepository fileImageRepository, FileImageService fileImageService, BuyService buyService, SellService sellService, FavoriteService favoriteService)
 	{
 		this.usedTradeRepository = usedTradeRepository;
 		this.fileImageRepository = fileImageRepository;
 		this.fileImageService = fileImageService;
 		this.buyService = buyService;
 		this.sellService = sellService;
+		this.favoriteService = favoriteService;
 	}
 	
 	// 판매 작성글 저장 Service		---> 게시물 id(autoincrement) 값 가져오기 위해 useGeneratedKeys 사용해야함으로 파라미터 타입을 객체로 바꿔줘야함
@@ -65,6 +68,8 @@ public class UsedTradeService {
 		// 각 게시글의 첫번째 파일 가져오기
 		for(int i = 0; i < usedTradeList.size(); i++)
 		{
+			int favoriteCount = favoriteService.getAllShoppingCartCount(usedTradeList.get(i).getId());
+			
 			BoardDTO boardDTO = new BoardDTO();
 			
 			int id = usedTradeList.get(i).getId();
@@ -80,7 +85,7 @@ public class UsedTradeService {
 			boardDTO.setPlace(place);
 			boardDTO.setAddTradingPlace(addTradingPlace);
 			boardDTO.setSellerName(sellerName);
-			
+			boardDTO.setFavoriteCount(favoriteCount);
 			
 			// 이미지가 담긴 게시글이라면
 			if(!fileImageService.getFileImages(id).isEmpty())
@@ -357,5 +362,11 @@ public class UsedTradeService {
 		}
 		
 		return id;
+	}
+	
+	// 자신이 작성한 게시글을 제외한 모든 게시글의 수를 조회하는 Service
+	public int getCountAllByUserId(int userId)
+	{
+		return usedTradeRepository.CountAllByUserId(userId);
 	}
 }

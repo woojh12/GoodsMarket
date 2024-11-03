@@ -16,46 +16,62 @@
 		<div id="userinfo" class="mt-1 d-flex">
 			<div id="noneUserinfo1"></div>
 			<div id="useUserinfo">
-				<div id="myinfoArea" class="bg-light mt-2 d-flex">
+				<div id="myinfoArea" class="mt-2 d-flex">
 					<div id="myinfoProfileArea">
-						<img th:if="${user.imagePath != null}" th:src="@{${user.imagePath}}" id="myinfoProfileImage">
-						<img th:if="${user.imagePath == null}" src="https://cdn-icons-png.flaticon.com/128/847/847969.png">
-					</div>
-					<div id="myinfoTextArea" class="ml-2 bg-primary">
-						<div id="myinfoUserName" class="d-flex align-items-center">
-							<h2 th:text="${session.userName}" class="ml-3">홍길동</h2>
+						<div id="profileTextArea" class="d-flex align-items-center justify-content-center mt-3">
+							<h5>프로필 이미지</h5>
 						</div>
-						<div id="myinfoUserScore" class="d-flex align-items-center">
-							<h2 class="ml-3">마일리지</h2>
+						<div id="profileImageArea" class="d-flex align-items-center justify-content-center mt-1">
+							<img th:if="${user.imagePath != null}" th:src="@{${user.imagePath}}" id="myinfoProfileImage">
+							<img th:if="${user.imagePath == null}" src="https://cdn-icons-png.flaticon.com/128/847/847969.png" id="myinfoProfileImage">						
 						</div>
 					</div>
-				</div>
-				<div id="myinfoUpdateArea" class="bg-light mt-2 d-flex align-items-center">
-					<a href="/info/update-view">
-						<h3 class="text-dark">내 정보 수정하기</h3>
-					</a>
-				</div>
-				<div id="myinfoEtcArea" class="bg-light mt-3">
-					<div id="myinfoWish">
-						<a href="/info/favorite-view">
-							<h3 class="text-dark">즐겨찾기 바로가기</h3>
-						</a>
+					<div id="myinfoEtcArea" class="ml-2 d-flex align-items-center">
+						<div id="myinfoUpdateArea">
+							<label>내 정보 수정</label>
+							<a href="/info/update-view">
+								<img src="https://cdn-icons-png.flaticon.com/128/10994/10994565.png" id="myinfoUpdate">
+							</a>
+						</div>
+						<div id="myinfoWishArea" class="ml-5">
+							<label>즐겨찾기</label>
+							<a href="/info/favorite-view">
+								<img src="https://cdn-icons-png.flaticon.com/128/15455/15455442.png" id="myinfoWish">
+							</a>
+						</div>
+						<div id="myinfoBuyArea" class="ml-5">
+							<label>구매 내역</label>
+							<a href="/info/buy-view">
+								<img src="https://cdn-icons-png.flaticon.com/128/1849/1849033.png" id="myinfoBuy">
+							</a>
+						</div>
+						<div id="myinfoSellArea" class="ml-5">
+							<label>판매 내역</label>
+							<a href="/info/sell-view">
+								<img src="https://cdn-icons-png.flaticon.com/128/4470/4470773.png" id="myinfoSell">
+							</a>
+						</div>
+						<div id="myinfoPostArea" class="ml-5">
+							<label>게시글 확인</label>
+							<a href="/info/postList-view">
+								<img src="https://cdn-icons-png.flaticon.com/128/570/570171.png" id="myinfoPost">
+							</a>
+						</div>
 					</div>
-					<div id="myinfoBuy">
-						<a href="/info/buy-view">
-							<h3 class="text-dark mt-4">구매한 물품 확인</h3>
-						</a>
-					</div>
-					<div id="myinfoSell">
-						<a href="/info/sell-view">
-							<h3 class="text-dark mt-4">판매한 물품 확인</h3>
-						</a>
-					</div>
 				</div>
-				<div id="myinfoPost" class="bg-light mt-2 d-flex align-items-center">
-					<a href="/info/postList-view">
-						<h3 class="text-dark">작성한 게시글 확인</h3>
-					</a>
+				<div id="chartsArea" class="bg-light d-flex" th:data-post-count="${postCount}">
+					<div id="buyChartArea">
+						<div id="buyChartTitleArea" class="d-flex items-align-center justify-content-center">
+							<h3>구매한 물품</h3>
+						</div>
+						<div id="buyChart" class="gauge" th:data-buy-count="${buyCount}"></div>
+					</div>
+					<div id="sellChartArea">
+						<div id="sellChartTitleArea" class="d-flex items-align-center justify-content-center">
+							<h3>판매한 물품</h3>
+						</div>
+						<div id="sellChart" class="mt-2 gauge" th:data-sell-count="${sellCount}"></div>
+					</div>
 				</div>
 			</div>
 			<div id="noneUserinfo2"></div>
@@ -69,6 +85,8 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.2/justgage.js"></script>
 	
 	<script>
 		$(document).ready(function(){
@@ -94,6 +112,44 @@
 			$("#backBtn").on("click", function(){
 				location.href="/info/my-view";
 			});
+			
+			// 자신이 작성한 게시글을 제외한 모든 게시글의 수
+			let postCount = $("#chartsArea").data("post-count");
+			
+			// 구매한 개수
+			let buyCount = $("#buyChart").data("buy-count");
+			
+			// 구매 비율 계산
+			let buyResult = buyCount / postCount * 100;
+			
+			// 판매한 개수
+			let sellCount = $("#sellChart").data("sell-count");
+			
+			// 판매 비율 계산
+			let sellResult = sellCount / postCount * 100;
+			
+			let dflt = {
+	                min: 0,
+	                max: 100,
+	                donut: true,
+	                gaugeWidthScale: 0.6,
+	                counter: true,
+	                hideInnerShadow: true
+	            }
+	 
+	   		let buyChart = new JustGage({
+	        	id: 'buyChart',
+	          	value: buyResult,
+	           	title: '구매 비율',
+	            defaults: dflt
+	    	});
+			
+			let sellChart = new JustGage({
+	        	id: 'sellChart',
+	          	value: sellResult,
+	           	title: '판매 비율',
+	            defaults: dflt
+	    	});
 		});	
 	</script>
 </html>

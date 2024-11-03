@@ -9,6 +9,7 @@ public class BoardDTO {
 	private String addTradingPlace;		// 사용자가 주소를 추가적으로 적은 것을 저장하는 변수
 	private String sellerName;
 	private String imagePath;
+	private int favoriteCount;			// 즐겨찾기 개수
 	
 	public int getId() {
 		return id;
@@ -57,5 +58,11 @@ public class BoardDTO {
 	}
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+	public int getFavoriteCount() {
+		return favoriteCount;
+	}
+	public void setFavoriteCount(int favoriteCount) {
+		this.favoriteCount = favoriteCount;
 	}
 }

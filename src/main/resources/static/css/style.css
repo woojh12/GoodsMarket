@@ -438,13 +438,40 @@ header > #user-field
 
 #wrap > section > #showOther > #showFile > #lookingFileImageArea
 {
+	width : 800px;
 	height : 200px;
+	position : relative;
+	left : 220px;
+}
+
+#wrap > section > #showOther > #showFile > #lookingFileImageArea > #back
+{
+	width : 100px;
+	height : 50px;
+	position : relative;
+	top : 70px;
 }
 
 #wrap > section > #showOther > #showFile > #lookingFileImageArea > #lookingFileImage
 {
-	width : 1200px;
+	width : 500px;
 	height : 200px;
+}
+
+#wrap > section > #showOther > #showFile > #lookingFileImageArea > #lookingFileImage > .fileImage
+{
+	width : 500px;
+	height : 200px;
+	position : relative;
+	left : 50px;
+}
+
+#wrap > section > #showOther > #showFile > #lookingFileImageArea > #next
+{
+	width : 100px;
+	height : 50px;
+	position : relative;
+	top : 70px;
 }
 
 #wrap > section > #checkTradingPlace
@@ -486,7 +513,7 @@ header > #user-field
 
 #wrap > #userinfo > #useUserinfo > #myinfoArea
 {
-	height : 300px;
+	height : 200px;
 }
 
 #wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoProfileArea
@@ -494,45 +521,70 @@ header > #user-field
 	width : 300px;
 }
 
-#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoProfileArea > #myinfoProfileImage
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoProfileArea > #profileTextArea
 {
-	width : 300px;
-	height : 300px;
+	height : 50px;
 }
 
-#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoTextArea
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoProfileArea > #profileImageArea> #myinfoProfileImage
 {
-	width : 790px;
-}
-
-#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoTextArea > #myinfoUserName
-{
-	width : 800px;
-	height : 150px;
-}
-
-#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoTextArea > #myinfoUserScore
-{
-	width : 800px;
-	height : 150px;
-}
-
-
-
-
-#wrap > #userinfo > #useUserinfo > #myinfoEtcArea > #myinfoWish
-{
+	width : 100px;
 	height : 100px;
 }
 
-#wrap > #userinfo > #useUserinfo > #myinfoEtcArea > #myinfoBuy
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoEtcArea
 {
-	height : 100px;
+	width : 1000px;
 }
 
-#wrap > #userinfo > #useUserinfo > #myinfoEtcArea > #myinfoSell
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoEtcArea > #myinfoUpdateArea > a> #myinfoUpdate
 {
-	height : 100px;
+	width : 60px;
+	height : 60px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoEtcArea > #myinfoWishArea > a> #myinfoWish
+{
+	width : 60px;
+	height : 60px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoEtcArea > #myinfoBuyArea > a> #myinfoBuy
+{
+	width : 60px;
+	height : 60px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoEtcArea > #myinfoSellArea > a> #myinfoSell
+{
+	width : 60px;
+	height : 60px;
+}
+
+#wrap > #userinfo > #useUserinfo > #myinfoArea > #myinfoEtcArea > #myinfoPostArea > a> #myinfoPost
+{
+	width : 60px;
+	height : 60px;
+}
+
+#wrap > #userinfo > #useUserinfo > #chartsArea > #buyChartArea
+{
+	width : 600px;
+}
+
+#wrap > #userinfo > #useUserinfo > #chartsArea > #sellChartArea
+{
+	width : 600px;
+}
+
+#wrap > #userinfo > #useUserinfo > #chartsArea > #buyChartArea > #buyChartTitleArea
+{
+	height : 50px;
+}
+
+#wrap > #userinfo > #useUserinfo > #chartsArea > #sellChartArea > #sellChartTitleArea
+{
+	width : 600px;
 }
 
 /* myinfoUpdate.html */
@@ -619,6 +671,18 @@ header > #user-field
 {
 	width : 150px;
 	height : 150px;
+}
+
+/* 파일 이모티콘 */
+#fileArea
+{
+	width : 50px;
+	height : 50px;
+}
+
+#file
+{
+	display : none;
 }
 
 #wrap > #sellTitleArea

@@ -47,9 +47,22 @@ public class InfoController {
 	{
 		int userId = (Integer)session.getAttribute("userId");
 		
+		// 전체 게시글의 개수
+		int postCount = usedTradeService.getCountAllByUserId(userId);
+		
+		// 구매한 물품 개수 가져오기
+		int buyCount = buyService.getCountAllByUserId(userId);
+		
+		// 판매한 물품 개수 가져오기
+		int sellCount = sellService.getCountAllByUserId(userId);
+		
 		User user = userService.getProfileImage(userId);
 		
 		model.addAttribute("user", user);
+		
+		model.addAttribute("postCount", postCount);
+		model.addAttribute("buyCount", buyCount);
+		model.addAttribute("sellCount", sellCount);
 		
 		return "/info/myinfo";
 	}

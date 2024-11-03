@@ -22,4 +22,7 @@ public interface BuyRepository {
 	// 구매 취소하는 Repository
 	public int deleteBuy(@Param("usedTradeId") int usedTradeId
 			, @Param("userId") int userId);
+	
+	// 구매한 물품의 개수를 출력하는 Repository
+	public int countAllByUserId(@Param("userId") int userId);
 }

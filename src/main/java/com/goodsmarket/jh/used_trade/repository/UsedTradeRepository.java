@@ -38,4 +38,7 @@ public interface UsedTradeRepository {
 	
 	// 사용자가 작성한 게시글 모두 조회 Repository(사용자 PK로 판단)
 	public List<UsedTrade> selectUsedTradeByUserId(@Param("userId") int userId);
+	
+	// 자신이 작성한 게시글을 제외한 모든 게시글 조회
+	public int CountAllByUserId(@Param("userId") int userId);
 }

@@ -18,4 +18,7 @@ public interface SellRepository {
 	
 	// 사용자가 판매한 물품 정보를 출력하는 Repository
 	public List<Sell> selectAllSellByUserId(@Param("userId") int userId);
+	
+	// 판매한 물품의 개수를 출력하는 Repository
+	public int countAllByUserId(@Param("userId") int userId); 
 }

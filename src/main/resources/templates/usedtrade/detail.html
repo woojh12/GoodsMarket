@@ -36,7 +36,8 @@
 				<div id="showFile">
 					<div id="checkImage" class="mt-3 ml-3 bg-light d-flex align-items-center justify-content-center">
 						<label>판매 물품 사진</label>
-					</div> 
+					</div>
+					<!--  
 					<div id="lookingFileImageArea" class="ml-3" th:if="${usedTrade.fileImage[0] == null}">
 						<div id="lookingFileImage" class="mt-3 bg-light d-flex align-items-center justify-content-center">
 							<img src="https://cdn-icons-png.flaticon.com/128/10701/10701484.png">
@@ -46,6 +47,14 @@
 						<div id="lookingFileImage" class="d-flex bg-light">
 							<img class="ml-3" th:each="file:${usedTrade.fileImage}" th:src="@{${file}}" id="sellImage">													
 						</div>
+					</div>
+					-->
+					<div id="lookingFileImageArea" class="d-flex">
+						<img id="back" src="https://cdn-icons-png.flaticon.com/128/17415/17415481.png">
+						<div id="lookingFileImage" th:each="file,fileStat:${usedTrade.fileImage}" th:data-size="${fileStat.size}">
+							<img class="ml-5 fileImage" th:src="@{${file}}" th:id="'image' + ${fileStat.count}">
+						</div>	
+						<img id="next" src="https://cdn-icons-png.flaticon.com/128/7046/7046533.png">
 					</div>
 				</div>
 			</div>
@@ -141,6 +150,73 @@
 				//location.href="/usedtrade/list-view";
 				window.history.back();
 			});
+			
+			// 사진 기능 시작 //
+			// 이미지의 개수 저장
+			let size = $("#lookingFileImage").data("size");
+			
+			// 초기 이미지 값
+			let nowImageNum = 1;
+			
+			// 다른 이미지 숨기기
+			for(let i = 1; i <= size; i++)
+			{
+				if(nowImageNum == i)
+				{
+					$("#image"+i).show();
+				}
+				else
+				{
+					$("#image"+i).hide();
+				}
+			}
+		
+			// 앞으로 가기
+			$("#next").on("click",function(){
+				nowImageNum++;
+				
+				if(nowImageNum > size)
+				{
+					nowImageNum = 1;
+				}
+				
+				for(let i = 1; i <= size; i++)
+				{
+					if(nowImageNum == i)
+					{
+						$("#image"+nowImageNum).show();
+						$("#image"+nowImageNum).prependTo("#lookingFileImage");
+					}
+					else
+					{
+						$("#image"+i).hide();
+					}
+				}
+			});
+			
+			// 뒤로 가기
+			$("#back").on("click",function(){	
+				nowImageNum--;
+				
+				if(nowImageNum == 0)
+				{
+					nowImageNum = size;
+				}
+				
+				for(let i = 1; i <= size; i++)
+				{
+					if(nowImageNum == i)
+					{
+						$("#image"+nowImageNum).show();
+						$("#image"+nowImageNum).prependTo("#lookingFileImage");
+					}
+					else
+					{
+						$("#image"+i).hide();
+					}
+				}
+			});
+			// 사진 기능 끝 //
 			
 			// 현재 접속한 사용자 세션 아이디
 			let userId = $("#buyBtn").data("user-id"); 

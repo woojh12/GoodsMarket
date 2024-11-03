@@ -82,4 +82,10 @@ public class SellService {
 			
 		return boardList;
 	}
+	
+	// 구매한 물품의 개수를 출력하는 Service
+	public int getCountAllByUserId(int userId)
+	{
+		return sellRepository.countAllByUserId(userId);
+	}
 }

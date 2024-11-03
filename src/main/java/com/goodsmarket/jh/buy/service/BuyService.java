@@ -93,4 +93,10 @@ public class BuyService {
 	{
 		return buyRepository.deleteBuy(usedTradeId, userId);
 	}
+	
+	// 구매한 물품의 개수를 출력하는 Service
+	public int getCountAllByUserId(int userId)
+	{
+		return buyRepository.countAllByUserId(userId);
+	}
 }
