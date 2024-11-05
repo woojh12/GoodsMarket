@@ -19,8 +19,11 @@ public interface UserRepository {
 	
 	public int countUserId(@Param("loginId") String loginId);
 	
-	public User selectProfileImage(@Param("id") int id);
+	public String selectProfileImage(@Param("id") int id);
 	
 	// 회원 탈퇴 Repository
 	public int deleteUser(@Param("id") int id);
+	
+	// 회원정보 담는 Repository
+	public User selectUserById(@Param("id") int id);
 }

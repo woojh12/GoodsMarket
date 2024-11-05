@@ -49,7 +49,7 @@ public class UserService {
 	}
 	
 	// 프로필 이미지 가져오기 Service
-	public User getProfileImage(int userId)
+	public String getProfileImage(int userId)
 	{
 		return userRepository.selectProfileImage(userId);
 	}
@@ -62,5 +62,11 @@ public class UserService {
 		commentService.removeAllCommentsByUserId(id);
 		
 		return userRepository.deleteUser(id);
+	}
+	
+	// 회원정보 담는 Service --- 내 정보 수정에서 사용
+	public User getUserById(int id)
+	{
+		return userRepository.selectUserById(id);
 	}
 }

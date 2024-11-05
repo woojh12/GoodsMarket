@@ -56,9 +56,9 @@ public class InfoController {
 		// 판매한 물품 개수 가져오기
 		int sellCount = sellService.getCountAllByUserId(userId);
 		
-		User user = userService.getProfileImage(userId);
+		String userImagePath = userService.getProfileImage(userId);
 		
-		model.addAttribute("user", user);
+		model.addAttribute("userImagePath", userImagePath);
 		
 		model.addAttribute("postCount", postCount);
 		model.addAttribute("buyCount", buyCount);
@@ -68,8 +68,13 @@ public class InfoController {
 	}
 	
 	@GetMapping("/update-view")
-	public String infoUpdate()
+	public String infoUpdate(HttpSession session, Model model)
 	{
+		int userId = (Integer)session.getAttribute("userId");
+		User user = userService.getUserById(userId);
+		
+		model.addAttribute("user", user);
+		
 		return "/info/myinfoUpdate";
 	}
 	

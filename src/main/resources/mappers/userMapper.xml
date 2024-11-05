@@ -52,10 +52,9 @@
  		WHERE `loginId` = #{loginId}
  	</select>
  	
- 	<select id="selectProfileImage" parameterType="map" resultType="com.goodsmarket.jh.user.domain.User">
+ 	<select id="selectProfileImage" parameterType="int" resultType="String">
  		SELECT
- 			`id`
- 			, `imagePath`
+			`imagePath`
  		FROM
  			`user`
  		WHERE `id` = #{id}
@@ -69,4 +68,22 @@
  		WHERE
  			`id` = #{id}
  	</delete>
+ 	
+ 	<select id="selectUserById" parameterType="int">
+ 		SELECT
+ 			`id`
+ 			, `loginId`
+ 			, `password`
+ 			, `name`
+ 			, `phone`
+ 			, `email`
+ 			, `nickName`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`user`
+ 		WHERE 
+ 			`id` = #{id}  	
+ 	</select>
  </mapper>

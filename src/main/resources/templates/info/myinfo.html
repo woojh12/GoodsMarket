@@ -22,8 +22,8 @@
 							<h5>프로필 이미지</h5>
 						</div>
 						<div id="profileImageArea" class="d-flex align-items-center justify-content-center mt-1">
-							<img th:if="${user.imagePath != null}" th:src="@{${user.imagePath}}" id="myinfoProfileImage">
-							<img th:if="${user.imagePath == null}" src="https://cdn-icons-png.flaticon.com/128/847/847969.png" id="myinfoProfileImage">						
+							<img th:if="${userImagePath != null}" th:src="@{${userImagePath}}" id="myinfoProfileImage">
+							<img th:if="${userImagePath == null}" src="https://cdn-icons-png.flaticon.com/128/847/847969.png" id="myinfoProfileImage">						
 						</div>
 					</div>
 					<div id="myinfoEtcArea" class="ml-2 d-flex align-items-center">

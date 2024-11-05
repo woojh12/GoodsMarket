@@ -40,7 +40,7 @@ header > #user-field
 
 #wrap > #marketField
 {
-	height : 150px;
+	height : 100px;
 }
 
 #wrap > #marketField > #noneUseMarketField
@@ -61,7 +61,7 @@ header > #user-field
 
 #wrap > #loginForm > #loginIdFiled
 {
-	height : 200px;
+	height : 70px;
 }
 
 #wrap > #loginForm > #loginIdFiled > #noneUseIdField
@@ -98,7 +98,7 @@ header > #user-field
 
 #wrap > #loginForm > #loginPwFiled
 {
-	height : 200px;
+	height : 70px;
 }
 
 #wrap > #noneUseLoginArea3
