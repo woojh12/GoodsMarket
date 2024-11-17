@@ -147,8 +147,30 @@
 			
 			// 이전 화면으로 이동 버튼
 			$("#backBtn").on("click",function(){
-				//location.href="/usedtrade/list-view";
-				window.history.back();
+				// 이전페이지의 url을 담는 객체 생성
+				let referrerURL = document.referrer;
+				
+				// 각 화면의 이전 페이지로 이동
+				if(referrerURL.includes("/usedtrade/list-view"))
+				{
+					location.href="/usedtrade/list-view";
+				}
+				else if(referrerURL.includes("/info/sell-view"))
+				{
+					location.href="/info/sell-view";
+				}
+				else if(referrerURL.includes("/info/buy-view"))
+				{
+					location.href="/info/buy-view";
+				}
+				else if(referrerURL.includes("/info/favorite-view"))
+				{
+					location.href="/info/favorite-view";
+				}
+				else if(referrerURL.includes("/info/postList-view"))
+				{
+					location.href="/info/postList-view";
+				}
 			});
 			
 			// 사진 기능 시작 //
