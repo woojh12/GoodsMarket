@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.goodsmarket.jh.favorite.repository.FavoriteRepository">
- 	<insert id="insertShoppingCart" parameterType="map">
+ 	<insert id="insertFavorite" parameterType="map">
  		INSERT INTO
  			`favorite`
  		(
@@ -17,7 +17,7 @@
  		)
  	</insert>
  	
- 	<select id="countShoppingCart" parameterType="map">
+ 	<select id="countFavorite" parameterType="map">
  		SELECT 
  			COUNT(*)
  		FROM
@@ -25,7 +25,7 @@
  		WHERE `usedTradeId` = #{usedTradeId} AND `userId` = #{userId}
  	</select>
  	
- 	<select id="countAllShoppingCart" parameterType="int" resultType="int">
+ 	<select id="countAllFavorite" parameterType="int" resultType="int">
  		SELECT 
  			COUNT(*)
  		FROM
@@ -33,7 +33,7 @@
  		WHERE `usedTradeId` = #{usedTradeId}
  	</select>
  	
- 	<delete id="deleteShoppingCart" parameterType="map">
+ 	<delete id="deleteFavorite" parameterType="map">
  		DELETE
  		
  		FROM
@@ -41,7 +41,7 @@
  		WHERE `usedTradeId` = #{usedTradeId} AND `userId` = #{userId}
  	</delete>
  	
- 	<delete id="deleteAllShoppingCart" parameterType="int">
+ 	<delete id="deleteAllFavorite" parameterType="int">
  		DELETE
  		
  		FROM
@@ -49,7 +49,7 @@
  		WHERE `userId` = #{userId}
  	</delete>
  	
- 	<select id="selectUserShopingCartList" parameterType="int" resultType="int">
+ 	<select id="selectUserFavoriteList" parameterType="int" resultType="int">
  		SELECT
  			`usedTradeId`
  		FROM

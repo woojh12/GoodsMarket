@@ -68,7 +68,7 @@ public class UsedTradeService {
 		// 각 게시글의 첫번째 파일 가져오기
 		for(int i = 0; i < usedTradeList.size(); i++)
 		{
-			int favoriteCount = favoriteService.getAllShoppingCartCount(usedTradeList.get(i).getId());
+			int favoriteCount = favoriteService.getAllFavoriteCount(usedTradeList.get(i).getId());
 			
 			BoardDTO boardDTO = new BoardDTO();
 			
@@ -216,6 +216,7 @@ public class UsedTradeService {
 		}
 	}
 	
+	// 241110 수정중
 	// 사용자가 작성한 게시글 정보 조회 Service
 	public List<BoardDTO> getUsedTradeByUserId(int userId)
 	{
@@ -239,11 +240,14 @@ public class UsedTradeService {
 			String addTradingPlace = usedTradeList.get(i).getAddTradingPlace();
 			String sellerName = usedTradeList.get(i).getSellerName();
 			
+			int favoriteCount = favoriteService.getAllFavoriteCount(1);
+			
 			board.setId(id);
 			board.setTitle(title);
 			board.setPlace(place);
 			board.setAddTradingPlace(addTradingPlace);
 			board.setSellerName(sellerName);
+			board.setFavoriteCount(favoriteCount);
 			
 			// 이미지가 있는 경우면
 			if(!fileImageList.isEmpty())

@@ -96,7 +96,7 @@ public class InfoController {
 	{
 		int userId = (Integer)session.getAttribute("userId");
 	
-		List<BoardDTO> usedTradeList =  favoriteService.getUserShopingCartList(userId);
+		List<BoardDTO> usedTradeList =  favoriteService.getUserFavoriteList(userId);
 		
 		model.addAttribute("usedTradeList", usedTradeList);
 		return "/info/favorite";

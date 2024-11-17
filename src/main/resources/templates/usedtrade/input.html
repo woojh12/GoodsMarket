@@ -96,8 +96,8 @@
 			
 			var mapContainer = document.getElementById('sellLocationArea');		// 지도를 표시할 div
 				mapOption = {
-					center: new kakao.maps.LatLng(37.56431006014851, 126.97672880129785),	// 지도의 중심좌표
-					level: 3	// 지도의 축소, 확대 레벨
+						center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+				        level: 3 // 지도의 확대 레벨
 			};
 			
 			// 지도 생성
@@ -114,7 +114,7 @@
 				if(!$("#inputTradingPlace").val().replace(/^\s+|\s+$/g, ''))
 				{
 					$("#inputTradingPlace").val("");
-					$("#inputTradingPlace").focus();
+					$("#inputTradingPlace").focus();	// 입력 상태로 만듬
 					return false;
 				}
 				
@@ -145,7 +145,7 @@
 					
 					// 검색된 장소를 기준으로 지도 범위 재설정
 					map.setBounds(bounds);
-					map.setLevel(6);
+					map.setLevel(5);
 				}
 			}
 			

@@ -57,7 +57,7 @@ public class UserService {
 	// 회원정보 탈퇴 Service	--- 작성한 게시글 및 즐겨찾기도 삭제
 	public int removeUser(int id)
 	{
-		favoriteService.removeAllShoppingCart(id);
+		favoriteService.removeAllFavorite(id);
 		usedTradeService.removeAllUsedTrade(id);
 		commentService.removeAllCommentsByUserId(id);
 		

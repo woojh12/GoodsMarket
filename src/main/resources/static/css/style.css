@@ -35,7 +35,8 @@ header > #user-field
 
 #wrap > #noneUseLoginArea1
 {
-	height : 100px;
+	height : 50px;
+	background-color:#c0c0c0;
 }
 
 #wrap > #marketField
@@ -51,7 +52,6 @@ header > #user-field
 #wrap > #marketField > #useMarketField
 {
 	width : 800px;
-	background-color : #c0c0c0;
 }
 
 #wrap > #noneUseLoginArea2
@@ -72,7 +72,6 @@ header > #user-field
 #wrap > #loginForm > #loginIdFiled > #useIdField
 {
 	width : 800px;
-	background-color : #c0c0c0;
 }
 
 #wrap > #loginForm > #loginIdFiled > #useIdField > #inputId
@@ -88,7 +87,6 @@ header > #user-field
 #wrap > #loginForm > #loginPwFiled > #usePwField
 {
 	width : 800px;
-	background-color : #c0c0c0;
 }
 
 #wrap > #loginForm > #loginPwFiled > #usePwField > #inputPassword
@@ -133,7 +131,8 @@ header > #user-field
 
 #wrap > #noneUseJoinArea1
 {
-	height : 100px;
+	height : 50px;
+	background-color:#c0c0c0;
 }
 
 #wrap > #joinTitle
@@ -149,17 +148,11 @@ header > #user-field
 #wrap > #joinTitle > #useJoinTitle
 {
 	width : 800px;
-	background-color : #c0c0c0;
 }
 
 #wrap > #noneUseJoinArea2
 {
 	height : 100px;
-}
-
-#wrap > #joinInfo
-{
-	height : 850px;	
 }
 
 #wrap > #joinInfo > #noneJoinMain1
@@ -174,37 +167,37 @@ header > #user-field
 
 #wrap > #joinInfo > #joinMain > #joinIdArea
 {
-	height : 120px;
+	height : 80px;
 }
 
 #wrap > #joinInfo > #joinMain > #joinPwArea
 {
-	height : 100px;
+	height : 50px;
 }
 
 #wrap > #joinInfo > #joinMain > #joinPwCheckArea
 {
-	height : 100px;
+	height : 50px;
 }
 
 #wrap > #joinInfo > #joinMain > #joinNameArea
 {
-	height : 100px;
+	height : 50px;
 }
 
 #wrap > #joinInfo > #joinMain > #joinEmailArea
 {
-	height : 100px;
+	height : 50px;
 }
 
 #wrap > #joinInfo > #joinMain > #joinPhoneArea
 {
-	height : 100px;
+	height : 50px;
 }
 
 #wrap > #joinInfo > #joinMain > #joinNickNameArea
 {
-	height : 100px;
+	height : 50px;
 }
 
 #wrap > #joinInfo > #joinMain > #joinBtnsArea
@@ -714,6 +707,6 @@ header > #user-field
 
 footer
 {
-	height : 40px;
+	height : 50px;
 	background-color:#c0c0c0;
 }

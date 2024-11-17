@@ -29,7 +29,7 @@
 				<h5>이미지 업로드</h5>
 			</div>
 			<div id="sellGoodsImageArea" class="d-flex">
-				<div th:each="file:${usedTrade.fileImage}" class="bg-light ml-2" th:id="'sellGoodsImage' + ${fileStat.count}" th:data-imagepath="${file}" th:data-size="${fileStat.size}"></div>			
+				<div th:each="file:${usedTrade.fileImage}" class="bg-light ml-2" th:id="'sellGoodsImage' + ${fileStat.count}" th:data-imagepath="${file}" th:data-size="${fileStat.size}"></div>		
 			</div>
 			<div class="d-flex mt-1">
 				<label for="file">
@@ -234,6 +234,27 @@
     		$("#sellGoodsImage"+(i+1)).append(image);
     	}
  		
+    	// 파일이 없는 경우
+    	if(size == 1)
+    	{
+    		let image = new Image();
+    		image.src = "https://cdn-icons-png.flaticon.com/128/10701/10701484.png";
+    		image.width = 150;
+    		image.height = 150;
+    		
+    		// 파일이 선택된 시에 이미지 미리보기 창 삭제 
+			$("#sellGoodsImageArea").empty();
+    		
+			$("#sellGoodsImageArea").append(
+    				$("<div>").prop({
+    					id: "sellGoodsImage1",
+    					className: "bg-light ml-2"
+    				})	
+    			);
+			
+    		$("#sellGoodsImage1").append(image);
+    	}
+    	
 		// 파일 미리보기 기능
 		$(function(){
     		$("#file").change(function(event){

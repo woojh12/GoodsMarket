@@ -286,7 +286,7 @@
 			// 장바구니 클릭 여부 조회
 			$.ajax({
 					type:"post"
-					, url:"/shoppingcart/check/shoppingcart"
+					, url:"/favorite/check"
 					, data:{"usedTradeId":id}
 					, success:function(data)
 					{
@@ -298,7 +298,7 @@
 					}
 					, error:function()
 					{
-						alert("장바구니 조회 오류발생");
+						alert("즐겨찾기 조회 오류발생");
 					}
 				});
 			
@@ -310,7 +310,7 @@
 				{
 					$.ajax({
 						type:"post"
-						, url:"/shoppingcart/add"
+						, url:"/favorite/add"
 						, data:{"usedTradeId":id}
 						, success:function(data)
 						{
@@ -334,7 +334,7 @@
 				{
 					$.ajax({
 						type:"delete"
-						, url:"/shoppingcart/delete"
+						, url:"/favorite/delete"
 						, data:{"usedTradeId":id}
 						, success:function(data)
 						{

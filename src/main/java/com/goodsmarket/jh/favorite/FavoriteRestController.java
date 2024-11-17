@@ -14,7 +14,7 @@ import com.goodsmarket.jh.favorite.service.FavoriteService;
 
 import jakarta.servlet.http.HttpSession;
 
-@RequestMapping("/shoppingcart")
+@RequestMapping("/favorite")
 @RestController
 public class FavoriteRestController {
 	private FavoriteService favoriteService;
@@ -25,14 +25,14 @@ public class FavoriteRestController {
 		this. favoriteService =  favoriteService;
 	}
 	
-	// 장바구니 담기 API
+	// 즐겨찾기 추가 API
 	@PostMapping("/add")
-	public Map<String, String> addShoppingCart(@RequestParam("usedTradeId") int usedTradeId
+	public Map<String, String> addFavorite(@RequestParam("usedTradeId") int usedTradeId
 			, HttpSession session)
 	{
 		int userId = (Integer)session.getAttribute("userId");
 	
-		int count =  favoriteService.addShoppingCart(usedTradeId, userId);
+		int count =  favoriteService.addFavorite(usedTradeId, userId);
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
@@ -48,14 +48,14 @@ public class FavoriteRestController {
 		return resultMap;
 	}	
 	
-	// 장바구니 체크 API
-	@PostMapping("/check/shoppingcart")
-	public Map<String, String> checkShoppingCart(@RequestParam("usedTradeId") int usedTradeId
+	// 즐겨찾기 체크 API
+	@PostMapping("/check")
+	public Map<String, String> checkFavorite(@RequestParam("usedTradeId") int usedTradeId
 			, HttpSession session)
 	{
 		int userId = (Integer)session.getAttribute("userId");
 	
-		int count =  favoriteService.getShoppingCartCount(usedTradeId, userId);
+		int count =  favoriteService.getFavoriteCount(usedTradeId, userId);
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
@@ -71,14 +71,14 @@ public class FavoriteRestController {
 		return resultMap;
 	}
 	
-	// 장바구니 삭제 API
+	// 즐겨찾기 삭제 API
 	@DeleteMapping("/delete")
-	public Map<String, String> deleteShoppingCart(@RequestParam("usedTradeId") int usedTradeId
+	public Map<String, String> deleteFavorite(@RequestParam("usedTradeId") int usedTradeId
 			, HttpSession session)
 	{
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count =  favoriteService.removeShoppingCartCount(usedTradeId, userId);
+		int count =  favoriteService.removeFavoriteCount(usedTradeId, userId);
 		
 		Map<String, String> resultMap = new HashMap<>();
 		

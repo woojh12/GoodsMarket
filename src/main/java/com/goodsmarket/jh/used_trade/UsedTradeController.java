@@ -57,7 +57,7 @@ public class UsedTradeController {
 		model.addAttribute("usedTrade", usedTrade);
 		
 		// 선택한 게시글의 즐겨찾기 수 조회
-		int shoppingCartCount =  favoriteService.getAllShoppingCartCount(id);
+		int shoppingCartCount =  favoriteService.getAllFavoriteCount(id);
 		
 		model.addAttribute("shoppingCartCount", shoppingCartCount);
 		

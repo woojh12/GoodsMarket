@@ -103,26 +103,22 @@ public class UserRestController {
 	}
 	
 	// 회원탈퇴 API
-		@DeleteMapping("/delete")
-		public Map<String, String> deleteUser(@RequestParam("id") int id)
+	@DeleteMapping("/delete")
+	public Map<String, String> deleteUser(@RequestParam("id") int id)
+	{
+		Map<String, String> resultMap = new HashMap<>();
+			
+		int count = userService.removeUser(id);
+				
+		if(count == 1)
 		{
-			Map<String, String> resultMap = new HashMap<>();
-			
-			int count = userService.removeUser(id);
-			
-			// 즐겨찾기 개수 리턴 후 1개 이상인 경우 삭제 되게 구현해야함
-			//int favoriteCount = favoriteService.removeAllShoppingCart(id);
-			//int usedTradeCount = usedTradeService.removeAllUsedTrade(id);
-			
-			if(count == 1)
-			{
-				resultMap.put("result", "success");
-			}
-			else
-			{
-				resultMap.put("result", "fail");
-			}
-			
-			return resultMap;
+			resultMap.put("result", "success");
 		}
+		else
+		{
+			resultMap.put("result", "fail");
+		}
+			
+		return resultMap;
+	}
 }
